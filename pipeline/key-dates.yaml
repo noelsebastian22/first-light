@@ -1,0 +1,62 @@
+# Key dates shown on Today. Hand-maintained each quarter from:
+#   RBA: https://www.rba.gov.au/schedules-events/board-meeting-schedules.html
+#   ABS: https://www.abs.gov.au/release-calendar/future-releases-calendar
+# Times are Sydney local. ABS releases land at 11:30am; RBA decisions at 2:30pm on the
+# second day of the Board meeting. The pipeline warns when nothing is left in the next 30 days.
+# Last checked: 2026-10-10. Next update due: mid-December 2026 (add Jan-Mar 2027 ABS dates).
+
+- date: 2026-10-15
+  time: "11:30"
+  label: Labour force figures for September
+  source: ABS
+  url: https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release
+- date: 2026-10-28
+  time: "11:30"
+  label: Consumer price index for September
+  source: ABS
+  url: https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/latest-release
+- date: 2026-11-03
+  time: "14:30"
+  label: RBA cash rate decision
+  source: RBA
+  url: https://www.rba.gov.au/schedules-events/board-meeting-schedules.html
+- date: 2026-11-18
+  time: "11:30"
+  label: Wage price index, September quarter
+  source: ABS
+  url: https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/wage-price-index-australia/latest-release
+- date: 2026-11-19
+  time: "11:30"
+  label: Labour force figures for October
+  source: ABS
+  url: https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release
+- date: 2026-11-25
+  time: "11:30"
+  label: Consumer price index for October
+  source: ABS
+  url: https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/latest-release
+- date: 2026-12-02
+  time: "11:30"
+  label: GDP, September quarter
+  source: ABS
+  url: https://www.abs.gov.au/statistics/economy/national-accounts/australian-national-accounts-national-income-expenditure-and-product/latest-release
+- date: 2026-12-08
+  time: "14:30"
+  label: RBA cash rate decision
+  source: RBA
+  url: https://www.rba.gov.au/schedules-events/board-meeting-schedules.html
+- date: 2026-12-17
+  time: "11:30"
+  label: Labour force figures for November
+  source: ABS
+  url: https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release
+- date: 2027-02-09
+  time: "14:30"
+  label: RBA cash rate decision
+  source: RBA
+  url: https://www.rba.gov.au/schedules-events/board-meeting-schedules.html
+- date: 2027-03-23
+  time: "14:30"
+  label: RBA cash rate decision
+  source: RBA
+  url: https://www.rba.gov.au/schedules-events/board-meeting-schedules.html

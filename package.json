@@ -6,6 +6,7 @@
   "license": "MIT",
   "workspaces": [
     "contracts",
+    "pipeline",
     "app"
   ],
   "engines": {

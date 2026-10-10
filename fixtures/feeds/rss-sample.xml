@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Sample Economy Desk</title>
+    <link>https://example.com/economy</link>
+    <description>Synthetic feed for First Light tests. Not real news.</description>
+    <item>
+      <title>Sample bank holds the sample rate at 3.60 per cent</title>
+      <link>https://example.com/economy/rate-hold?utm_source=rss&amp;utm_medium=feed</link>
+      <description><![CDATA[<p>The <b>sample board</b> left the rate unchanged &amp; said inflation is &#8220;easing&#8221;.</p><img src="x.png"/>]]></description>
+      <pubDate>Mon, 12 Oct 2026 03:30:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Sample wages grow 0.8% in the quarter</title>
+      <link>https://example.com/economy/wages</link>
+      <description>&lt;p&gt;Escaped &lt;i&gt;HTML&lt;/i&gt; in a description&amp;nbsp;block.&lt;/p&gt;</description>
+      <pubDate>Mon, 12 Oct 2026 01:00:00 +1100</pubDate>
+    </item>
+    <item>
+      <title>An item with no link is dropped</title>
+      <description>No link here.</description>
+      <pubDate>Mon, 12 Oct 2026 01:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
