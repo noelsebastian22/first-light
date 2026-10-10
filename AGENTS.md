@@ -17,8 +17,8 @@ from `.claude/skills/`, so that symlink is load-bearing. Edit the `.agents/` cop
 
 ## Status
 
-Design approved in conversation; spec awaiting Noel's review. **No product code yet.**
-Next: review spec → implementation plan → build in the order of spec §9.
+Spec approved and revised after an independent review. Build follows spec §9 and the
+plan in `docs/superpowers/plans/`.
 
 ## Stack (planned)
 
@@ -26,7 +26,8 @@ Next: review spec → implementation plan → build in the order of spec §9.
 - Angular 22: standalone, zoneless, OnPush, signals-first, PWA
 - Neon: Postgres, Neon Auth (Google), Data API, row-level security
 - Pipeline: Node 22 + TypeScript, run by a Claude Code routine at 5:32am and 4:02pm Sydney
-- GitHub Actions: CI, watchdog, nudge, compaction, keepalive
+- Pipeline writes to Neon over HTTPS (`@neondatabase/serverless`); the routine has no connectors
+- GitHub Actions: CI, watchdog email, 8am reminder email, keepalive
 - Vercel Hobby at `firstlight.noel-sebastian.com` (Cloudflare DNS, grey cloud)
 
 ## Hard rules
@@ -53,8 +54,9 @@ Next: review spec → implementation plan → build in the order of spec §9.
 ## Database
 
 - Migrations live in `db/migrations/`, numbered, never edited once applied.
-- **RLS on every table, always.** Content readable only by `members`; personal tables
-  owner-only.
+- **RLS on every table, always.** Content readable only when `public.is_member()`;
+  personal tables owner-only. `private.members` is never exposed to the Data API.
+- **Model output is plain text.** Never render it with `innerHTML`.
 - Only the `pipeline_writer` role writes editions and stories.
 
 ## Cost
