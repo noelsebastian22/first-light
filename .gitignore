@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.angular/
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage/
+playwright-report/
+test-results/
+pipeline/out/
+*.bak
