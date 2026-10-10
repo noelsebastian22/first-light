@@ -17,15 +17,18 @@ from `.claude/skills/`, so that symlink is load-bearing. Edit the `.agents/` cop
 
 ## Status
 
-Spec approved and revised after an independent review. Build follows spec §9 and the
-plan in `docs/superpowers/plans/`.
+Spec approved. Building the offline v1 on branch `feat/v1-offline` from
+`docs/superpowers/plans/2026-10-10-first-light-v1-offline.md` (see its Status section).
+Execution ledger with every ruling: `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`
+(git-ignored; the rulings are also copied into `docs/SESSIONS.md`).
 
-## Stack (planned)
+## Stack
 
-- npm workspaces: `app/`, `pipeline/`, `contracts/`, `db/`, `fixtures/`
+- npm workspaces: `contracts/`, `pipeline/`, `app/` (plus `db/`, `fixtures/`, `scripts/` folders)
+- **Node 24 (≥ 24.15) and npm 11.** Older versions fail; see `.nvmrc` and `engines`.
 - Angular 22: standalone, zoneless, OnPush, signals-first, PWA
 - Neon: Postgres, Neon Auth (Google), Data API, row-level security
-- Pipeline: Node 22 + TypeScript, run by a Claude Code routine at 5:32am and 4:02pm Sydney
+- Pipeline: Node 24 + TypeScript (tsx), run by a Claude Code routine at 5:32am and 4:02pm Sydney
 - Pipeline writes to Neon over HTTPS (`@neondatabase/serverless`); the routine has no connectors
 - GitHub Actions: CI, watchdog email, 8am reminder email, keepalive
 - Vercel Hobby at `firstlight.noel-sebastian.com` (Cloudflare DNS, grey cloud)

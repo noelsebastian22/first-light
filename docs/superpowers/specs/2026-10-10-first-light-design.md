@@ -51,6 +51,10 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 | Demo | Hand-written sample edition in the repo, used by the public landing page and demo screens |
 | Credit | "Edited by Claude" in small print only (landing footer, Today fine print) |
 | Cost | $0 beyond the existing Claude subscription |
+| Runtime | Node 24 (Angular CLI 22.2 needs ≥ 24.15) and npm 11 (npm 10.9 crashes resolving Vitest peers) |
+| Candidates | Feed items older than 72 hours are dropped before Claude sees them |
+| Afternoon edition | Never carries a nudge or Top 3, even when it runs as a full edition because the morning one is missing |
+| Browser bundle | No Zod in the app; the demo area is lazy-loaded; CI fails on secret-like strings in `app/dist` |
 
 ---
 
@@ -90,7 +94,7 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 ```
 first-light/
 ├─ app/                 Angular 22 PWA
-├─ pipeline/            Node 22 + TypeScript: fetch, prepare, validate, write, fail, watchdog, reminder
+├─ pipeline/            Node 24 + TypeScript (run with tsx): fetch, prepare, validate, write, fail, watchdog, reminder
 │  ├─ sources.ts        the feed list (code, not a table)
 │  ├─ key-dates.yaml    hand-maintained each quarter from the RBA and ABS calendars
 │  └─ weather-normals.json   1991–2020 monthly normals, computed once

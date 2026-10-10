@@ -10,9 +10,20 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-10-first-light-design.md`
 
+## Status (2026-10-10, end of first build session)
+
+| Tasks | State |
+|---|---|
+| 1–11 | Done on `feat/v1-offline` (contracts, demo fixture, Angular app with Today/News/Archive/landing, Playwright + axe + PWA + secret scan, pipeline fetch) |
+| 12 | **In progress.** `url.ts` and `prepare.ts` done and tested. `validate.spec.ts` is written and RED; implement `pipeline/src/validate.ts` next |
+| 13–16 | Not started (writer + CLI + routine prompt + runbook; db migrations + RLS tests; watchdog/reminder/workflows/vercel.json; README) |
+| Final | Whole-branch review by a fresh reviewer, fix pass, then PR to `main` |
+
+Use `superpowers:executing-plans`. Its ledger lives in `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md` (git-ignored, so it exists only on the machine that ran the build). `docs/SESSIONS.md` has a copy of every ruling.
+
 ## Global Constraints
 
-- Node 22, TypeScript strict, **no `any`**.
+- Node 24 (≥ 24.15) and npm 11, TypeScript strict, **no `any`**.
 - Angular: standalone, zoneless, every component `ChangeDetectionStrategy.OnPush`, `input()`/`output()`, `inject()`, built-in control flow, templates in sibling `.html` files; a sibling `.css` only where genuinely needed.
 - A "day" is a `YYYY-MM-DD` string in `Australia/Sydney`; never `toISOString()` for a calendar date.
 - Sections, in this order and with these labels: `au-economy` "AU economy", `au-politics` "AU politics", `world` "World", `web-dev` "Web dev", `ai` "AI", `au-tech-market` "AU tech market". Max 4 stories per section.
