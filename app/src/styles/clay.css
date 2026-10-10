@@ -56,3 +56,16 @@
 .coverage a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--fl-clay);
   box-shadow: var(--fl-shadow-pill); text-decoration: none; color: var(--fl-ink); font-size: 13px; }
 .detail-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.month { border-radius: 28px; padding: 22px; display: block; }
+.month-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.month-head h2 { margin: 0; font-size: 22px; }
+.month-key { font-size: 12px; color: var(--fl-ink-2); display: flex; gap: 6px; align-items: center; }
+.month-days, .month-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.month-days { font-size: 12px; color: var(--fl-ink-2); text-align: center; margin-bottom: 6px; }
+.month-grid { list-style: none; margin: 0; padding: 0; }
+.cell { aspect-ratio: 1 / 1; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 14px; color: #6b7889; }
+.cell.has { background: var(--fl-well); box-shadow: var(--fl-shadow-pressed); color: var(--fl-ink); font-weight: 600; }
+.dots { display: flex; gap: 3px; height: 6px; }
+.dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; }
+.dot.am { background: var(--fl-sun); }
+.dot.pm { background: var(--fl-primary); }

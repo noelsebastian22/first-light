@@ -1,0 +1,22 @@
+<section class="month clay" aria-labelledby="month-title">
+  <div class="month-head">
+    <h2 id="month-title" class="disp">{{ title() }}</h2>
+    <span class="month-key mono"><i class="dot am"></i>AM <i class="dot pm"></i>PM</span>
+  </div>
+  <div class="month-days mono" aria-hidden="true"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+  <ol class="month-grid">
+    @for (c of cells(); track $index) {
+      @if (c.day === null) {
+        <li class="cell blank" aria-hidden="true"></li>
+      } @else {
+        <li class="cell" [class.has]="c.am || c.pm" [attr.aria-label]="c.day + (c.am ? ', morning edition' : '') + (c.pm ? ', afternoon edition' : '')">
+          <span>{{ c.day }}</span>
+          <span class="dots">
+            @if (c.am) { <i class="dot am"></i> }
+            @if (c.pm) { <i class="dot pm"></i> }
+          </span>
+        </li>
+      }
+    }
+  </ol>
+</section>

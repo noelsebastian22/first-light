@@ -1,1 +1,51 @@
-<p>Archive</p>
+<div class="archive">
+  <header>
+    <p class="label">Every edition, searchable</p>
+    <h1 class="disp">Archive</h1>
+  </header>
+
+  <form class="search clay" role="search" aria-label="Search past editions" (submit)="$event.preventDefault()">
+    <div class="field wide">
+      <label for="archive-q">Search stories</label>
+      <input id="archive-q" class="input dent" type="search" placeholder="Try RBA, Angular, AI Mode" autocomplete="off" [formField]="searchForm.text" />
+    </div>
+    <div class="field">
+      <label for="archive-section">Section</label>
+      <select id="archive-section" class="input dent" [formField]="searchForm.section">
+        <option value="all">All sections</option>
+        @for (s of sections; track s.key) {
+          <option [value]="s.key">{{ s.label }}</option>
+        }
+      </select>
+    </div>
+    <label class="check" for="archive-saved">
+      <input id="archive-saved" type="checkbox" [formField]="searchForm.savedOnly" />
+      Saved only
+    </label>
+  </form>
+
+  <div class="layout">
+    @if (month(); as m) {
+      <app-month-grid class="grid" [month]="m" [days]="days()" />
+    }
+    <section class="results" aria-labelledby="results-title" aria-live="polite">
+      <h2 id="results-title" class="disp">{{ hits().length }} {{ hits().length === 1 ? 'story' : 'stories' }}</h2>
+      <ol>
+        @for (h of hits(); track h.story.id) {
+          <li>
+            <a class="hit clay-light" [routerLink]="['../news', h.story.id]">
+              <span class="hit-date"><span class="mono">{{ h.short.month }} {{ h.slot.toUpperCase() }}</span><b class="disp">{{ h.short.day }}</b></span>
+              <span class="hit-body">
+                <span><span class="tag" [style.background]="h.meta.fill">{{ h.meta.label }}</span></span>
+                <span class="hit-title">{{ h.story.title }}</span>
+              </span>
+            </a>
+          </li>
+        }
+      </ol>
+      @if (loaded() && hits().length === 0) {
+        <p class="empty dent">Nothing matches. Try a broader word, or clear the section filter.</p>
+      }
+    </section>
+  </div>
+</div>
