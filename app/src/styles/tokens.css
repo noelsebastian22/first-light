@@ -1,0 +1,36 @@
+:root {
+  --fl-ground: #e9eef5;
+  --fl-clay: #f5f8fc;
+  --fl-well: #e3e9f2;
+  --fl-ink: #0e1a2b;
+  --fl-ink-2: #44546a;
+  --fl-primary: #3e6fa3;
+  --fl-primary-hover: #355f8d;
+  --fl-link: #2f5f8f;
+  --fl-sun: #e8833a;
+  --fl-sun-soft: #f7b865;
+
+  --fl-sec-au-economy: #fbe3cc;
+  --fl-sec-au-politics: #e4ddf3;
+  --fl-sec-world: #d9eee6;
+  --fl-sec-web-dev: #dce7f2;
+  --fl-sec-ai: #f6e7b8;
+  --fl-sec-au-tech-market: #f0dada;
+
+  --fl-shadow-raised: 10px 12px 24px rgb(140 160 190 / 0.45), -8px -8px 20px rgb(255 255 255 / 0.95),
+    inset 3px 3px 6px rgb(255 255 255 / 0.9), inset -4px -6px 12px rgb(140 160 190 / 0.28);
+  --fl-shadow-light: 5px 6px 12px rgb(140 160 190 / 0.35), -4px -4px 10px rgb(255 255 255 / 0.9),
+    inset 2px 2px 4px #fff, inset -3px -4px 8px rgb(140 160 190 / 0.2);
+  --fl-shadow-pressed: inset 3px 4px 7px rgb(140 160 190 / 0.5), inset -3px -3px 6px rgb(255 255 255 / 0.9);
+  --fl-shadow-pill: 3px 4px 8px rgb(140 160 190 / 0.4), inset 1px 2px 3px rgb(255 255 255 / 0.8),
+    inset -2px -3px 5px rgb(110 130 165 / 0.22);
+  --fl-shadow-primary: 5px 7px 14px rgb(62 111 163 / 0.4), inset 2px 3px 5px rgb(255 255 255 / 0.3),
+    inset -3px -4px 8px rgb(20 40 80 / 0.3);
+
+  --fl-radius-lg: 32px;
+  --fl-radius-md: 24px;
+  --fl-radius-sm: 16px;
+
+  --fl-font: 'Google Sans Flex', system-ui, sans-serif;
+  --fl-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
