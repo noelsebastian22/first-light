@@ -1,11 +1,13 @@
 import { Injectable, signal } from '@angular/core';
-import { Edition } from '@first-light/contracts';
+import type { Edition } from '@first-light/contracts';
 import demo from '../../../../fixtures/demo-edition.json';
 import type { ArchiveHit, ArchiveQuery, EditionSource, TodayEditions } from './edition-source';
 
-const AM = Edition.parse(demo.am);
-const PM = Edition.parse(demo.pm);
-const ARCHIVE = demo.archive.map((e) => Edition.parse(e));
+// The fixture is validated against the Edition schema in contracts/src/demo-fixture.spec.ts,
+// so the app skips runtime parsing and ships no Zod.
+const AM = demo.am as unknown as Edition;
+const PM = demo.pm as unknown as Edition;
+const ARCHIVE = demo.archive as unknown as Edition[];
 const ALL: Edition[] = [AM, PM, ...ARCHIVE].sort((a, b) =>
   b.editionDate === a.editionDate ? b.createdAt.localeCompare(a.createdAt) : b.editionDate.localeCompare(a.editionDate),
 );

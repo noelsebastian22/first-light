@@ -1,0 +1,32 @@
+:host { display: block; }
+.shell { display: flex; gap: 8px; min-height: 100vh; padding: 16px; }
+.drawer { position: sticky; top: 16px; align-self: flex-start; flex: 0 0 248px; border-radius: var(--fl-radius-lg);
+  padding: 18px 14px; display: flex; flex-direction: column; gap: 20px; transition: flex-basis 0.25s ease; }
+.collapsed .drawer { flex-basis: 84px; align-items: center; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fl-ink); min-height: 44px; }
+.brand-name { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+.drawer-toggle { width: 48px; height: 48px; border: 0; border-radius: 16px; display: flex; align-items: center;
+  justify-content: center; color: var(--fl-ink); cursor: pointer; align-self: flex-end; }
+.collapsed .drawer-toggle { align-self: center; }
+.drawer-nav { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.nav-link { display: flex; align-items: center; gap: 14px; min-height: 50px; padding: 0 15px; border-radius: 18px;
+  text-decoration: none; color: var(--fl-ink-2); font-weight: 600; font-size: 15px; }
+.collapsed .nav-link { justify-content: center; padding: 0; }
+.nav-link:hover { background: var(--fl-well); color: var(--fl-ink); }
+.nav-link.on { background: var(--fl-primary); color: #fff; box-shadow: var(--fl-shadow-primary); }
+.drawer-note { display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: 20px; font-size: 13px; line-height: 1.45; }
+.content { flex: 1 1 auto; min-width: 0; padding: 8px 18px 40px; max-width: 1200px; }
+.private-note { padding: 16px 20px; border-radius: var(--fl-radius-md); margin: 0 0 20px; font-size: 15px; }
+.bottombar { display: none; }
+
+@media (max-width: 899px) {
+  .shell { padding: 0; display: block; }
+  .drawer { display: none; }
+  .content { padding: 12px 14px 120px; }
+  .bottombar { display: flex; gap: 4px; position: fixed; left: 10px; right: 10px;
+    bottom: calc(12px + env(safe-area-inset-bottom)); padding: 8px; border-radius: 28px; z-index: 20; }
+  .tab { flex: 1; min-height: 58px; border: 0; background: transparent; font: inherit; font-size: 11px; font-weight: 700;
+    color: var(--fl-ink-2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    cursor: pointer; border-radius: 18px; text-decoration: none; }
+  .tab.on { color: #fff; background: var(--fl-primary); box-shadow: var(--fl-shadow-primary); }
+}

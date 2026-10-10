@@ -14,3 +14,15 @@
 .btn-sec:hover { color: var(--fl-link); }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 :focus-visible { outline: 3px solid #9cc0e4; outline-offset: 2px; }
+.sheet-backdrop { position: fixed; inset: 0; background: rgb(14 26 43 / 0.28); z-index: 30; }
+.sheet { position: fixed; left: 10px; right: 10px; bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 31;
+  border-radius: 30px; padding: 14px; display: flex; flex-direction: column; gap: 6px; max-width: 480px; margin: 0 auto; }
+.sheet-grip { width: 40px; height: 5px; border-radius: 3px; background: #c3d2e4; align-self: center; margin-bottom: 6px; }
+.sheet-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 56px; padding: 0 16px;
+  border-radius: 18px; text-decoration: none; color: var(--fl-ink); font-weight: 600; font-size: 16px; cursor: pointer; }
+.sheet-row:hover { background: var(--fl-well); }
+.sheet-row input { width: 22px; height: 22px; accent-color: var(--fl-primary); }
+.signin { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.signin-card { max-width: 440px; border-radius: var(--fl-radius-lg); padding: 36px; display: flex; flex-direction: column; gap: 16px; }
+.signin-card h1 { margin: 0; font-size: 36px; }
+.signin-card p { margin: 0; color: var(--fl-ink-2); line-height: 1.55; }
