@@ -7,7 +7,7 @@
       <div class="weather-temp disp">{{ liveNow() ?? place().nowC }}°</div>
       <div class="weather-place">{{ place().name }} · {{ place().summary }}</div>
     </div>
-    <div class="weather-meta mono">Rain {{ place().rainChancePct }}%<br />Wind {{ place().windKmh }} km/h<br />Sunrise {{ clock(place().sunrise) }}</div>
+    <div class="weather-meta mono"><span>Rain {{ place().rainChancePct }}%</span><span>Wind {{ place().windKmh }} km/h</span><span>Sunrise {{ clock(place().sunrise) }}</span></div>
   </div>
   <app-range-bar [low]="place().lowC" [high]="place().highC" [normalLow]="place().normalLowC" [normalHigh]="place().normalHighC" [now]="liveNow() ?? place().nowC" />
   <ol class="hours" aria-label="Hourly temperatures">
