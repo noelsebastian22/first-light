@@ -13,8 +13,8 @@ export const DEMO_ROUTES: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'today' },
       { path: 'today', loadComponent: () => import('./today/today').then((m) => m.Today), resolve: { editions: todayResolver }, title: 'Today · First Light' },
-      { path: 'news', loadComponent: () => import('./news/news').then((m) => m.News), title: 'News · First Light' },
-      { path: 'news/:storyId', loadComponent: () => import('./news/news').then((m) => m.News), title: 'Story · First Light' },
+      { path: 'news', loadComponent: () => import('./news/news').then((m) => m.News), resolve: { editions: todayResolver }, title: 'News · First Light' },
+      { path: 'news/:storyId', loadComponent: () => import('./news/news').then((m) => m.News), resolve: { editions: todayResolver }, title: 'Story · First Light' },
       { path: 'archive', loadComponent: () => import('./archive/archive').then((m) => m.Archive), title: 'Archive · First Light' },
     ],
   },

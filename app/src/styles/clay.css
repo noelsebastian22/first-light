@@ -44,3 +44,15 @@
 .hours li { text-align: center; padding: 8px 0; border-radius: 16px; display: flex; flex-direction: column; font-size: 15px; }
 .hours .mono { font-size: 11px; color: var(--fl-ink-2); }
 .second { margin: 0; padding: 12px 16px; border-radius: 18px; background: var(--fl-sec-web-dev); font-size: 14px; }
+.detail-card { border-radius: 30px; padding: 26px; display: flex; flex-direction: column; gap: 16px; }
+.detail-card h2 { margin: 0; font-size: 26px; line-height: 1.15; letter-spacing: -0.02em; }
+.detail-meta { margin: 0; display: flex; gap: 10px; align-items: center; color: var(--fl-ink-2); font-size: 12px; }
+.detail-summary { margin: 0; font-size: 16px; line-height: 1.6; }
+.why { padding: 16px; border-radius: 20px; background: var(--fl-sec-au-economy); }
+.picked { padding: 16px; border-radius: 20px; }
+.why p, .picked p { margin: 6px 0 0; font-size: 15px; line-height: 1.55; }
+.why .label, .picked .label, .coverage .label { margin: 0; }
+.coverage ul { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.coverage a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--fl-clay);
+  box-shadow: var(--fl-shadow-pill); text-decoration: none; color: var(--fl-ink); font-size: 13px; }
+.detail-actions { display: flex; flex-wrap: wrap; gap: 12px; }
