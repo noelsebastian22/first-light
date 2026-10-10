@@ -1,0 +1,13 @@
+<div class="range">
+  <div class="range-head">
+    <b>Today {{ low() }}° – {{ high() }}°</b>
+    <span>Average {{ normalLow() }}° – {{ normalHigh() }}°</span>
+  </div>
+  <div class="range-track dent" role="img" [attr.aria-label]="label()">
+    <span class="range-normal" [style.left]="normalLeft()" [style.width]="normalWidth()"></span>
+    <span class="range-today" [style.left]="todayLeft()" [style.width]="todayWidth()"></span>
+    <span class="range-now" [style.left]="nowLeft()"></span>
+  </div>
+  <div class="range-scale mono" aria-hidden="true"><span>{{ min() }}°</span><span>NOW {{ now() }}°</span><span>{{ max() }}°</span></div>
+  <p class="range-note">{{ note() }}</p>
+</div>

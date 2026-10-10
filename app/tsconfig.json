@@ -15,6 +15,9 @@
     "paths": {
       "@first-light/contracts": [
         "../contracts/src/index.ts"
+      ],
+      "@first-light/contracts/*": [
+        "../contracts/src/*"
       ]
     },
     "resolveJsonModule": true
