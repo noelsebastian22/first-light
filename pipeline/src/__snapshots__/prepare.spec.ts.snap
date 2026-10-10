@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`prepare > turns the synthetic feeds into stable candidates 1`] = `
+{
+  "amContext": null,
+  "candidates": [
+    {
+      "id": "c001",
+      "publishedAt": "2026-10-12T03:30:00.000Z",
+      "publisher": "Sample Economy Desk",
+      "sectionHint": "au-economy",
+      "snippet": "The sample board left the rate unchanged & said inflation is “easing”.",
+      "sourceKey": "sample-econ",
+      "title": "Sample bank holds the sample rate at 3.60 per cent",
+      "url": "https://example.com/economy/rate-hold",
+    },
+    {
+      "id": "c002",
+      "publishedAt": "2026-10-11T14:00:00.000Z",
+      "publisher": "Sample Economy Desk",
+      "sectionHint": "au-economy",
+      "snippet": "Escaped HTML in a description block.",
+      "sourceKey": "sample-econ",
+      "title": "Sample wages grow 0.8% in the quarter",
+      "url": "https://example.com/economy/wages",
+    },
+    {
+      "id": "c003",
+      "publishedAt": "2026-10-11T20:00:00.000Z",
+      "publisher": "Sample Long",
+      "sectionHint": "world",
+      "snippet": "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word…",
+      "sourceKey": "sample-long",
+      "title": "Long snippet",
+      "url": "https://example.net/long",
+    },
+    {
+      "id": "c004",
+      "publishedAt": "2026-10-11T22:15:00.000Z",
+      "publisher": "Sample Dev Blog",
+      "sectionHint": "web-dev",
+      "snippet": "Content used when there is no summary.",
+      "sourceKey": "sample-dev",
+      "title": "Only updated, no published",
+      "url": "https://example.org/blog/updated-only",
+    },
+    {
+      "id": "c005",
+      "publishedAt": "2026-10-11T18:00:00.000Z",
+      "publisher": "Sample Dev Blog",
+      "sectionHint": "web-dev",
+      "snippet": "A synthetic post about signals.",
+      "sourceKey": "sample-dev",
+      "title": "Signals land in Sample framework 9",
+      "url": "https://example.org/blog/signals-9",
+    },
+  ],
+  "editionDate": "2026-10-13",
+  "generatedAt": "2026-10-12T18:30:00.000Z",
+  "slot": "am",
+}
+`;
