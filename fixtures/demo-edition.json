@@ -1,0 +1,1292 @@
+{
+  "am": {
+    "id": "demo-2026-10-13-am",
+    "editionDate": "2026-10-13",
+    "slot": "am",
+    "status": "ok",
+    "createdAt": "2026-10-12T18:31:00Z",
+    "nudge": "A quiet news day. The big one is CPI on 28 October, so if there is deep work you have been putting off, this is the week to do it.",
+    "weather": {
+      "katoomba": {
+        "name": "Katoomba",
+        "nowC": 9,
+        "highC": 17,
+        "lowC": 7,
+        "normalHighC": 18,
+        "normalLowC": 8,
+        "summary": "Fog lifting around 10am",
+        "rainChancePct": 20,
+        "windKmh": 12,
+        "sunrise": "05:50",
+        "hourly": [
+          {
+            "time": "06:00",
+            "tempC": 8
+          },
+          {
+            "time": "09:00",
+            "tempC": 10
+          },
+          {
+            "time": "12:00",
+            "tempC": 15
+          },
+          {
+            "time": "15:00",
+            "tempC": 17
+          },
+          {
+            "time": "18:00",
+            "tempC": 13
+          }
+        ]
+      },
+      "sydney": {
+        "name": "Sydney CBD",
+        "nowC": 16,
+        "highC": 22,
+        "lowC": 14,
+        "normalHighC": 22,
+        "normalLowC": 13,
+        "summary": "Clear",
+        "rainChancePct": 5,
+        "windKmh": 15,
+        "sunrise": "05:50",
+        "hourly": [
+          {
+            "time": "06:00",
+            "tempC": 14
+          },
+          {
+            "time": "09:00",
+            "tempC": 17
+          },
+          {
+            "time": "12:00",
+            "tempC": 21
+          },
+          {
+            "time": "15:00",
+            "tempC": 22
+          },
+          {
+            "time": "18:00",
+            "tempC": 19
+          }
+        ]
+      }
+    },
+    "keyDates": [
+      {
+        "date": "2026-10-15",
+        "timeLocal": "11:30",
+        "label": "Labour Force",
+        "sourceName": "ABS",
+        "url": "https://www.abs.gov.au/release-calendar/future-releases"
+      },
+      {
+        "date": "2026-10-28",
+        "timeLocal": "11:30",
+        "label": "CPI, September quarter",
+        "sourceName": "ABS",
+        "url": "https://www.abs.gov.au/release-calendar/future-releases"
+      },
+      {
+        "date": "2026-11-03",
+        "timeLocal": "14:30",
+        "label": "RBA cash rate decision",
+        "sourceName": "RBA",
+        "url": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html"
+      }
+    ],
+    "sourceCount": 41,
+    "stories": [
+      {
+        "id": "demo-001",
+        "section": "au-economy",
+        "rank": 1,
+        "topRank": 1,
+        "title": "September-quarter CPI lands 28 October",
+        "summary": "The ABS publishes quarterly inflation on Wednesday 28 October at 11:30am. It is the last major inflation reading before the RBA board meets on 2 and 3 November.",
+        "whyItMatters": "Rates move on this number. Anything with a variable rate, a refinance or a fixed-rate expiry is worth watching from here.",
+        "pickedBecause": "Scheduled primary-source release that feeds directly into the next rate decision.",
+        "links": [
+          {
+            "sourceKey": "abs",
+            "url": "https://www.abs.gov.au/release-calendar/future-releases",
+            "publisherTitle": "ABS release calendar",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          },
+          {
+            "sourceKey": "rba",
+            "url": "https://www.rba.gov.au/media-releases/",
+            "publisherTitle": "Reserve Bank of Australia",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-002",
+        "section": "au-economy",
+        "rank": 2,
+        "topRank": null,
+        "title": "Labour Force figures due Thursday",
+        "summary": "September jobs data comes out on 15 October. The unemployment rate is one of the two numbers the RBA leans on most.",
+        "whyItMatters": "A surprise here shifts expectations for November before CPI does.",
+        "pickedBecause": "Primary-source release in the next seven days.",
+        "links": [
+          {
+            "sourceKey": "abs",
+            "url": "https://www.abs.gov.au/release-calendar/future-releases",
+            "publisherTitle": "ABS release calendar",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-003",
+        "section": "au-economy",
+        "rank": 3,
+        "topRank": null,
+        "title": "RBA board meets 2 and 3 November",
+        "summary": "The November meeting comes with the quarterly Statement on Monetary Policy, so it brings new forecasts as well as a decision.",
+        "whyItMatters": "The forecasts say where rates are heading over the next year, not just next month.",
+        "pickedBecause": "Primary source with a fixed date.",
+        "links": [
+          {
+            "sourceKey": "rba",
+            "url": "https://www.rba.gov.au/media-releases/",
+            "publisherTitle": "Reserve Bank of Australia",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-004",
+        "section": "au-politics",
+        "rank": 1,
+        "topRank": null,
+        "title": "How a bill becomes law: the spring sittings explained",
+        "summary": "Parliament sits in blocks through spring. Bills pass both houses before the Governor-General gives assent, and Senate committees often slow them down.",
+        "whyItMatters": "Policy that touches housing, tax or tech rarely changes overnight; the sitting calendar tells you when it can.",
+        "pickedBecause": "A useful explainer while the sitting calendar is busy.",
+        "links": [
+          {
+            "sourceKey": "abc-politics",
+            "url": "https://www.abc.net.au/news/politics",
+            "publisherTitle": "ABC News: Politics",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          },
+          {
+            "sourceKey": "conversation-politics",
+            "url": "https://theconversation.com/au/politics",
+            "publisherTitle": "The Conversation: Politics",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-005",
+        "section": "au-politics",
+        "rank": 2,
+        "topRank": null,
+        "title": "Where housing supply policy is made",
+        "summary": "Federal targets set the direction, but zoning and approvals sit with the states and councils, which is why progress varies so much by city.",
+        "whyItMatters": "Explains why Melbourne and Sydney can move at different speeds on the same national target.",
+        "pickedBecause": "Background that helps read housing headlines.",
+        "links": [
+          {
+            "sourceKey": "sbs-australia",
+            "url": "https://www.sbs.com.au/news/topic/australia",
+            "publisherTitle": "SBS News: Australia",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          },
+          {
+            "sourceKey": "conversation-politics",
+            "url": "https://theconversation.com/au/politics",
+            "publisherTitle": "The Conversation: Politics",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-006",
+        "section": "world",
+        "rank": 1,
+        "topRank": null,
+        "title": "Why US interest rates still matter here",
+        "summary": "When the US Federal Reserve moves, the Australian dollar and global borrowing costs tend to follow, which feeds into local prices and bank funding.",
+        "whyItMatters": "A weaker dollar makes imported tech and travel dearer.",
+        "pickedBecause": "Context for reading global rate news.",
+        "links": [
+          {
+            "sourceKey": "abc-world",
+            "url": "https://www.abc.net.au/news/world",
+            "publisherTitle": "ABC News: World",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-007",
+        "section": "world",
+        "rank": 2,
+        "topRank": null,
+        "title": "Trade with Asia: the numbers behind the headlines",
+        "summary": "China, Japan and South Korea remain Australia’s largest export markets, so their growth and policy settings show up in the federal budget.",
+        "whyItMatters": "Commodity export income is a big swing factor in budget forecasts.",
+        "pickedBecause": "Explainer that frames recurring trade stories.",
+        "links": [
+          {
+            "sourceKey": "sbs-world",
+            "url": "https://www.sbs.com.au/news/topic/world",
+            "publisherTitle": "SBS News: World",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-008",
+        "section": "web-dev",
+        "rank": 1,
+        "topRank": 2,
+        "title": "Angular v20 leaves long-term support in November",
+        "summary": "Each Angular major gets 18 months of support: six active and twelve LTS. v20 reaches the end of that window next month, after which security fixes stop.",
+        "whyItMatters": "Any app still on v20, at work or for a client, should have an upgrade ticket before the end of the year.",
+        "pickedBecause": "Angular is your main framework and support dates are high signal.",
+        "links": [
+          {
+            "sourceKey": "angular-dev",
+            "url": "https://angular.dev/reference/releases",
+            "publisherTitle": "Angular release schedule",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-009",
+        "section": "web-dev",
+        "rank": 2,
+        "topRank": null,
+        "title": "Signal Forms are stable as of Angular v22",
+        "summary": "Signal Forms, resource and httpResource moved to stable in v22, and new apps now default to OnPush change detection.",
+        "whyItMatters": "Safe to use in production code now, not just side projects.",
+        "pickedBecause": "Direct match on Angular and signals.",
+        "links": [
+          {
+            "sourceKey": "angular-blog",
+            "url": "https://blog.angular.dev/",
+            "publisherTitle": "Angular Blog",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-010",
+        "section": "web-dev",
+        "rank": 3,
+        "topRank": null,
+        "title": "Core updates keep reshuffling small-business search results",
+        "summary": "Google confirmed several core updates this year. Sites with thin service pages tend to lose ground; specific, local pages tend to hold up.",
+        "whyItMatters": "Worth checking client sites’ service pages before the next update lands.",
+        "pickedBecause": "Search changes affect your freelance clients.",
+        "links": [
+          {
+            "sourceKey": "seroundtable",
+            "url": "https://www.seroundtable.com/",
+            "publisherTitle": "Search Engine Roundtable",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-011",
+        "section": "ai",
+        "rank": 1,
+        "topRank": 3,
+        "title": "Google AI Mode passes a billion monthly users",
+        "summary": "Google says AI Mode now has more than a billion monthly users, alongside this year’s core updates to regular search.",
+        "whyItMatters": "Fewer clicks reach small-business sites. Pitch clients on being the cited answer, not just a blue link.",
+        "pickedBecause": "Touches both AI and your freelance work.",
+        "links": [
+          {
+            "sourceKey": "seroundtable",
+            "url": "https://www.seroundtable.com/",
+            "publisherTitle": "Search Engine Roundtable",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          },
+          {
+            "sourceKey": "smol-ai",
+            "url": "https://news.smol.ai/",
+            "publisherTitle": "AI News by smol.ai",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-012",
+        "section": "ai",
+        "rank": 2,
+        "topRank": null,
+        "title": "State of JS: Claude use among respondents doubles to 44%",
+        "summary": "The 2025 survey found 29% of respondents’ code is AI-generated, and Claude use rose from 22% to 44%.",
+        "whyItMatters": "Useful numbers for interviews and client conversations about AI-assisted delivery.",
+        "pickedBecause": "Developer-tooling data from a large survey.",
+        "links": [
+          {
+            "sourceKey": "state-of-js",
+            "url": "https://2025.stateofjs.com/",
+            "publisherTitle": "State of JavaScript 2025",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          },
+          {
+            "sourceKey": "simonw",
+            "url": "https://simonwillison.net/",
+            "publisherTitle": "Simon Willison",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-013",
+        "section": "au-tech-market",
+        "rank": 1,
+        "topRank": null,
+        "title": "Developer workforce at a record 216,000",
+        "summary": "An analysis of ABS data puts Australia’s software developer workforce at 216,000 in February, up from 189,000 a year earlier.",
+        "whyItMatters": "More competition for roles, and more teams that need seniors to lead them.",
+        "pickedBecause": "Matches your interest in the local tech market.",
+        "links": [
+          {
+            "sourceKey": "itnews",
+            "url": "https://www.itnews.com.au/",
+            "publisherTitle": "iTnews",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-014",
+        "section": "au-tech-market",
+        "rank": 2,
+        "topRank": null,
+        "title": "Startups lean on AI to stay small",
+        "summary": "Local founders report hiring fewer juniors and more senior generalists who can direct AI tools across the stack.",
+        "whyItMatters": "Senior frontend skills plus AI fluency is the profile in demand.",
+        "pickedBecause": "Recurring theme across local startup coverage.",
+        "links": [
+          {
+            "sourceKey": "startup-daily",
+            "url": "https://www.startupdaily.net/",
+            "publisherTitle": "Startup Daily",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      }
+    ]
+  },
+  "pm": {
+    "id": "demo-2026-10-13-pm",
+    "editionDate": "2026-10-13",
+    "slot": "pm",
+    "status": "ok",
+    "createdAt": "2026-10-13T05:03:00Z",
+    "nudge": null,
+    "weather": {
+      "katoomba": {
+        "name": "Katoomba",
+        "nowC": 9,
+        "highC": 17,
+        "lowC": 7,
+        "normalHighC": 18,
+        "normalLowC": 8,
+        "summary": "Fog lifting around 10am",
+        "rainChancePct": 20,
+        "windKmh": 12,
+        "sunrise": "05:50",
+        "hourly": [
+          {
+            "time": "06:00",
+            "tempC": 8
+          },
+          {
+            "time": "09:00",
+            "tempC": 10
+          },
+          {
+            "time": "12:00",
+            "tempC": 15
+          },
+          {
+            "time": "15:00",
+            "tempC": 17
+          },
+          {
+            "time": "18:00",
+            "tempC": 13
+          }
+        ]
+      },
+      "sydney": {
+        "name": "Sydney CBD",
+        "nowC": 16,
+        "highC": 22,
+        "lowC": 14,
+        "normalHighC": 22,
+        "normalLowC": 13,
+        "summary": "Clear",
+        "rainChancePct": 5,
+        "windKmh": 15,
+        "sunrise": "05:50",
+        "hourly": [
+          {
+            "time": "06:00",
+            "tempC": 14
+          },
+          {
+            "time": "09:00",
+            "tempC": 17
+          },
+          {
+            "time": "12:00",
+            "tempC": 21
+          },
+          {
+            "time": "15:00",
+            "tempC": 22
+          },
+          {
+            "time": "18:00",
+            "tempC": 19
+          }
+        ]
+      }
+    },
+    "keyDates": [
+      {
+        "date": "2026-10-15",
+        "timeLocal": "11:30",
+        "label": "Labour Force",
+        "sourceName": "ABS",
+        "url": "https://www.abs.gov.au/release-calendar/future-releases"
+      },
+      {
+        "date": "2026-10-28",
+        "timeLocal": "11:30",
+        "label": "CPI, September quarter",
+        "sourceName": "ABS",
+        "url": "https://www.abs.gov.au/release-calendar/future-releases"
+      },
+      {
+        "date": "2026-11-03",
+        "timeLocal": "14:30",
+        "label": "RBA cash rate decision",
+        "sourceName": "RBA",
+        "url": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html"
+      }
+    ],
+    "sourceCount": 39,
+    "stories": [
+      {
+        "id": "demo-015",
+        "section": "au-economy",
+        "rank": 1,
+        "topRank": null,
+        "title": "Update: what economists expect from CPI",
+        "summary": "Bank economists published their September-quarter previews this afternoon. Most expect underlying inflation to edge lower but stay above the RBA’s target band.",
+        "whyItMatters": "If the print lands above previews, a November move becomes more likely.",
+        "pickedBecause": "New since the morning and adds to the CPI story.",
+        "links": [
+          {
+            "sourceKey": "abs",
+            "url": "https://www.abs.gov.au/release-calendar/future-releases",
+            "publisherTitle": "ABS release calendar",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-016",
+        "section": "web-dev",
+        "rank": 1,
+        "topRank": null,
+        "title": "Chrome lands a new Baseline batch",
+        "summary": "Chrome’s latest stable release moves more CSS and DOM features into Baseline “newly available”.",
+        "whyItMatters": "More features you can use without polyfills in client sites.",
+        "pickedBecause": "New since the morning; browser platform changes.",
+        "links": [
+          {
+            "sourceKey": "chrome-dev",
+            "url": "https://developer.chrome.com/blog",
+            "publisherTitle": "Chrome for Developers",
+            "publishedAt": "2026-10-13T03:00:00Z"
+          }
+        ]
+      },
+      {
+        "id": "demo-017",
+        "section": "ai",
+        "rank": 1,
+        "topRank": null,
+        "title": "Coding agents get scheduled runs",
+        "summary": "More AI coding tools now run unattended jobs on a schedule, such as nightly reviews and morning reports.",
+        "whyItMatters": "This app is built on the same idea.",
+        "pickedBecause": "New since the morning; AI developer tooling.",
+        "links": [
+          {
+            "sourceKey": "simonw",
+            "url": "https://simonwillison.net/",
+            "publisherTitle": "Simon Willison",
+            "publishedAt": "2026-10-12T19:00:00Z"
+          }
+        ]
+      }
+    ]
+  },
+  "archive": [
+    {
+      "id": "demo-2026-10-12-am",
+      "editionDate": "2026-10-12",
+      "slot": "am",
+      "status": "ok",
+      "createdAt": "2026-10-12T05:31:00+11:00",
+      "nudge": "Steady day. Nothing scheduled that changes your plans.",
+      "weather": {
+        "katoomba": {
+          "name": "Katoomba",
+          "nowC": 9,
+          "highC": 17,
+          "lowC": 7,
+          "normalHighC": 18,
+          "normalLowC": 8,
+          "summary": "Fog lifting around 10am",
+          "rainChancePct": 20,
+          "windKmh": 12,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 8
+            },
+            {
+              "time": "09:00",
+              "tempC": 10
+            },
+            {
+              "time": "12:00",
+              "tempC": 15
+            },
+            {
+              "time": "15:00",
+              "tempC": 17
+            },
+            {
+              "time": "18:00",
+              "tempC": 13
+            }
+          ]
+        },
+        "sydney": {
+          "name": "Sydney CBD",
+          "nowC": 16,
+          "highC": 22,
+          "lowC": 14,
+          "normalHighC": 22,
+          "normalLowC": 13,
+          "summary": "Clear",
+          "rainChancePct": 5,
+          "windKmh": 15,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 14
+            },
+            {
+              "time": "09:00",
+              "tempC": 17
+            },
+            {
+              "time": "12:00",
+              "tempC": 21
+            },
+            {
+              "time": "15:00",
+              "tempC": 22
+            },
+            {
+              "time": "18:00",
+              "tempC": 19
+            }
+          ]
+        }
+      },
+      "keyDates": [],
+      "sourceCount": 38,
+      "stories": [
+        {
+          "id": "demo-018",
+          "section": "au-economy",
+          "rank": 1,
+          "topRank": null,
+          "title": "RBA minutes point to a data-dependent November",
+          "summary": "The minutes of the last board meeting stress that the next decision depends on the coming inflation and jobs data.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "rba",
+              "url": "https://www.rba.gov.au/media-releases/",
+              "publisherTitle": "Reserve Bank of Australia",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-019",
+          "section": "web-dev",
+          "rank": 2,
+          "topRank": null,
+          "title": "TypeScript 6 is the floor for Angular 22",
+          "summary": "Angular 22 requires TypeScript 6.0, so older toolchains need upgrading before a move to v22.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "angular-blog",
+              "url": "https://blog.angular.dev/",
+              "publisherTitle": "Angular Blog",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-020",
+          "section": "ai",
+          "rank": 3,
+          "topRank": null,
+          "title": "Agents that review their own pull requests",
+          "summary": "More teams are wiring AI review into CI so every change gets a first pass before a human looks.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "simonw",
+              "url": "https://simonwillison.net/",
+              "publisherTitle": "Simon Willison",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-2026-10-09-am",
+      "editionDate": "2026-10-09",
+      "slot": "am",
+      "status": "ok",
+      "createdAt": "2026-10-09T05:31:00+11:00",
+      "nudge": "Steady day. Nothing scheduled that changes your plans.",
+      "weather": {
+        "katoomba": {
+          "name": "Katoomba",
+          "nowC": 9,
+          "highC": 17,
+          "lowC": 7,
+          "normalHighC": 18,
+          "normalLowC": 8,
+          "summary": "Fog lifting around 10am",
+          "rainChancePct": 20,
+          "windKmh": 12,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 8
+            },
+            {
+              "time": "09:00",
+              "tempC": 10
+            },
+            {
+              "time": "12:00",
+              "tempC": 15
+            },
+            {
+              "time": "15:00",
+              "tempC": 17
+            },
+            {
+              "time": "18:00",
+              "tempC": 13
+            }
+          ]
+        },
+        "sydney": {
+          "name": "Sydney CBD",
+          "nowC": 16,
+          "highC": 22,
+          "lowC": 14,
+          "normalHighC": 22,
+          "normalLowC": 13,
+          "summary": "Clear",
+          "rainChancePct": 5,
+          "windKmh": 15,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 14
+            },
+            {
+              "time": "09:00",
+              "tempC": 17
+            },
+            {
+              "time": "12:00",
+              "tempC": 21
+            },
+            {
+              "time": "15:00",
+              "tempC": 22
+            },
+            {
+              "time": "18:00",
+              "tempC": 19
+            }
+          ]
+        }
+      },
+      "keyDates": [],
+      "sourceCount": 39,
+      "stories": [
+        {
+          "id": "demo-021",
+          "section": "au-tech-market",
+          "rank": 1,
+          "topRank": null,
+          "title": "Contract rates for senior frontend roles hold steady",
+          "summary": "Recruiters report steady day rates for senior Angular and React contractors in Sydney and Melbourne.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "itnews",
+              "url": "https://www.itnews.com.au/",
+              "publisherTitle": "iTnews",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-022",
+          "section": "au-economy",
+          "rank": 2,
+          "topRank": null,
+          "title": "Household spending data due next week",
+          "summary": "The ABS monthly household spending indicator gives an early read on how rate rises are biting.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "abs",
+              "url": "https://www.abs.gov.au/release-calendar/future-releases",
+              "publisherTitle": "ABS release calendar",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-2026-10-08-pm",
+      "editionDate": "2026-10-08",
+      "slot": "pm",
+      "status": "ok",
+      "createdAt": "2026-10-08T16:03:00+11:00",
+      "nudge": null,
+      "weather": {
+        "katoomba": {
+          "name": "Katoomba",
+          "nowC": 9,
+          "highC": 17,
+          "lowC": 7,
+          "normalHighC": 18,
+          "normalLowC": 8,
+          "summary": "Fog lifting around 10am",
+          "rainChancePct": 20,
+          "windKmh": 12,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 8
+            },
+            {
+              "time": "09:00",
+              "tempC": 10
+            },
+            {
+              "time": "12:00",
+              "tempC": 15
+            },
+            {
+              "time": "15:00",
+              "tempC": 17
+            },
+            {
+              "time": "18:00",
+              "tempC": 13
+            }
+          ]
+        },
+        "sydney": {
+          "name": "Sydney CBD",
+          "nowC": 16,
+          "highC": 22,
+          "lowC": 14,
+          "normalHighC": 22,
+          "normalLowC": 13,
+          "summary": "Clear",
+          "rainChancePct": 5,
+          "windKmh": 15,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 14
+            },
+            {
+              "time": "09:00",
+              "tempC": 17
+            },
+            {
+              "time": "12:00",
+              "tempC": 21
+            },
+            {
+              "time": "15:00",
+              "tempC": 22
+            },
+            {
+              "time": "18:00",
+              "tempC": 19
+            }
+          ]
+        }
+      },
+      "keyDates": [],
+      "sourceCount": 40,
+      "stories": [
+        {
+          "id": "demo-023",
+          "section": "web-dev",
+          "rank": 1,
+          "topRank": null,
+          "title": "View transitions keep spreading across browsers",
+          "summary": "Cross-document view transitions now work in more browsers, making page-to-page animation possible without a framework.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "chrome-dev",
+              "url": "https://developer.chrome.com/blog",
+              "publisherTitle": "Chrome for Developers",
+              "publishedAt": "2026-10-08T03:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-024",
+          "section": "ai",
+          "rank": 2,
+          "topRank": null,
+          "title": "Smaller models, cheaper summaries",
+          "summary": "Labs keep shipping small models that summarise well, which keeps the cost of daily digests falling.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "smol-ai",
+              "url": "https://news.smol.ai/",
+              "publisherTitle": "AI News by smol.ai",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-2026-10-07-am",
+      "editionDate": "2026-10-07",
+      "slot": "am",
+      "status": "ok",
+      "createdAt": "2026-10-07T05:31:00+11:00",
+      "nudge": "Steady day. Nothing scheduled that changes your plans.",
+      "weather": {
+        "katoomba": {
+          "name": "Katoomba",
+          "nowC": 9,
+          "highC": 17,
+          "lowC": 7,
+          "normalHighC": 18,
+          "normalLowC": 8,
+          "summary": "Fog lifting around 10am",
+          "rainChancePct": 20,
+          "windKmh": 12,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 8
+            },
+            {
+              "time": "09:00",
+              "tempC": 10
+            },
+            {
+              "time": "12:00",
+              "tempC": 15
+            },
+            {
+              "time": "15:00",
+              "tempC": 17
+            },
+            {
+              "time": "18:00",
+              "tempC": 13
+            }
+          ]
+        },
+        "sydney": {
+          "name": "Sydney CBD",
+          "nowC": 16,
+          "highC": 22,
+          "lowC": 14,
+          "normalHighC": 22,
+          "normalLowC": 13,
+          "summary": "Clear",
+          "rainChancePct": 5,
+          "windKmh": 15,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 14
+            },
+            {
+              "time": "09:00",
+              "tempC": 17
+            },
+            {
+              "time": "12:00",
+              "tempC": 21
+            },
+            {
+              "time": "15:00",
+              "tempC": 22
+            },
+            {
+              "time": "18:00",
+              "tempC": 19
+            }
+          ]
+        }
+      },
+      "keyDates": [],
+      "sourceCount": 41,
+      "stories": [
+        {
+          "id": "demo-025",
+          "section": "au-politics",
+          "rank": 1,
+          "topRank": null,
+          "title": "Senate committees: where bills slow down",
+          "summary": "Committee inquiries let the Senate test a bill in detail, which is where most amendments start.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "conversation-politics",
+              "url": "https://theconversation.com/au/politics",
+              "publisherTitle": "The Conversation: Politics",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-026",
+          "section": "world",
+          "rank": 2,
+          "topRank": null,
+          "title": "Why global shipping costs reach your shelves",
+          "summary": "Freight rates feed into import prices with a lag of a few months, so shipping news is an early inflation signal.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "abc-world",
+              "url": "https://www.abc.net.au/news/world",
+              "publisherTitle": "ABC News: World",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-027",
+          "section": "web-dev",
+          "rank": 3,
+          "topRank": null,
+          "title": "Angular’s support windows explained",
+          "summary": "Each major version gets six months of active support and twelve of LTS, which sets the upgrade rhythm for teams.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "angular-dev",
+              "url": "https://angular.dev/reference/releases",
+              "publisherTitle": "Angular release schedule",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-2026-10-05-am",
+      "editionDate": "2026-10-05",
+      "slot": "am",
+      "status": "ok",
+      "createdAt": "2026-10-05T05:31:00+11:00",
+      "nudge": "Steady day. Nothing scheduled that changes your plans.",
+      "weather": {
+        "katoomba": {
+          "name": "Katoomba",
+          "nowC": 9,
+          "highC": 17,
+          "lowC": 7,
+          "normalHighC": 18,
+          "normalLowC": 8,
+          "summary": "Fog lifting around 10am",
+          "rainChancePct": 20,
+          "windKmh": 12,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 8
+            },
+            {
+              "time": "09:00",
+              "tempC": 10
+            },
+            {
+              "time": "12:00",
+              "tempC": 15
+            },
+            {
+              "time": "15:00",
+              "tempC": 17
+            },
+            {
+              "time": "18:00",
+              "tempC": 13
+            }
+          ]
+        },
+        "sydney": {
+          "name": "Sydney CBD",
+          "nowC": 16,
+          "highC": 22,
+          "lowC": 14,
+          "normalHighC": 22,
+          "normalLowC": 13,
+          "summary": "Clear",
+          "rainChancePct": 5,
+          "windKmh": 15,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 14
+            },
+            {
+              "time": "09:00",
+              "tempC": 17
+            },
+            {
+              "time": "12:00",
+              "tempC": 21
+            },
+            {
+              "time": "15:00",
+              "tempC": 22
+            },
+            {
+              "time": "18:00",
+              "tempC": 19
+            }
+          ]
+        }
+      },
+      "keyDates": [],
+      "sourceCount": 42,
+      "stories": [
+        {
+          "id": "demo-028",
+          "section": "au-economy",
+          "rank": 1,
+          "topRank": null,
+          "title": "The RBA’s target band in plain terms",
+          "summary": "The Reserve Bank aims to keep inflation between 2 and 3 per cent on average, which is why each CPI print matters.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "rba",
+              "url": "https://www.rba.gov.au/media-releases/",
+              "publisherTitle": "Reserve Bank of Australia",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-029",
+          "section": "ai",
+          "rank": 2,
+          "topRank": null,
+          "title": "Claude Code routines run on a schedule",
+          "summary": "Routines let a Claude Code session run on a timetable in the cloud, which is how this app’s editions are made.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "simonw",
+              "url": "https://simonwillison.net/",
+              "publisherTitle": "Simon Willison",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-2026-10-02-am",
+      "editionDate": "2026-10-02",
+      "slot": "am",
+      "status": "ok",
+      "createdAt": "2026-10-02T05:31:00+11:00",
+      "nudge": "Steady day. Nothing scheduled that changes your plans.",
+      "weather": {
+        "katoomba": {
+          "name": "Katoomba",
+          "nowC": 9,
+          "highC": 17,
+          "lowC": 7,
+          "normalHighC": 18,
+          "normalLowC": 8,
+          "summary": "Fog lifting around 10am",
+          "rainChancePct": 20,
+          "windKmh": 12,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 8
+            },
+            {
+              "time": "09:00",
+              "tempC": 10
+            },
+            {
+              "time": "12:00",
+              "tempC": 15
+            },
+            {
+              "time": "15:00",
+              "tempC": 17
+            },
+            {
+              "time": "18:00",
+              "tempC": 13
+            }
+          ]
+        },
+        "sydney": {
+          "name": "Sydney CBD",
+          "nowC": 16,
+          "highC": 22,
+          "lowC": 14,
+          "normalHighC": 22,
+          "normalLowC": 13,
+          "summary": "Clear",
+          "rainChancePct": 5,
+          "windKmh": 15,
+          "sunrise": "05:50",
+          "hourly": [
+            {
+              "time": "06:00",
+              "tempC": 14
+            },
+            {
+              "time": "09:00",
+              "tempC": 17
+            },
+            {
+              "time": "12:00",
+              "tempC": 21
+            },
+            {
+              "time": "15:00",
+              "tempC": 22
+            },
+            {
+              "time": "18:00",
+              "tempC": 19
+            }
+          ]
+        }
+      },
+      "keyDates": [],
+      "sourceCount": 43,
+      "stories": [
+        {
+          "id": "demo-030",
+          "section": "ai",
+          "rank": 1,
+          "topRank": null,
+          "title": "State of JS 2025: AI writes more of the code",
+          "summary": "Respondents say 29% of their code is now AI-generated, up sharply on the year before.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "state-of-js",
+              "url": "https://2025.stateofjs.com/",
+              "publisherTitle": "State of JavaScript 2025",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "demo-031",
+          "section": "au-tech-market",
+          "rank": 2,
+          "topRank": null,
+          "title": "Where the developer jobs are",
+          "summary": "Sydney and Melbourne still hold most developer roles, but remote-first teams are spreading them further.",
+          "whyItMatters": "Background worth keeping in mind.",
+          "pickedBecause": "Archive sample.",
+          "links": [
+            {
+              "sourceKey": "startup-daily",
+              "url": "https://www.startupdaily.net/",
+              "publisherTitle": "Startup Daily",
+              "publishedAt": "2026-10-12T19:00:00Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
