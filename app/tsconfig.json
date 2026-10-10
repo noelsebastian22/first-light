@@ -16,7 +16,8 @@
       "@first-light/contracts": [
         "../contracts/src/index.ts"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
