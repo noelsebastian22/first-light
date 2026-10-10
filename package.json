@@ -1,0 +1,19 @@
+{
+  "name": "first-light",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A personal morning briefing PWA: weather, news and the three things to know, edited by Claude twice a day.",
+  "license": "MIT",
+  "workspaces": ["contracts"],
+  "engines": { "node": ">=22.21", "npm": ">=11" },
+  "packageManager": "npm@11.21.0",
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.0",
+    "vitest": "^4.0.8"
+  }
+}
