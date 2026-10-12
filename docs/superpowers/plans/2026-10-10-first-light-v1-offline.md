@@ -16,7 +16,7 @@
 |---|---|
 | 1–16 | Done (contracts, demo app, Playwright + axe + PWA + secret/CSP checks, pipeline fetch/prepare/validate/write/fail CLI, db migration + RLS tests, watchdog/reminder/workflows/vercel.json, README) |
 | Final | Whole-branch review done (0 Critical, 3 Important fixed in `adc5426`, 6 Minor deferred in the ledger). Merged to `main` as PR #1 (`c67103f`) on 2026-10-13 |
-| Next | Follow-up plan for the account-dependent work (see "Not in this plan" at the bottom) |
+| Next | Follow-up plan written: `docs/superpowers/plans/2026-10-13-first-light-v1-live.md` |
 
 Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, is force-added to git (the rest of `.superpowers/` stays ignored) so any machine resumes at the first unfinished task instead of redoing finished tasks. Keep appending to it and commit it with each task.
 
