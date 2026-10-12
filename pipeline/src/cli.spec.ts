@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { Edition } from '@first-light/contracts';
 import { runCli } from './cli';
+import { SOURCES } from './sources';
 import type { CliDeps } from './cli';
 import type { Db, Statement } from './db';
 
@@ -50,6 +51,39 @@ describe('demo-run', () => {
     expect(edition.editionDate).toBe('2026-10-13');
     expect(edition.stories.length).toBeGreaterThan(0);
     expect(edition.stories.every((s) => s.links.length > 0)).toBe(true);
+  });
+});
+
+describe('fetch', () => {
+  const fixture = (path: string) => readFileSync(new URL(`../../fixtures/${path}`, import.meta.url), 'utf8');
+
+  /** Every feed answers with the sample RSS except ABC Business, which sends malformed XML. */
+  const oneBadFeed = (async (input: string | URL | Request) => {
+    const url = new URL(input instanceof Request ? input.url : String(input));
+    if (url.hostname === 'api.open-meteo.com') return new Response(fixture(`open-meteo/${url.searchParams.get('latitude') === '-33.71' ? 'katoomba' : 'sydney'}.json`));
+    if (url.pathname === '/news/feed/104217374/rss.xml') return new Response(fixture('feeds/malformed.xml'));
+    return new Response(fixture('feeds/rss-sample.xml'));
+  }) as typeof fetch;
+
+  it('skips and records a malformed feed and marks the edition partial', async () => {
+    expect(await runCli(['fetch', '--slot', 'am'], deps({ fetch: oneBadFeed }))).toBe(0);
+    const context = JSON.parse(readFileSync(join(outDir, 'context.json'), 'utf8'));
+    const active = SOURCES.filter((s) => s.active).length;
+
+    expect(context.status).toBe('partial');
+    expect(context.failedFeeds.map((f: { key: string }) => f.key)).toEqual(['abc-business']);
+    expect(context.sourceCount).toBe(active - 1);
+    expect(lines.join('\n')).toContain('feed skipped: abc-business');
+  });
+
+  it('marks the edition ok when every feed answers', async () => {
+    const allGood = (async (input: string | URL | Request) => {
+      const url = new URL(input instanceof Request ? input.url : String(input));
+      if (url.hostname === 'api.open-meteo.com') return new Response(fixture(`open-meteo/${url.searchParams.get('latitude') === '-33.71' ? 'katoomba' : 'sydney'}.json`));
+      return new Response(fixture('feeds/rss-sample.xml'));
+    }) as typeof fetch;
+    expect(await runCli(['fetch', '--slot', 'am'], deps({ fetch: allGood }))).toBe(0);
+    expect(JSON.parse(readFileSync(join(outDir, 'context.json'), 'utf8')).status).toBe('ok');
   });
 });
 

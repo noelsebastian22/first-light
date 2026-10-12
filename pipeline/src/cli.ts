@@ -87,7 +87,7 @@ async function gather(deps: CliDeps, slot: Slot, now: Date, sources: Source[], f
   const [feeds, weather] = await Promise.all([fetchAllFeeds(sources, fetchImpl), fetchWeather(fetchImpl, normals, editionDate)]);
   const keyDates = loadKeyDates(repoFile('pipeline/key-dates.yaml'), editionDate);
 
-  const recentUrls = db ? await loadRecentUrls(db, now) : new Set<string>();
+  const recentUrls = db ? await loadRecentUrls(db, now, editionDate, slot) : new Set<string>();
   const am = db && slot === 'pm' ? await loadAmContext(db, editionDate) : null;
   const candidates = prepare({ items: feeds.items, slot, editionDate, now, recentUrls, am });
 

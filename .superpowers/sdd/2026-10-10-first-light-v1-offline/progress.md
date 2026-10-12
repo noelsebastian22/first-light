@@ -73,3 +73,17 @@ Task 15: Ruling: watchdog picks the slot from the Sydney clock (same rule as rou
 Task 15: Ruling: vercel.json also sets buildCommand and outputDirectory (app/dist/app/browser) so the Vercel project needs no dashboard settings; ci.yml runs on push to main and on pull requests — cost if wrong: none
 Task 15: complete (commits 0b0e371..f225a08, tests: npm test -w pipeline →    Duration  423ms (import 43%, transform 30%, tests 25%, worker 2%))
 Task 16: Ruling: README has no license section — package.json says MIT but the repo has no LICENSE file; left for Noel — cost if wrong: none
+Task 16: complete (commits f225a08..cd0b2aa, tests: npm test → [2m   Duration [22m 2.35s[2m (environment 47%, tests 25%, setup 18%, transform 7%, import 3%, worker 1%)[22m)
+Final review: fresh reviewer (opus subagent), 0 Critical, 3 Important, 6 Minor; did not run Playwright or RLS SQL itself (both ran green this session)
+Final: fixed CSP blocks Google Fonts once the service worker controls the page — scripts/check-dist-csp.test.mjs "the CSP in vercel.json lets the service worker fetch what index.html loads" RED→GREEN (connect-src gains fonts.googleapis.com + fonts.gstatic.com; check:csp now also checks connect-src), suite contracts 13/13, pipeline 79/79, app 38/38, scripts 8/8
+Final: fixed rerun starved of its own articles — pipeline/src/db.spec.ts "leaves out the edition this run will replace" RED→GREEN (loadRecentUrls excludes the same date+slot; SQL checked on postgres:18), suite as above
+Final: fixed missing partial-edition test (Review Focus 4) — cli.spec "skips and records a malformed feed and marks the edition partial" (mutation: forcing status 'ok' turns it RED; restored GREEN), suite as above
+Final: minor (deferred): Open-Meteo fetch has no timeout (weather.ts) — a hang stalls the routine for minutes before fail
+Final: minor (deferred): stale files in pipeline/out (fetch doesn't clear out/, validate leaves an old validated.json, fail trusts any context.json) — laptop-only risk
+Final: minor (deferred): fail prints "ok: recorded failure" even when the guarded upsert left an ok/partial row alone
+Final: minor (deferred): rls.sql checks the reads cascade as superuser, not as pipeline_writer
+Final: minor (deferred): Today always says "Good morning." / "Next edition 4:02pm" after the pm lands; News header shows the raw date
+Final: minor (deferred): plan Status table stale (updated in the session handoff)
+Final: Ruling: replacing a partial edition still cascades away reads and saves on its old stories (spec §4) — after the fix the rerun can pick the same articles, but a saved story only survives if story ids stay stable; follow-up plan should decide whether replace keeps saves — cost if wrong: Noel loses a save after a Run now on a partial edition
+Final: Ruling: GitHub schedule timezone accepted — confirmed in GitHub's official docs this session (reviewer could only find secondary sources) — cost if wrong: none
+Final: Ruling: gh workflow enable resetting the 60-day clock stays unverified until a quiet 60 days passes — cost if wrong: emails stop until a commit

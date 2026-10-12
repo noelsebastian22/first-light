@@ -25,15 +25,19 @@ export function createSql(url: string): Db {
 
 const iso = (value: unknown) => new Date(value as string | Date).toISOString();
 
-/** Normalised URLs used by editions created in the last 48 hours (spec §5, step 2). */
-export async function loadRecentUrls(db: Db, now: Date): Promise<Set<string>> {
+/**
+ * Normalised URLs used by editions created in the last 48 hours (spec §5, step 2),
+ * except the edition for this date and slot: a rerun replaces it, so its articles
+ * are fair game again.
+ */
+export async function loadRecentUrls(db: Db, now: Date, editionDate: string, slot: string): Promise<Set<string>> {
   const since = new Date(now.getTime() - 48 * 3_600_000).toISOString();
   const rows = await db.query({
     text: `select l.url from story_links l
            join stories s on s.id = l.story_id
            join editions e on e.id = s.edition_id
-           where e.created_at >= $1`,
-    params: [since],
+           where e.created_at >= $1 and not (e.edition_date = $2 and e.slot = $3)`,
+    params: [since, editionDate, slot],
   });
   return new Set(rows.map((r) => String(r['url'])));
 }
