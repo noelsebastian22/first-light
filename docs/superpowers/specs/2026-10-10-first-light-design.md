@@ -52,6 +52,7 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 | Credit | "Edited by Claude" in small print only (landing footer, Today fine print) |
 | Cost | $0 beyond the existing Claude subscription |
 | Runtime | Node 24 (Angular CLI 22.2 needs ≥ 24.15) and npm 11 (npm 10.9 crashes resolving Vitest peers) |
+| Database | Neon project on Postgres 18, region AWS Sydney (Singapore if the Data API isn't offered there); CI tests against `postgres:18` |
 | Candidates | Feed items older than 72 hours are dropped before Claude sees them |
 | Afternoon edition | Never carries a nudge or Top 3, even when it runs as a full edition because the morning one is missing |
 | Browser bundle | No Zod in the app; the demo area is lazy-loaded; CI fails on secret-like strings in `app/dist` |
