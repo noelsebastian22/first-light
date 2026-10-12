@@ -57,3 +57,9 @@ Task 13: Ruling: weather fetch failure is fatal (exit 2 → fail); one feed fail
 Task 13: Ruling: Db interface {query, transaction: SqlTx} instead of bare SqlTx — write must read the existing status first — cost if wrong: none
 Task 13: Ruling: demo-run uses two fixture sources (rss-sample, atom-sample) at a fixed 2026-10-12T18:32Z, served by a fixture fetch; sample model edition at fixtures/model-edition.sample.json — cost if wrong: none
 Task 13: Ruling: root scripts pipeline, pipeline:fail, pipeline:feeds-check → pipeline workspace "cli" (tsx src/cli.ts); out dir pipeline/out (already git-ignored) — cost if wrong: none
+Task 13: complete (commits fa8d365..650b11d, tests: npm test -w pipeline →    Duration  229ms (import 42%, transform 35%, tests 20%, worker 2%))
+Task 14: Ruling: run.sh builds a fresh first_light_test database each run (drop/create, \connect) instead of relying on a clean server; PSQL env overrides the client (locally "docker exec -i <container> psql", no psql installed) — cost if wrong: none
+Task 14: Ruling: migration wrapped in begin/commit so the Neon SQL editor applies it atomically; runbook reordered so Neon Auth + Data API (roles authenticated/anonymous, auth.user_id()) exist before the migration — cost if wrong: none
+Task 14: Ruling: section is a Postgres enum section_key; reads/saves/app_opens.user_id default auth.user_id(); story_links pk (story_id, url) with on delete cascade; editions.nudge check (am or null) — cost if wrong: a later migration
+Task 14: Ruling: rls.sql also runs the exact write.ts / fail SQL as pipeline_writer (columns, upsert, replace delete, fail never touching ok) and checks reads cascade with their story — catches drift between Task 13 and the schema; mutation-checked two policies — cost if wrong: SQL duplicated in two places
+Task 14: Ruling: anonymous check accepts either permission denied or zero rows per table — cost if wrong: none

@@ -7,9 +7,18 @@ this file says how. Nothing here costs money: every service stays on its free ti
 
 1. Create a project on **Postgres 18**, region **AWS Sydney** (`ap-southeast-2`;
    Singapore if the Data API isn't offered in Sydney). Set max compute to **0.25 CU**.
-2. Apply `db/migrations/*.sql` in number order, as the project owner (`neondb_owner`), from
-   the Neon SQL editor. An applied migration is never edited; fixes go in a new file.
-3. The migration creates the roles `pipeline_writer` and `watchdog_reader` without login.
+2. **Neon Auth:** enable it with **Google only**. Turn email/password sign-in off *before*
+   anyone signs in. Use your own Google OAuth client, left in *Testing* status with
+   yourself as the only test user. Trusted domains: `firstlight.noel-sebastian.com` and
+   localhost; turn "Allow localhost" off once development is done.
+3. **Data API:** enable it. It serves `public` only; `private.members` stays unreachable.
+   It also creates the `authenticated` and `anonymous` roles and `auth.user_id()`, which
+   the migration needs, so do this before step 4.
+4. Apply `db/migrations/*.sql` in number order, as the project owner (`neondb_owner`), from
+   the Neon SQL editor. Each file is one transaction. An applied migration is never
+   edited; fixes go in a new file. CI runs the same files plus `db/test/rls.sql` against
+   `postgres:18` (`db/test/run.sh`).
+5. The migration creates the roles `pipeline_writer` and `watchdog_reader` without login.
    Give each a long generated password (keep them in your password manager):
 
    ```sql
@@ -21,11 +30,6 @@ this file says how. Nothing here costs money: every service stays on its free ti
    and password swapped:
    `postgresql://pipeline_writer:<password>@<endpoint-host>/neondb?sslmode=require`.
    The pipeline uses it over HTTPS (`@neondatabase/serverless`), so no port needs opening.
-4. **Neon Auth:** enable it with **Google only**. Turn email/password sign-in off *before*
-   anyone signs in. Use your own Google OAuth client, left in *Testing* status with
-   yourself as the only test user. Trusted domains: `firstlight.noel-sebastian.com` and
-   localhost; turn "Allow localhost" off once development is done.
-5. **Data API:** enable it. It serves `public` only; `private.members` stays unreachable.
 
 ### Bootstrap the member
 
