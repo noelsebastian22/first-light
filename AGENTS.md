@@ -17,15 +17,15 @@ from `.claude/skills/`, so that symlink is load-bearing. Edit the `.agents/` cop
 
 ## Status
 
-Spec approved. Building the offline v1 on branch `feat/v1-offline` from
-`docs/superpowers/plans/2026-10-10-first-light-v1-offline.md` (see its Status section).
-Execution ledger with every ruling: `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`
-(tracked in git, unlike the rest of `.superpowers/`; it tells executing-plans which tasks are done).
+The offline v1 (`docs/superpowers/plans/2026-10-10-first-light-v1-offline.md`) is merged to
+`main` (PR #1). Its ledger, with every ruling and the deferred review minors:
+`.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md` (tracked in git, unlike the
+rest of `.superpowers/`). Next is a follow-up plan for the work that needs Noel's accounts
+(Neon, Vercel, routine, GitHub secrets). Account setup steps: `docs/runbook.md`.
 
 ## Setup on a new machine
 
 ```bash
-git checkout feat/v1-offline        # the build lives here until the final PR
 nvm install 24 && nvm use 24        # Node >= 24.15 (Angular CLI 22.2 refuses older)
 npm i -g npm@11                     # npm 10.9 crashes resolving Vitest peers
 npm install
@@ -33,9 +33,11 @@ npx playwright install chromium     # once, for app e2e tests (run from app/)
 npm test                            # contracts, pipeline, app unit tests
 npm run build -w app                # e2e serves app/dist; without a build it times out
 npm run e2e -w app
+npm run pipeline -- demo-run       # pipeline end to end on fixtures, no network or DB
 ```
 
-No `.env` is needed until the database and email tasks; `.env.example` lists the names.
+No `.env` is needed for any of the above; `.env.example` lists the names. RLS tests need a
+throwaway Postgres 18: see "Local development" in `README.md` (`db/test/run.sh`).
 
 ## Design references
 
@@ -66,7 +68,8 @@ them). Live canvas: the "First Light mockups" design artifact linked there.
 - **Dates:** a "day" is a local `YYYY-MM-DD` string in `Australia/Sydney`. Never use
   `toISOString()` to get a calendar date.
 - **The browser holds no secrets** and has no way to run the AI. A CI check fails the
-  build if a secret-like string appears in `app/dist`.
+  build if a secret-like string appears in `app/dist`, and `check:csp` fails it if `index.html`
+  carries inline script or loads an origin missing from the CSP's `connect-src`.
 - **Links are never written by the model.** Stories cite article IDs; code attaches URLs
   from fetched feed items.
 - **The demo never touches the database.** It uses `DemoEditionSource` and

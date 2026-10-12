@@ -2,6 +2,54 @@
 
 <!-- newest first -->
 
+## 2026-10-13 · claude-code · Tasks 13–16, review, merge
+
+**Did**
+- Pulled `fa8d365` (Postgres 18 docs, from a cloud session the log never recorded).
+- Task 13: `pipeline/src/db.ts` (`createSql`, `loadRecentUrls`, `loadAmContext`, `loadExisting`), `write.ts` (`planWrite`, `buildWriteStatements`, `buildFailStatement`), `cli.ts` (`fetch`, `validate`, `write [--force]`, `fail`, `feeds-check`, `demo-run`), `fixtures/model-edition.sample.json`, `docs/routine-prompt.md`, `docs/runbook.md`. Root scripts `pipeline`, `pipeline:fail`, `pipeline:feeds-check`.
+- Task 14: `db/migrations/0001_init.sql`, plus `db/test/{shim.sql,rls.sql,run.sh}`. `rls.sql` also runs the exact `write.ts`/`fail` SQL as `pipeline_writer`. Two policies were mutation-checked.
+- Task 15: `pipeline/src/ops/{mail,watchdog,reminder}.ts`, the four workflows, `vercel.json`, and `scripts/check-dist-csp.mjs` (`check:csp`).
+- Task 16: `README.md`. Every command in it was run.
+- Final review (fresh opus subagent): 0 Critical, 3 Important, all fixed in `adc5426`:
+  - fonts added to the CSP `connect-src`;
+  - `loadRecentUrls` excludes the edition being replaced;
+  - a partial-edition CLI test.
+- PR #1 merged to `main` as a merge commit (`c67103f`) after CI passed (build and db jobs).
+- Neon: CLI installed, Noel logged in. Project `bold-heart-62307789` checked: PG 18, `aws-ap-southeast-2`, max compute 2 CU. Project-level Neon MCP (OAuth) and skills `neon`, `neon-auth`, `neon-postgres` installed, **uncommitted**.
+- Numbers: contracts 13, pipeline 79, app 38, scripts 8, e2e 8, RLS pass, typecheck clean. Initial bundle 307 kB (84 kB transfer).
+
+**Decided** (all in the spec's Decisions log and §4)
+- `editions.key_dates` column. `weather` is null on a failed row.
+- `pipeline_writer` gets DELETE on `stories`/`story_links` (needed to replace), never on `editions`. Reads and saves cascade with their story.
+- Edition id `ed-<date>-<slot>`. The slot comes from the Sydney clock (before noon is `am`), so Run now after noon writes pm.
+- `write` over an `ok` edition prints `skipped:` and exits 0. `fail` touches only a `failed` row.
+- Angular `inlineCritical` is off: its loader is an inline script the CSP blocks.
+- Keepalive runs `gh workflow enable`.
+
+**Didn't work**
+- `gautamkrishnar/keepalive-workflow` (named in the plan): GitHub has disabled the repo.
+- CSP `https://*.neonauth.*` is invalid; wildcards are allowed only on the leftmost label. `*.neon.tech` is used instead.
+- The original CSP `connect-src` would have blocked Google Fonts. The Angular service worker refetches every GET under the worker's own CSP, so the installed PWA would have had no fonts. Playwright can't catch this because `serve` sends no Vercel headers.
+- `echo '\connect db'` in a psql pipe: some shells treat `\c` as "stop output". Use `printf`. Also, `set -e` inside `{ … } | psql` quits the group at the first failed `cat`, so the SQL never reaches psql.
+- No `psql` on the Mac. Locally use `PSQL="docker exec -i fl-pg18 psql"` (Docker Desktop must be running).
+- `neon login` from an agent was blocked by the permission check; Noel ran it with `!neon login`.
+- GitGuardian flags `POSTGRES_PASSWORD: postgres` in `ci.yml` (`f225a08`). Since `a77f0bb`, CI uses `POSTGRES_HOST_AUTH_METHOD: trust`, but the old commit keeps the check red.
+
+**Open**
+- **GitGuardian incident 38146939:** Noel should mark it as a false positive in the dashboard (it's the throwaway CI container password).
+- **Neon files are uncommitted** (`.mcp.json`, `.claude/skills/neon*`, `skills-lock.json`). Commit them? Move the skills to `.agents/skills/` and symlink them, per `AGENTS.md`? On restart, approve the project MCP and sign in.
+- **Neon max compute is 2 CU**; the spec's cost guard says 0.25. Lower it in the console?
+- **Not run yet:** `neon link`, `neon config init`, `neon deploy` (`auth: true`). First confirm `neon.ts` can do Google-only with email/password off before the first sign-in.
+- **Replacing a partial edition deletes its reads and saves.** Decide in the follow-up plan whether a replace keeps saves.
+- **Unverified:** whether `gh workflow enable` resets the 60-day clock.
+- **Six deferred review minors:** see the `Final: minor (deferred)` lines in the ledger.
+- **Housekeeping:** the `fl-pg18` Docker container is still running. `feat/v1-offline` still exists on the remote.
+
+**Next**
+- Write the follow-up plan for the account-dependent work: Neon Auth (Google only) → Data API → apply `0001_init.sql` → role passwords → member bootstrap → `NeonEditionSource` → Vercel → routine → GitHub secrets. Follow `docs/runbook.md` §1–3, and decide the Neon files and the 2 CU limit first.
+
+**Touched** — `pipeline/src/{db,write,cli}.ts`, `pipeline/src/ops/*.ts`, `db/migrations/0001_init.sql`, `db/test/*`, `.github/workflows/*.yml`, `vercel.json`, `scripts/check-dist-csp.mjs`, `app/angular.json`, `fixtures/model-edition.sample.json`, `docs/routine-prompt.md`, `docs/runbook.md`, `README.md`, `AGENTS.md`, `docs/superpowers/specs/2026-10-10-first-light-design.md`, `docs/superpowers/plans/2026-10-10-first-light-v1-offline.md`, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, `docs/SESSIONS.md`
+
 ## 2026-10-13 · claude-code · Git sync and Task 12
 
 **Did**

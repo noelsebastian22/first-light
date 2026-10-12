@@ -10,13 +10,13 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-10-first-light-design.md`
 
-## Status (2026-10-13)
+## Status (2026-10-13, end of day)
 
 | Tasks | State |
 |---|---|
-| 1–12 | Done on `feat/v1-offline` (contracts, demo fixture, Angular app with Today/News/Archive/landing, Playwright + axe + PWA + secret scan, pipeline fetch, prepare and validate) |
-| 13–16 | Not started (writer + CLI + routine prompt + runbook; db migrations + RLS tests; watchdog/reminder/workflows/vercel.json; README) |
-| Final | Whole-branch review by a fresh reviewer, fix pass, then PR to `main` |
+| 1–16 | Done (contracts, demo app, Playwright + axe + PWA + secret/CSP checks, pipeline fetch/prepare/validate/write/fail CLI, db migration + RLS tests, watchdog/reminder/workflows/vercel.json, README) |
+| Final | Whole-branch review done (0 Critical, 3 Important fixed in `adc5426`, 6 Minor deferred in the ledger). Merged to `main` as PR #1 (`c67103f`) on 2026-10-13 |
+| Next | Follow-up plan for the account-dependent work (see "Not in this plan" at the bottom) |
 
 Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, is force-added to git (the rest of `.superpowers/` stays ignored) so any machine resumes at the first unfinished task instead of redoing finished tasks. Keep appending to it and commit it with each task.
 
@@ -249,10 +249,10 @@ Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-firs
 - CLI (`npm run pipeline -- <cmd>`): `fetch --slot am|pm` (writes `out/candidates.json` and `out/context.json`; reads recent URLs and am context from DB when `DATABASE_URL` is set, else empty), `validate` (reads `out/edition.json`, prints errors or `ok`, writes `out/validated.json`), `write [--force]`, `fail "<step>: <error>"`, `feeds-check` (prints per-feed ok/failed), `demo-run` (fetch from fixtures → uses `fixtures/model-edition.sample.json` → validate, no DB; for local smoke tests).
 - Exit codes: 0 ok, 1 validation errors, 2 infrastructure error.
 
-- [ ] **Step 1: Failing tests** — `planWrite(null,false)='insert'`, `({status:'failed'},false)='replace'`, `({status:'partial'},false)='replace'`, `({status:'ok'},false)='refuse'`, `({status:'ok'},true)='replace'`; `buildWriteStatements` uses parameters only (no interpolated text) and inserts one link row per story link; `demo-run` exits 0 and produces a valid edition.
-- [ ] **Step 2–4:** FAIL → implement → PASS.
-- [ ] **Step 5: Write** `docs/routine-prompt.md` (generic template: the exact command sequence fetch → read candidates → write `out/edition.json` → validate → retry up to twice → write → on final failure `fail`; editorial rules from spec §5; placeholder `<<READER PROFILE: kept in the private routine prompt>>`) and `docs/runbook.md` (Neon setup, roles, member bootstrap SQL, routine environment settings, GitHub secrets, recovering a missed edition with Run now).
-- [ ] **Step 6: Commit** `feat(pipeline): writer, CLI and routine prompt template`
+- [x] **Step 1: Failing tests** — `planWrite(null,false)='insert'`, `({status:'failed'},false)='replace'`, `({status:'partial'},false)='replace'`, `({status:'ok'},false)='refuse'`, `({status:'ok'},true)='replace'`; `buildWriteStatements` uses parameters only (no interpolated text) and inserts one link row per story link; `demo-run` exits 0 and produces a valid edition.
+- [x] **Step 2–4:** FAIL → implement → PASS.
+- [x] **Step 5: Write** `docs/routine-prompt.md` (generic template: the exact command sequence fetch → read candidates → write `out/edition.json` → validate → retry up to twice → write → on final failure `fail`; editorial rules from spec §5; placeholder `<<READER PROFILE: kept in the private routine prompt>>`) and `docs/runbook.md` (Neon setup, roles, member bootstrap SQL, routine environment settings, GitHub secrets, recovering a missed edition with Run now).
+- [x] **Step 6: Commit** `feat(pipeline): writer, CLI and routine prompt template`
 
 ### Task 14: Database migrations and RLS tests
 
@@ -261,11 +261,11 @@ Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-firs
 
 **Interfaces:** Schema per spec §4: `editions`, `stories` (with `top_rank`, generated `search` tsvector, GIN index), `story_links`, `private.members`, `reads`, `saves`, `app_opens`; `public.is_member()` `SECURITY DEFINER` with `set search_path = ''`; roles `pipeline_writer`, `watchdog_reader` created `NOLOGIN` in the migration (Noel sets passwords in Neon, see runbook); grants and policies exactly as spec §4.
 
-- [ ] **Step 1: Write `rls.sql`** as assertions (`DO $$ … RAISE EXCEPTION … $$`): as `authenticated` with sub `stranger` → 0 editions; with sub `noel` (member) → editions visible; `noel` cannot insert into `editions`; `noel` cannot select `private.members`; `noel` sees own reads only, not `other`'s; `anonymous` sees nothing; `pipeline_writer` can insert an edition and cannot select `reads`; `watchdog_reader` can select `app_opens` and cannot insert.
-- [ ] **Step 2: Run** `db/test/run.sh` against a local Postgres 18 (`DATABASE_URL`, matching the Neon project) — FAIL before migration exists.
-- [ ] **Step 3: Write `0001_init.sql`** — idempotent role creation (`DO` blocks), schema, policies.
-- [ ] **Step 4: Run** — PASS.
-- [ ] **Step 5: Commit** `feat(db): schema, roles and RLS with tests`
+- [x] **Step 1: Write `rls.sql`** as assertions (`DO $$ … RAISE EXCEPTION … $$`): as `authenticated` with sub `stranger` → 0 editions; with sub `noel` (member) → editions visible; `noel` cannot insert into `editions`; `noel` cannot select `private.members`; `noel` sees own reads only, not `other`'s; `anonymous` sees nothing; `pipeline_writer` can insert an edition and cannot select `reads`; `watchdog_reader` can select `app_opens` and cannot insert.
+- [x] **Step 2: Run** `db/test/run.sh` against a local Postgres 18 (`DATABASE_URL`, matching the Neon project) — FAIL before migration exists.
+- [x] **Step 3: Write `0001_init.sql`** — idempotent role creation (`DO` blocks), schema, policies.
+- [x] **Step 4: Run** — PASS.
+- [x] **Step 5: Commit** `feat(db): schema, roles and RLS with tests`
 
 ### Task 15: Operations scripts and workflows
 
@@ -281,16 +281,16 @@ Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-firs
 - Workflows: `ci.yml` on push/PR — `npm ci`, typecheck, unit tests, build, secret scan, Playwright (with browsers), and a `db` job with `postgres:18` service (Neon project is Postgres 18) running `db/test/run.sh`. `watchdog.yml` cron `17 6 * * *` and `47 16 * * *` with `timezone: Australia/Sydney`; `reminder.yml` `57 7 * * *`; `keepalive.yml` monthly using the keepalive action in API mode. All print only `ok`/`sent`/`skipped`.
 - `vercel.json`: SPA rewrite to `/index.html`; headers: CSP (`default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.open-meteo.com https://*.neon.tech https://*.neonauth.*; img-src 'self' data:; frame-ancestors 'none'`), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`.
 
-- [ ] **Step 1: Failing tests** — watchdog: null edition → send "First Light: morning edition missing"; `failed` with error → send with the error in the body; `ok`/`partial` → no send. Reminder: am ok and not opened → send with subject "Today's edition is ready" and body containing nudge, 3 titles and the URL; opened → no send; am missing or failed → no send.
-- [ ] **Step 2–4:** FAIL → implement → PASS.
-- [ ] **Step 5: Commit** `feat(ops): watchdog, reminder and workflows`
+- [x] **Step 1: Failing tests** — watchdog: null edition → send "First Light: morning edition missing"; `failed` with error → send with the error in the body; `ok`/`partial` → no send. Reminder: am ok and not opened → send with subject "Today's edition is ready" and body containing nudge, 3 titles and the URL; opened → no send; am missing or failed → no send.
+- [x] **Step 2–4:** FAIL → implement → PASS.
+- [x] **Step 5: Commit** `feat(ops): watchdog, reminder and workflows`
 
 ### Task 16: README
 
 **Files:** Create `README.md` — what it is, screenshots placeholder list, architecture diagram (text), "Safe by design", local dev commands, how the routine works, credits ("Edited by Claude", Open-Meteo).
 
-- [ ] **Step 1:** Write; check every command in it runs.
-- [ ] **Step 2: Commit** `docs: README`
+- [x] **Step 1:** Write; check every command in it runs.
+- [x] **Step 2: Commit** `docs: README`
 
 ---
 
