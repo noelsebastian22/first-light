@@ -19,7 +19,10 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
     "check:secrets": "node scripts/check-dist-secrets.mjs app/dist",
-    "test:scripts": "node --test 'scripts/*.test.mjs'"
+    "test:scripts": "node --test 'scripts/*.test.mjs'",
+    "pipeline": "npm run cli -w pipeline --",
+    "pipeline:fail": "npm run cli -w pipeline -- fail",
+    "pipeline:feeds-check": "npm run cli -w pipeline -- feeds-check"
   },
   "devDependencies": {
     "typescript": "~6.0.0",

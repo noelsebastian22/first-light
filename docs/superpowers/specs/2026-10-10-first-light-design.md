@@ -58,6 +58,9 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 | Browser bundle | No Zod in the app; the demo area is lazy-loaded; CI fails on secret-like strings in `app/dist` |
 | Model text | Limits: title 120, summary 400, why it matters 220, picked because 160, nudge 200 characters. Rejected if empty, if it contains `<` (treated as HTML) or a URL (`http(s)://` or `www.<host>`) |
 | Story IDs | `<editionId>-NN`, numbered in the order the model returned the stories (e.g. `ed-2026-10-13-am-01`) |
+| Edition IDs | `ed-<date>-<slot>`; the routine picks the slot from the Sydney clock (before noon `am`), so **Run now** after noon writes the pm edition |
+| Writing | One transaction: clear old stories for that date and slot, upsert the edition, insert stories and links. An `ok` edition is left alone (`skipped`, exit 0) unless `--force` |
+| Failing | `fail` creates or updates only a `failed` row; it never overwrites an `ok` or `partial` edition. A weather fetch failure fails the run (the edition schema needs weather) |
 
 ---
 
@@ -118,11 +121,11 @@ All `user_id` columns are `text`, matching `auth.user_id()` (the JWT `sub`).
 
 | Table | Key columns |
 |---|---|
-| `editions` | `id`, `edition_date` (date, Sydney), `slot` (`am`/`pm`), `status` (`ok`/`partial`/`failed`), `error` (text, null), `nudge` (null for pm), `weather` (jsonb), `source_count`, `created_at` — unique on (`edition_date`, `slot`) |
+| `editions` | `id`, `edition_date` (date, Sydney), `slot` (`am`/`pm`), `status` (`ok`/`partial`/`failed`), `error` (text, null), `nudge` (null for pm), `weather` (jsonb, null on a `failed` row), `key_dates` (jsonb), `source_count`, `created_at` — unique on (`edition_date`, `slot`) |
 | `stories` | `id`, `edition_id`, `section` (enum of six), `rank`, `top_rank` (smallint 1–3, null if not in the Top 3), `title`, `summary`, `why_it_matters`, `picked_because`, `search` (generated tsvector over title + summary), `created_at` |
 | `story_links` | `story_id`, `source_key`, `url` (normalised), `publisher_title`, `published_at` — URLs come from fetched feed items only |
 
-Sources and key dates live in the repo (`pipeline/sources.ts`, `pipeline/key-dates.yaml`), not in tables. The edition stores the key dates it displayed inside its `weather`/metadata payload so the app needs no extra query.
+Sources and key dates live in the repo (`pipeline/sources.ts`, `pipeline/key-dates.yaml`), not in tables. The edition stores the key dates it displayed in its `key_dates` column so the app needs no extra query.
 
 ### Personal
 
@@ -138,7 +141,7 @@ Sources and key dates live in the repo (`pipeline/sources.ts`, `pipeline/key-dat
 - `public.is_member()` is a `SECURITY DEFINER` function returning `exists(select 1 from private.members where user_id = auth.user_id())`. Policies call `(select public.is_member())`.
 - **`authenticated` (the Data API role):** `SELECT` on content tables when a member. `SELECT/INSERT/DELETE` on `reads`, `saves`, `app_opens` only where `user_id = auth.user_id()` and a member. `INSERT/UPDATE/DELETE` on content tables explicitly revoked. No access to `private`.
 - **`anonymous`:** nothing.
-- **`pipeline_writer`:** `SELECT/INSERT/UPDATE` on content tables (with policies for that role), nothing on personal tables.
+- **`pipeline_writer`:** `SELECT/INSERT/UPDATE` on content tables, plus `DELETE` on `stories` and `story_links` (replacing a failed or partial edition clears its old stories), with policies for that role; no `DELETE` on `editions`; nothing on personal tables. `reads.story_id` and `saves.story_id` cascade on delete.
 - **`watchdog_reader`:** `SELECT` on `editions`, `stories`, `app_opens`.
 - Any view uses `security_invoker = true`.
 - **Bootstrap (runbook):** Noel signs in once; then, from the Neon console, `insert into private.members(user_id, email) select id, email from neon_auth.user where email = '<Noel>'`.

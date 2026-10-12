@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "cli": "tsx src/cli.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@first-light/contracts": "*",
+    "@neondatabase/serverless": "^1.2.0",
     "fast-xml-parser": "^5.2.0",
     "yaml": "^2.8.0",
     "zod": "^4.1.0"
