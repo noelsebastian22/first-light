@@ -62,6 +62,7 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 | Writing | One transaction: clear old stories for that date and slot, upsert the edition, insert stories and links. An `ok` edition is left alone (`skipped`, exit 0) unless `--force` |
 | Failing | `fail` creates or updates only a `failed` row; it never overwrites an `ok` or `partial` edition. A weather fetch failure fails the run (the edition schema needs weather) |
 | CSP and critical CSS | Angular's critical-CSS inlining is off: its loader is an inline script the CSP blocks, which would leave the page unstyled. CI fails if `index.html` carries inline script (`npm run check:csp`) |
+| Reads and saves on replace | Replacing a `partial` or `failed` edition, or forcing over an `ok` one, deletes its stories, and their reads and saves go with them (cascade). Accepted for v1: reruns happen around 5:30am and 4pm, before Noel is usually reading. If a save is ever actually lost, carry saves across by article URL |
 | Keepalive | A monthly workflow re-enables the scheduled workflows with `gh workflow enable` (no commits). The third-party keepalive action has been disabled by GitHub |
 
 ---
@@ -251,7 +252,7 @@ Sun rises over clay hills → six source pods light up → messy story cards tum
 - **Keepalive:** a monthly workflow keeps scheduled workflows from being disabled after 60 quiet days by re-enabling them through the API (`gh workflow enable`; no commits, so no extra Vercel deploys).
 - **Copyright:** short summaries in Claude's words, always linked to the publisher; no full text stored; paywalls never bypassed. Test fixtures use synthetic feed items. The public demo uses hand-written sample content.
 - **Privacy:** the public repo holds no personal reader profile; the "AU tech market" section name avoids signalling a job search.
-- **Cost guards:** Neon max compute 0.25 CU; candidates capped per section.
+- **Cost guards:** Neon max compute 0.25 CU (min and max, also the project default for new branches; set 2026-10-13). Raise it only if real demand needs it, for example slow pipeline writes or the free compute-hours running short, and record the change here. Candidates capped per section.
 
 ---
 

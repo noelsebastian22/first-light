@@ -6,7 +6,8 @@ this file says how. Nothing here costs money: every service stays on its free ti
 ## 1. Neon
 
 1. Create a project on **Postgres 18**, region **AWS Sydney** (`ap-southeast-2`;
-   Singapore if the Data API isn't offered in Sydney). Set max compute to **0.25 CU**.
+   Singapore if the Data API isn't offered in Sydney). Set max compute to **0.25 CU**
+   (done 2026-10-13; raise only if demand needs it, see spec §7 "Cost guards").
 2. **Neon Auth:** enable it with **Google only**. Turn email/password sign-in off *before*
    anyone signs in. Use your own Google OAuth client, left in *Testing* status with
    yourself as the only test user. Trusted domains: `firstlight.noel-sebastian.com` and
