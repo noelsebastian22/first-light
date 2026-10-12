@@ -19,7 +19,7 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
     "check:secrets": "node scripts/check-dist-secrets.mjs app/dist",
-    "test:scripts": "node --test scripts/"
+    "test:scripts": "node --test 'scripts/*.test.mjs'"
   },
   "devDependencies": {
     "typescript": "~6.0.0",
