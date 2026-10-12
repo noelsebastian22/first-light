@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First Light: typeface options</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@8..144,400..900,0..100&amp;family=Mona+Sans:wght@400;600;800&amp;family=Inter:wght@400;600;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9EEF5}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.clay{background:#F5F8FC;box-shadow:10px 12px 24px rgba(140,160,190,.45),-8px -8px 20px rgba(255,255,255,.95),inset 3px 3px 6px rgba(255,255,255,.9),inset -4px -6px 12px rgba(140,160,190,.28)}
+.dent{background:#E3E9F2;box-shadow:inset 3px 4px 7px rgba(140,160,190,.5),inset -3px -3px 6px rgba(255,255,255,.9)}
+.f1{font-family:'Google Sans Flex',sans-serif}
+.f1 .d{font-variation-settings:'ROND' 100}
+.f2{font-family:'Mona Sans',sans-serif}
+.f3{font-family:'Inter',sans-serif}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #E9EEF5; color: #0E1A2B; font-family: 'Google Sans Flex', sans-serif; padding: 40px 32px; box-sizing: border-box">
+  <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
+    <div>
+      <div class="mono" style="font-size: 13px; letter-spacing: 0.1em; color: #44546A">TYPEFACE OPTIONS · SAME CONTENT, THREE FACES</div>
+      <h1 style="margin: 8px 0 0; font-size: 44px; letter-spacing: -0.03em; font-variation-settings: 'ROND' 100">Pick the voice</h1>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 28px">
+      <sc-for list="{{faces}}" as="f" hint-placeholder-count="3">
+        <section class="{{f.cls}}" style="flex: 1 1 360px; min-width: 0; border-radius: 34px; padding: 28px; display: flex; flex-direction: column; gap: 18px; background: #F5F8FC; box-shadow: 10px 12px 24px rgba(140,160,190,.45), -8px -8px 20px rgba(255,255,255,.95), inset 3px 3px 6px rgba(255,255,255,.9), inset -4px -6px 12px rgba(140,160,190,.28)">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+            <div>
+              <h2 class="d" style="margin: 0; font-size: 26px; font-weight: 800">{{f.name}}</h2>
+              <div style="font-size: 14px; color: #44546A; margin-top: 4px">{{f.who}}</div>
+            </div>
+            <span class="mono" style="font-size: 11px; padding: 6px 10px; border-radius: 999px; background: {{f.badgeBg}}; color: #0E1A2B">{{f.badge}}</span>
+          </div>
+          <div class="dent" style="border-radius: 26px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+            <div class="d" style="font-size: 48px; font-weight: 800; line-height: 1; letter-spacing: -0.03em">Good morning.</div>
+            <div class="d" style="font-size: 22px; font-weight: 600; line-height: 1.2">September-quarter CPI lands 28 October</div>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #44546A">It is the last big number before the RBA meets on 3 November. Anything with a variable rate moves on it.</p>
+            <div style="display: flex; gap: 18px; font-size: 15px; font-weight: 600"><span>9° · 7–17°</span><span>5:31am</span><span>18 stories</span></div>
+          </div>
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: #44546A">
+            <sc-for list="{{f.notes}}" as="n" hint-placeholder-count="3"><li>{{n}}</li></sc-for>
+          </ul>
+        </section>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      faces: [
+        { cls: 'f1', name: 'Google Sans Flex', who: "Google's own product face (Gmail, Android, Workspace)", badge: 'RECOMMENDED', badgeBg: '#FBE3CC', notes: ['Has a roundness axis, so headings can match the clay shapes while body text stays crisp', 'Free and open source on Google Fonts', 'Very readable at small sizes on phones'] },
+        { cls: 'f2', name: 'Mona Sans', who: "GitHub's brand and product face", badge: 'STRONG ALTERNATIVE', badgeBg: '#DCE7F2', notes: ['Sharper and more technical; reads as developer-made', 'Free and open source', 'Slightly cooler against soft clay shapes'] },
+        { cls: 'f3', name: 'Inter', who: 'The default interface face across much of SaaS', badge: 'SAFE BASELINE', badgeBg: '#E3E9F2', notes: ['Extremely legible and well tested', 'So common it makes a portfolio piece look generic', 'No rounded option'] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

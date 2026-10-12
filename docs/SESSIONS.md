@@ -2,6 +2,28 @@
 
 <!-- newest first -->
 
+## 2026-10-13 · claude-code · Handoff readiness check
+
+**Did**
+- Copied the approved mockups from the "First Light mockups" design artifact into `docs/design/mockups/` with `docs/design/README.md` (how to read them, known drift vs the spec).
+- Force-added the executing-plans ledger `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md` so a fresh clone resumes at Task 12.
+- `AGENTS.md`: setup-on-a-new-machine steps (Node 24, npm 11, Playwright browser) and a design-references pointer.
+
+**Decided**
+- The ledger is tracked in git (rest of `.superpowers/` stays ignored): without it, executing-plans on another machine would restart at Task 1.
+- Mockups are a visual target only; the spec and the built app win where they differ ("AU tech market", no Inbox tab in v1, spec colour tokens).
+
+**Didn't work**
+- The `.dc.html` mockups can't render outside the canvas runtime (`support.js`); kept as readable source plus the canvas link.
+
+**Open**
+- Same as the previous entry: Task 12 `validate.ts`, then Tasks 13–16, review, PR. Noel's account setup unchanged.
+
+**Next**
+- On the Mac: `git fetch && git checkout feat/v1-offline`, follow `AGENTS.md` "Setup on a new machine", then `/session-handoff start` and continue executing-plans at Task 12 Step 3.
+
+**Touched** — `docs/design/`, `AGENTS.md`, `docs/superpowers/plans/2026-10-10-first-light-v1-offline.md`, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`
+
 ## 2026-10-10 · claude-code · v1 offline build, tasks 1–11
 
 **Did**

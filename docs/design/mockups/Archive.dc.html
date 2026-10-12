@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First Light: Archive</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@8..144,400..900,0..100&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF2F6}
+a{color:#2F5F8F}a:hover{color:#1F4468}
+.fl{font-family:'Google Sans Flex',system-ui,sans-serif;color:#0E1A2B}
+.disp{font-family:'Google Sans Flex',system-ui,sans-serif;font-variation-settings:'ROND' 100}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.clay{background:#F5F8FC;box-shadow:10px 12px 24px rgba(140,160,190,.45),-8px -8px 20px rgba(255,255,255,.95),inset 3px 3px 6px rgba(255,255,255,.9),inset -4px -6px 12px rgba(140,160,190,.28)}
+.navlink{display:flex;align-items:center;gap:12px;min-height:46px;padding:0 14px;border-radius:14px;text-decoration:none;color:#44546A;font-weight:500;font-size:15px}
+.navlink:hover{background:#E2E8EF;color:#0E1A2B}
+.navlink.on{color:#FFFFFF;background:#3E6FA3;box-shadow:5px 7px 14px rgba(62,111,163,.4),inset 2px 3px 5px rgba(255,255,255,.3),inset -3px -4px 8px rgba(20,40,80,.3)}
+.inp{background:#E3E9F2 !important;border:0 !important;border-radius:18px !important;box-shadow:inset 3px 4px 7px rgba(140,160,190,.5),inset -3px -3px 6px rgba(255,255,255,.9)}
+.cell{box-shadow:inset 2px 2px 4px rgba(140,160,190,.35),inset -2px -2px 4px rgba(255,255,255,.8);border-radius:14px}
+main a[href="News.dc.html"]{border:0 !important;border-radius:24px !important;background:#F5F8FC !important;box-shadow:8px 10px 20px rgba(140,160,190,.4),-6px -6px 14px rgba(255,255,255,.9),inset 2px 2px 4px #fff,inset -3px -4px 8px rgba(140,160,190,.22)}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-size:13px;font-weight:600;color:#44546A}
+.inp{min-height:48px;box-sizing:border-box;padding:0 14px;border-radius:14px;border:1px solid #C9D6E4;background:#FFFFFF;font:inherit;font-size:15px;color:#0E1A2B;width:100%}
+.inp:focus{outline:3px solid #9CC0E4;outline-offset:1px}
+.tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#0E1A2B}
+.cell{aspect-ratio:1/1;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:14px}
+</style>
+</helmet>
+<div class="fl" style="min-height: 100vh; background: #EEF2F6; display: flex; flex-wrap: wrap; align-items: flex-start">
+
+<aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; padding: 28px 20px; display: flex; flex-direction: column; gap: 28px">
+  <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0E1A2B; padding: 0 6px">
+    <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="21" r="9" fill="#E8833A"></circle><rect x="3" y="21" width="28" height="3" rx="1.5" fill="#0E1A2B"></rect><path d="M17 4v4M6 9l3 3M28 9l-3 3" stroke="#0E1A2B" stroke-width="2.4" stroke-linecap="round"></path></svg>
+    <span class="disp" style="font-size: 21px; font-weight: 800; letter-spacing: -0.02em">First Light</span>
+  </a>
+  <nav aria-label="Sections" style="display: flex; flex-direction: column; gap: 4px">
+    <a class="navlink" href="Today.dc.html">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="4"></circle><path d="M12 3v2M4.9 6.9l1.4 1.4M19.1 6.9l-1.4 1.4M3 19h18"></path></svg>
+      Today
+    </a>
+    <a class="navlink" href="News.dc.html">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9h10M7 13h10M7 17h6"></path></svg>
+      News
+    </a>
+    <a class="navlink on" href="Archive.dc.html" aria-current="page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1.5"></rect><path d="M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4"></path></svg>
+      Archive
+    </a>
+  </nav>
+  <div class="mono" style="font-size: 12px; letter-spacing: 0.08em; color: #44546A; padding: 0 6px">DEMO EDITION · SAMPLE DATA</div>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 24px 28px 48px; display: flex; flex-direction: column; gap: 24px; max-width: 1180px">
+  <div>
+    <div class="mono" style="font-size: 13px; letter-spacing: 0.08em; color: #44546A">25 EDITIONS · 412 STORIES SINCE 1 OCTOBER</div>
+    <h1 class="disp" style="margin: 6px 0 0; font-size: 44px; letter-spacing: -0.03em; line-height: 1">Archive</h1>
+  </div>
+
+  <form class="clay" role="search" aria-label="Search past editions" style="border-radius: 24px; padding: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; align-items: end">
+    <div class="field" style="grid-column: span 2">
+      <label for="q">Search stories</label>
+      <input id="q" class="inp" type="search" placeholder="Try RBA, Angular, AI Mode" value="{{q}}" onChange="{{onQ}}">
+    </div>
+    <div class="field">
+      <label for="sec">Section</label>
+      <select id="sec" class="inp" value="{{sec}}" onChange="{{onSec}}">
+        <option value="all">All sections</option>
+        <option value="AU economy">AU economy</option>
+        <option value="Web dev">Web dev</option>
+        <option value="AI">AI</option>
+        <option value="AU tech jobs">AU tech jobs</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="from">From</label>
+      <input id="from" class="inp" type="date" value="2026-10-01">
+    </div>
+    <div class="field">
+      <label for="to">To</label>
+      <input id="to" class="inp" type="date" value="2026-10-13">
+    </div>
+    <label style="display: flex; align-items: center; gap: 10px; min-height: 48px; font-size: 15px; font-weight: 600; cursor: pointer">
+      <input type="checkbox" checked="{{savedOnly}}" onChange="{{onSaved}}" style="width: 20px; height: 20px; accent-color: #2F5F8F">
+      Saved only
+    </label>
+  </form>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
+    <section aria-labelledby="calh" class="clay" style="flex: 1 1 320px; min-width: 0; border-radius: 24px; padding: 22px">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px">
+        <h2 id="calh" class="disp" style="margin: 0; font-size: 22px">October 2026</h2>
+        <div class="mono" style="display: flex; gap: 12px; font-size: 12px; color: #44546A">
+          <span style="display: inline-flex; align-items: center; gap: 5px"><i style="width: 8px; height: 8px; border-radius: 50%; background: #E8833A; display: inline-block"></i>AM</span>
+          <span style="display: inline-flex; align-items: center; gap: 5px"><i style="width: 8px; height: 8px; border-radius: 50%; background: #2F5F8F; display: inline-block"></i>PM</span>
+        </div>
+      </div>
+      <div class="mono" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; font-size: 12px; color: #44546A; text-align: center; margin-bottom: 6px">
+        <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{cells}}" as="c" hint-placeholder-count="35">
+          <div class="cell" style="background: {{c.bg}}; color: {{c.fg}}">
+            <span style="font-weight: 600">{{c.d}}</span>
+            <span style="display: flex; gap: 3px; height: 6px">
+              <sc-if value="{{c.am}}" hint-placeholder-val="{{ false }}"><i style="width: 6px; height: 6px; border-radius: 50%; background: #E8833A; display: block"></i></sc-if>
+              <sc-if value="{{c.pm}}" hint-placeholder-val="{{ false }}"><i style="width: 6px; height: 6px; border-radius: 50%; background: #2F5F8F; display: block"></i></sc-if>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="resh" style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+      <h2 id="resh" class="disp" style="margin: 0 0 4px; font-size: 22px">{{resultLabel}}</h2>
+      <sc-for list="{{results}}" as="r" hint-placeholder-count="6">
+        <a href="News.dc.html" style="text-decoration: none; color: #0E1A2B; background: #FFFFFF; border-radius: 18px; padding: 16px 18px; display: flex; gap: 16px; align-items: center; border: 1px solid #D5DCE5">
+          <div style="min-width: 64px; text-align: center">
+            <div class="mono" style="font-size: 12px; color: #44546A">{{r.ed}}</div>
+            <div class="disp" style="font-size: 22px; font-weight: 800">{{r.date}}</div>
+          </div>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+            <span><span class="tag" style="background: {{r.bg}}">{{r.section}}</span></span>
+            <span style="font-size: 16px; font-weight: 600; line-height: 1.35">{{r.title}}</span>
+          </div>
+          <sc-if value="{{r.saved}}" hint-placeholder-val="{{ false }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#2F5F8F" aria-label="Saved" role="img"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+          </sc-if>
+        </a>
+      </sc-for>
+      <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 28px; border-radius: 18px; background: #FFFFFF; border: 1px dashed #C9D6E4; color: #44546A; font-size: 15px">Nothing matches. Try a broader word, or clear the section filter.</div>
+      </sc-if>
+    </section>
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { q: '', sec: 'all', savedOnly: false }; }
+  renderVals() {
+    const st = this.state;
+    const bg = { 'AU economy': '#FBE3CC', 'Web dev': '#DCE7F2', 'AI': '#F6E7B8', 'AU tech jobs': '#F0DADA' };
+    const R = [
+      { date: '13', ed: 'TUE AM', section: 'AU economy', title: 'September-quarter CPI lands 28 October', saved: false },
+      { date: '13', ed: 'TUE AM', section: 'Web dev', title: 'Angular v20 leaves long-term support in November', saved: true },
+      { date: '13', ed: 'TUE AM', section: 'AI', title: 'Google AI Mode passes a billion monthly users', saved: false },
+      { date: '12', ed: 'MON PM', section: 'AU economy', title: 'RBA board meets 2 and 3 November', saved: false },
+      { date: '09', ed: 'FRI AM', section: 'AU tech jobs', title: 'Developer workforce at a record 216,000', saved: true },
+      { date: '07', ed: 'WED AM', section: 'Web dev', title: 'Signal Forms are stable as of Angular v22', saved: false },
+      { date: '02', ed: 'FRI AM', section: 'AI', title: 'State of JS: Claude use among respondents doubles to 44%', saved: false }
+    ];
+    const q = st.q.trim().toLowerCase();
+    const results = R.filter((r) => (st.sec === 'all' || r.section === st.sec) && (!st.savedOnly || r.saved) && (!q || r.title.toLowerCase().includes(q)))
+      .map((r) => ({ ...r, bg: bg[r.section] }));
+    const cells = [];
+    for (let i = 0; i < 3; i++) cells.push({ d: '', bg: 'transparent', fg: '#44546A', am: false, pm: false });
+    for (let d = 1; d <= 31; d++) {
+      const has = d <= 13;
+      const today = d === 13;
+      cells.push({ d: String(d), am: has, pm: has && d < 13 && d % 7 !== 3 && d % 7 !== 4,
+        bg: today ? '#0E1A2B' : has ? '#EEF2F6' : 'transparent', fg: today ? '#FFFFFF' : has ? '#0E1A2B' : '#8592A3' });
+    }
+    return {
+      q: st.q, sec: st.sec, savedOnly: st.savedOnly,
+      onQ: (e) => this.setState({ q: e.target.value }),
+      onSec: (e) => this.setState({ sec: e.target.value }),
+      onSaved: (e) => this.setState({ savedOnly: e.target.checked }),
+      results, cells, empty: results.length === 0,
+      resultLabel: results.length + (results.length === 1 ? ' story' : ' stories')
+    };
+  }
+}
+</script>
+</body>
+</html>

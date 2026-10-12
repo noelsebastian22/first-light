@@ -20,7 +20,25 @@ from `.claude/skills/`, so that symlink is load-bearing. Edit the `.agents/` cop
 Spec approved. Building the offline v1 on branch `feat/v1-offline` from
 `docs/superpowers/plans/2026-10-10-first-light-v1-offline.md` (see its Status section).
 Execution ledger with every ruling: `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`
-(git-ignored; the rulings are also copied into `docs/SESSIONS.md`).
+(tracked in git, unlike the rest of `.superpowers/`; it tells executing-plans which tasks are done).
+
+## Setup on a new machine
+
+```bash
+git checkout feat/v1-offline        # the build lives here until the final PR
+nvm install 24 && nvm use 24        # Node >= 24.15 (Angular CLI 22.2 refuses older)
+npm i -g npm@11                     # npm 10.9 crashes resolving Vitest peers
+npm install
+npx playwright install chromium     # once, for app e2e tests (run from app/)
+npm test                            # contracts, pipeline, app unit tests
+```
+
+No `.env` is needed until the database and email tasks; `.env.example` lists the names.
+
+## Design references
+
+Mockups: `docs/design/` (README explains how to read them and where the spec overrides
+them). Live canvas: the "First Light mockups" design artifact linked there.
 
 ## Stack
 

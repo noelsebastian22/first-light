@@ -19,7 +19,7 @@
 | 13–16 | Not started (writer + CLI + routine prompt + runbook; db migrations + RLS tests; watchdog/reminder/workflows/vercel.json; README) |
 | Final | Whole-branch review by a fresh reviewer, fix pass, then PR to `main` |
 
-Use `superpowers:executing-plans`. Its ledger lives in `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md` (git-ignored, so it exists only on the machine that ran the build). `docs/SESSIONS.md` has a copy of every ruling.
+Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, is force-added to git (the rest of `.superpowers/` stays ignored) so any machine resumes at Task 12 instead of redoing finished tasks. Keep appending to it and commit it with each task.
 
 ## Global Constraints
 
