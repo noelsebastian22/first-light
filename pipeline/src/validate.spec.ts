@@ -148,6 +148,15 @@ describe('validateEdition', () => {
     expect(errorsOf('not json at all')[0]).toMatch(/expected object/i);
   });
 
+  it('rejects empty text', () => {
+    expect(errorsOf(amModel({ stories: [story({ whyItMatters: '  ' }), story(), story()] }))).toContain('stories[0].whyItMatters: empty');
+  });
+
+  it('makes one link when a story cites the same article twice', () => {
+    const result = validateEdition(amModel({ stories: [story({ articleIds: ['c001', 'c001'] }), story(), story()] }), candidates, ctx);
+    expect(result.ok && result.edition.stories[0]?.links.length).toBe(1);
+  });
+
   it('rejects an edition with no stories', () => {
     expect(errorsOf({ stories: [], top3: null, nudge: null }, pmCandidates)).toEqual(['stories: the edition has no stories']);
   });
