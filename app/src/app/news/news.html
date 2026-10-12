@@ -1,0 +1,58 @@
+<div class="news" [class.has-story]="!!storyId()">
+  <header class="news-head">
+    <div>
+      <p class="label">{{ editions().am.editionDate }} · morning edition{{ editions().pm ? ' + afternoon' : '' }}</p>
+      <h1 class="disp">The edition</h1>
+    </div>
+    <p class="label">{{ unreadCount() }} unread</p>
+  </header>
+
+  <div class="chips" role="group" aria-label="Filter by section">
+    @for (c of chips(); track c.key) {
+      <button type="button" class="chip" [class.on]="filter() === c.key" [attr.aria-pressed]="filter() === c.key" (click)="filter.set(c.key)">
+        {{ c.label }} <span class="mono">{{ c.count }}</span>
+      </button>
+    }
+  </div>
+
+  <div class="layout">
+    <ol class="list" aria-label="Stories">
+      @for (row of visible(); track row.id) {
+        <li>
+          <button type="button" class="story-row" [class.sel]="row.id === selectedId()" [attr.aria-pressed]="row.id === selectedId()" (click)="open(row)">
+            @if (!source.readIds().has(row.id)) {
+              <span class="unread-dot" aria-label="Unread"></span>
+            } @else {
+              <span class="read-dot" aria-hidden="true"></span>
+            }
+            <span class="row-body">
+              <span class="row-meta">
+                <span class="tag" [style.background]="row.fill">{{ row.label }}</span>
+                @if (row.isNew) {
+                  <span class="new-badge mono">New since {{ amTime() }}</span>
+                }
+                @if (source.savedIds().has(row.id)) {
+                  <span class="mono saved-mark">Saved</span>
+                }
+              </span>
+              <span class="row-title disp">{{ row.title }}</span>
+              <span class="row-summary">{{ row.summary }}</span>
+            </span>
+          </button>
+        </li>
+      }
+    </ol>
+
+    @if (selected(); as s) {
+      <app-story-detail
+        class="detail"
+        [story]="s"
+        [saved]="source.savedIds().has(s.id)"
+        (toggleSave)="source.toggleSave(s.id)"
+      />
+    }
+  </div>
+  @if (storyId()) {
+    <a class="back" routerLink="../../news">Back to the edition</a>
+  }
+</div>

@@ -1,0 +1,32 @@
+{
+  "name": "first-light",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A personal morning briefing PWA: weather, news and the three things to know, edited by Claude twice a day.",
+  "license": "MIT",
+  "workspaces": [
+    "contracts",
+    "pipeline",
+    "app"
+  ],
+  "engines": {
+    "node": ">=24.15",
+    "npm": ">=11"
+  },
+  "packageManager": "npm@11.21.0",
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "check:secrets": "node scripts/check-dist-secrets.mjs app/dist",
+    "test:scripts": "node --test 'scripts/*.test.mjs'",
+    "pipeline": "npm run cli -w pipeline --",
+    "pipeline:fail": "npm run cli -w pipeline -- fail",
+    "pipeline:feeds-check": "npm run cli -w pipeline -- feeds-check",
+    "check:csp": "node scripts/check-dist-csp.mjs"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.0",
+    "vitest": "^5.0.0"
+  }
+}

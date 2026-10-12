@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm install -g npm@11
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run test:scripts
+      - run: npm run build -w app
+      - run: npm run check:secrets
+      - run: npm run check:csp
+      - run: npx playwright install --with-deps chromium
+        working-directory: app
+      - run: npm run e2e -w app
+
+  db:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          # Throwaway container that only lives for this job: no password needed.
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v5
+      - run: db/test/run.sh
+        env:
+          DATABASE_URL: postgres://postgres@localhost:5432/postgres

@@ -17,15 +17,38 @@ from `.claude/skills/`, so that symlink is load-bearing. Edit the `.agents/` cop
 
 ## Status
 
-Spec approved and revised after an independent review. Build follows spec §9 and the
-plan in `docs/superpowers/plans/`.
+Spec approved. Building the offline v1 on branch `feat/v1-offline` from
+`docs/superpowers/plans/2026-10-10-first-light-v1-offline.md` (see its Status section).
+Execution ledger with every ruling: `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`
+(tracked in git, unlike the rest of `.superpowers/`; it tells executing-plans which tasks are done).
 
-## Stack (planned)
+## Setup on a new machine
 
-- npm workspaces: `app/`, `pipeline/`, `contracts/`, `db/`, `fixtures/`
+```bash
+git checkout feat/v1-offline        # the build lives here until the final PR
+nvm install 24 && nvm use 24        # Node >= 24.15 (Angular CLI 22.2 refuses older)
+npm i -g npm@11                     # npm 10.9 crashes resolving Vitest peers
+npm install
+npx playwright install chromium     # once, for app e2e tests (run from app/)
+npm test                            # contracts, pipeline, app unit tests
+npm run build -w app                # e2e serves app/dist; without a build it times out
+npm run e2e -w app
+```
+
+No `.env` is needed until the database and email tasks; `.env.example` lists the names.
+
+## Design references
+
+Mockups: `docs/design/` (README explains how to read them and where the spec overrides
+them). Live canvas: the "First Light mockups" design artifact linked there.
+
+## Stack
+
+- npm workspaces: `contracts/`, `pipeline/`, `app/` (plus `db/`, `fixtures/`, `scripts/` folders)
+- **Node 24 (≥ 24.15) and npm 11.** Older versions fail; see `.nvmrc` and `engines`.
 - Angular 22: standalone, zoneless, OnPush, signals-first, PWA
 - Neon: Postgres, Neon Auth (Google), Data API, row-level security
-- Pipeline: Node 22 + TypeScript, run by a Claude Code routine at 5:32am and 4:02pm Sydney
+- Pipeline: Node 24 + TypeScript (tsx), run by a Claude Code routine at 5:32am and 4:02pm Sydney
 - Pipeline writes to Neon over HTTPS (`@neondatabase/serverless`); the routine has no connectors
 - GitHub Actions: CI, watchdog email, 8am reminder email, keepalive
 - Vercel Hobby at `firstlight.noel-sebastian.com` (Cloudflare DNS, grey cloud)

@@ -1,0 +1,88 @@
+<div class="landing">
+  <header class="top">
+    <a class="brand" routerLink="/" aria-label="First Light home">
+      <span class="brand-mark clay" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 34 34"><circle cx="17" cy="20" r="8.5" fill="#E8833A"></circle><rect x="4" y="21" width="26" height="9" rx="4.5" fill="#3E6FA3"></rect></svg>
+      </span>
+      <span class="disp brand-name">First Light</span>
+    </a>
+    <nav aria-label="Primary" class="top-nav">
+      <a href="#machine">How it works</a>
+      <a href="#safe">Security</a>
+      <a class="btn btn-sec" routerLink="/signin">Sign in</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-main">
+      <p class="label kicker"><span class="kicker-dot" aria-hidden="true"></span>Katoomba · NSW · two editions a day</p>
+      <h1 class="disp">Your morning, <span class="line">already read.</span></h1>
+    </div>
+    <div class="hero-side">
+      <p>At 5:32 every morning, First Light reads about twenty sources on the Australian economy, politics, web development and AI, and hands you the twenty minutes that matter. At 4pm it adds whatever changed during the day.</p>
+      <div class="ctas">
+        <a class="btn btn-pri" routerLink="/demo/today">Explore the demo edition</a>
+        <a class="btn btn-sec" href="#machine">Watch it work</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="machine" class="machine" aria-label="How First Light works">
+    @defer (on viewport; prefetch on idle) {
+      <app-morning-machine [animate]="!prefs.reduceMotion()" />
+    } @placeholder {
+      <div class="machine-placeholder clay" aria-hidden="true"></div>
+    }
+    <ol class="steps">
+      @for (s of steps; track s.name) {
+        <li>
+          <div class="prog" [class]="'prog ' + s.progress" [class.still]="prefs.reduceMotion()"><i></i></div>
+          <p class="label step-name">{{ s.name }}</p>
+          <p>{{ s.text }}</p>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="demo clay" aria-label="Demo">
+    <div>
+      <p class="label">Demo edition · sample data</p>
+      <h2 class="disp">Click through the real interface.</h2>
+      <p class="muted">The demo runs on the same components as my daily edition, fed with a hand-written sample edition. Nothing here can run the AI or see my account.</p>
+    </div>
+    <div class="ctas">
+      <a class="btn btn-pri" routerLink="/demo/today">Open Today</a>
+      <a class="btn btn-sec" routerLink="/demo/news">Browse News</a>
+      <a class="btn btn-sec" routerLink="/demo/archive">Search the archive</a>
+    </div>
+  </section>
+
+  <section id="safe" class="safe" aria-labelledby="safe-title">
+    <h2 id="safe-title" class="disp">Safe by design</h2>
+    <div class="safe-cards">
+      @for (c of safe; track c.title) {
+        <div class="safe-card clay">
+          <span class="safe-icon" [style.background]="c.fill" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E1A2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="c.icon"></path></svg>
+          </span>
+          <h3 class="disp">{{ c.title }}</h3>
+          <p class="muted">{{ c.body }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="built" aria-labelledby="built-title">
+    <h2 id="built-title" class="disp">Built with</h2>
+    <ul class="stack">
+      @for (s of stack; track s) {
+        <li class="mono clay-light">{{ s }}</li>
+      }
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <span>A project by Noel Sebastian <span class="mono credit">Edited by Claude</span></span>
+    <a href="https://noel-sebastian.com">noel-sebastian.com</a>
+  </footer>
+</div>

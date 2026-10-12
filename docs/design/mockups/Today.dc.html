@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First Light: Today</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@8..144,400..900,0..100&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9EEF5}
+a{color:#2F5F8F}a:hover{color:#1F4468}
+.fl{font-family:'Google Sans Flex',system-ui,sans-serif;color:#0E1A2B}
+.disp{font-family:'Google Sans Flex',system-ui,sans-serif;font-variation-settings:'ROND' 100}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.clay{background:#F5F8FC;box-shadow:10px 12px 24px rgba(140,160,190,.45),-8px -8px 20px rgba(255,255,255,.95),inset 3px 3px 6px rgba(255,255,255,.9),inset -4px -6px 12px rgba(140,160,190,.28)}
+.dent{background:#E3E9F2;box-shadow:inset 3px 4px 7px rgba(140,160,190,.5),inset -3px -3px 6px rgba(255,255,255,.9)}
+.pill{box-shadow:3px 4px 8px rgba(140,160,190,.4),inset 1px 2px 3px rgba(255,255,255,.8),inset -2px -3px 5px rgba(110,130,165,.22)}
+.navlink{display:flex;align-items:center;gap:14px;min-height:50px;padding:0 15px;border-radius:18px;text-decoration:none;color:#44546A;font-weight:600;font-size:15px}
+.navlink:hover{color:#0E1A2B;background:#E3E9F2}
+.navlink.on{color:#FFFFFF;background:#3E6FA3;box-shadow:5px 7px 14px rgba(62,111,163,.4),inset 2px 3px 5px rgba(255,255,255,.3),inset -3px -4px 8px rgba(20,40,80,.3)}
+.iconbtn{width:48px;height:48px;border:0;border-radius:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0E1A2B}
+.seg{min-height:42px;padding:0 18px;border-radius:999px;border:0;font:inherit;font-size:14px;font-weight:600;cursor:pointer;background:transparent;color:#44546A}
+.seg.on{background:#F5F8FC;color:#0E1A2B;box-shadow:4px 5px 10px rgba(140,160,190,.5),inset 1px 2px 3px #fff}
+.tag{display:inline-block;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700;color:#0E1A2B}
+.mist{position:absolute;left:-20%;width:140%;height:120px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.6) 0%,rgba(255,255,255,0) 70%);animation:drift 38s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+.hill{position:absolute;border-radius:50% 50% 0 0/100% 100% 0 0;box-shadow:inset 14px 16px 26px rgba(255,255,255,.4),inset -16px -12px 26px rgba(60,85,125,.3)}
+@media (prefers-reduced-motion: reduce){.mist{animation:none}}
+</style>
+</helmet>
+<div class="fl" style="min-height: 100vh; background: #E9EEF5; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; padding: 16px; box-sizing: border-box">
+
+<aside class="clay" style="flex: 0 0 {{railW}}; max-width: 100%; box-sizing: border-box; border-radius: 32px; padding: 18px 14px; display: flex; flex-direction: column; gap: 22px; transition: flex-basis .25s ease">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0E1A2B" aria-label="First Light home">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="16" r="8.5" fill="#E8833A"></circle><rect x="4" y="17" width="26" height="9" rx="4.5" fill="#3E6FA3"></rect></svg>
+      <sc-if value="{{open}}" hint-placeholder-val="{{ true }}"><span class="disp" style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em">First Light</span></sc-if>
+    </a>
+  </div>
+  <button type="button" class="iconbtn dent" onClick="{{toggle}}" aria-expanded="{{expanded}}" aria-label="{{toggleLabel}}" style="align-self: {{toggleAlign}}">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{chev}}"></path></svg>
+  </button>
+  <nav aria-label="Sections" style="display: flex; flex-direction: column; gap: 6px">
+    <sc-for list="{{nav}}" as="n" hint-placeholder-count="3">
+      <a class="{{n.cls}}" href="{{n.href}}" aria-label="{{n.label}}" title="{{n.label}}">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="{{n.icon}}"></path></svg>
+        <sc-if value="{{open}}" hint-placeholder-val="{{ true }}"><span>{{n.label}}</span><span class="mono" style="margin-left: auto; font-size: 12px">{{n.badge}}</span></sc-if>
+      </a>
+    </sc-for>
+  </nav>
+  <sc-if value="{{open}}" hint-placeholder-val="{{ true }}">
+    <div class="dent" style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 22px">
+      <div class="mono" style="font-size: 11px; letter-spacing: 0.08em; color: #44546A">OFFLINE COPY</div>
+      <div style="font-size: 14px; line-height: 1.45">Saved 5:31am. Reads fine through the tunnels.</div>
+    </div>
+    <div class="mono" style="font-size: 11px; letter-spacing: 0.08em; color: #44546A; padding: 0 6px">DEMO EDITION · SAMPLE DATA</div>
+  </sc-if>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 10px 18px 40px; display: flex; flex-direction: column; gap: 30px; max-width: 1200px">
+
+  <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px">
+    <div class="mono" style="font-size: 13px; letter-spacing: 0.08em; color: #44546A">MORNING EDITION · 5:31AM · 18 STORIES FROM 41 SOURCES</div>
+    <div role="group" aria-label="Edition" class="dent" style="display: inline-flex; padding: 5px; border-radius: 999px">
+      <button class="{{amClass}}" type="button" onClick="{{pickAm}}" aria-pressed="{{amPressed}}">Morning</button>
+      <button class="{{pmClass}}" type="button" onClick="{{pickPm}}" aria-pressed="{{pmPressed}}">Afternoon</button>
+    </div>
+  </div>
+
+  <sc-if value="{{showPm}}" hint-placeholder-val="{{ false }}">
+    <div class="clay" style="border-radius: 30px; padding: 26px 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px">
+      <span class="pill" style="width: 52px; height: 52px; border-radius: 18px; background: #FBE3CC; display: flex; align-items: center; justify-content: center">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E1A2B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+      </span>
+      <div style="flex: 1 1 300px; min-width: 0">
+        <div class="disp" style="font-size: 24px; font-weight: 700">The afternoon edition isn't out yet.</div>
+        <div style="font-size: 16px; color: #44546A; margin-top: 4px">It lands at 4:00pm, after the 11:30 ABS releases and the 2:30 RBA slot.</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <section aria-label="Weather and greeting" style="position: relative; border-radius: 40px; overflow: hidden; min-height: 400px; background: linear-gradient(180deg,#BCD2EA 0%,#D9E2F0 50%,#F6DCC4 100%); display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; justify-content: space-between; padding: 34px; box-sizing: border-box; box-shadow: 14px 18px 36px rgba(140,160,190,.5), -10px -10px 24px rgba(255,255,255,.95), inset 4px 4px 10px rgba(255,255,255,.7), inset -6px -8px 18px rgba(120,140,175,.3)">
+    <div aria-hidden="true" style="position: absolute; left: 13%; top: 28%; width: 86px; height: 86px; border-radius: 50%; background: radial-gradient(circle at 34% 30%,#FFF1CF 0%,#F7B865 52%,#E7843A 100%); box-shadow: 0 0 50px 10px rgba(255,200,130,.55), inset -6px -8px 12px rgba(170,70,20,.3)"></div>
+    <div class="mist" style="bottom: 120px" aria-hidden="true"></div>
+    <div class="hill" style="left: -6%; bottom: -40px; width: 52%; height: 200px; background: #A9C1DD" aria-hidden="true"></div>
+    <div class="hill" style="left: 58%; bottom: -50px; width: 50%; height: 190px; background: #A9C1DD" aria-hidden="true"></div>
+    <div class="hill" style="left: 24%; bottom: -60px; width: 56%; height: 170px; background: #8FAACB" aria-hidden="true"></div>
+    <div style="position: relative; flex: 1 1 380px; min-width: 0; align-self: flex-start">
+      <div class="mono" style="font-size: 13px; letter-spacing: 0.12em; color: #22324B">TUESDAY 13 OCTOBER</div>
+      <h1 class="disp" style="margin: 10px 0 0; font-size: clamp(42px, 5vw, 68px); line-height: 1; letter-spacing: -0.03em; font-weight: 800">Good morning.</h1>
+      <p style="margin: 14px 0 0; font-size: 18px; line-height: 1.5; max-width: 440px; color: #22324B">Fog sits on the ridge until about ten. Sydney is clear, so it's an office day without the umbrella.</p>
+    </div>
+
+    <div class="clay" style="position: relative; flex: 0 1 420px; min-width: 0; border-radius: 32px; padding: 24px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; align-items: center; gap: 16px">
+        <span class="pill" style="width: 64px; height: 64px; border-radius: 22px; background: #DCE7F2; display: flex; align-items: center; justify-content: center">
+          <svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="18" r="9" fill="#F6B45E"></circle><rect x="6" y="26" width="34" height="6" rx="3" fill="#9FB5D1"></rect><rect x="12" y="35" width="30" height="6" rx="3" fill="#C3D2E4"></rect></svg>
+        </span>
+        <div>
+          <div class="disp" style="font-size: 54px; font-weight: 800; line-height: 1">9°</div>
+          <div style="font-size: 14px; color: #44546A">Katoomba · fog lifting</div>
+        </div>
+        <div class="mono" style="margin-left: auto; text-align: right; font-size: 13px; line-height: 1.7; color: #44546A">Rain 20%<br>Wind 12 km/h<br>Sunrise 5:50</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; justify-content: space-between; font-size: 14px">
+          <span><b>Today 7° – 17°</b></span>
+          <span style="color: #44546A">October average 8° – 18°</span>
+        </div>
+        <div class="dent" style="position: relative; height: 18px; border-radius: 9px" role="img" aria-label="Today's range 7 to 17 degrees, against an October average of 8 to 18 degrees">
+          <div style="position: absolute; left: 32%; width: 40%; top: -3px; bottom: -3px; border-radius: 12px; border: 2px dashed #8EA6C4" aria-hidden="true"></div>
+          <div style="position: absolute; left: 28%; width: 40%; top: 3px; bottom: 3px; border-radius: 6px; background: linear-gradient(90deg,#7FA6D6,#F6B45E); box-shadow: inset 1px 2px 2px rgba(255,255,255,.6)" aria-hidden="true"></div>
+          <div style="position: absolute; left: 36%; top: -6px; width: 6px; height: 30px; border-radius: 3px; background: #0E1A2B" aria-hidden="true"></div>
+        </div>
+        <div class="mono" style="display: flex; justify-content: space-between; font-size: 11px; color: #44546A"><span>0°</span><span>NOW 9°</span><span>25°</span></div>
+        <div style="font-size: 14px; color: #44546A">A degree cooler than usual. Dashed outline is the month's average.</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{hours}}" as="h" hint-placeholder-count="5">
+          <div class="dent" style="text-align: center; padding: 9px 0; border-radius: 16px">
+            <div class="mono" style="font-size: 11px; color: #44546A">{{h.t}}</div>
+            <div style="font-size: 16px; font-weight: 700; margin-top: 2px">{{h.v}}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="pill" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 18px; background: #DCE7F2; font-size: 14px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E1A2B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"></path></svg>
+        <span><b>Sydney CBD</b> · office day · 14° – 22°, clear</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Today's nudge" class="clay" style="border-radius: 32px; padding: 26px 30px; display: flex; gap: 20px; align-items: center">
+    <span class="pill" style="flex: 0 0 auto; width: 56px; height: 56px; border-radius: 20px; background: #FBE3CC; display: flex; align-items: center; justify-content: center">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E1A2B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v3M5 8l2 2M19 8l-2 2M4 16h16M8 20h8"></path><path d="M8 16a4 4 0 0 1 8 0"></path></svg>
+    </span>
+    <div>
+      <div class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #44546A">TODAY'S NUDGE</div>
+      <p class="disp" style="margin: 6px 0 0; font-size: 24px; line-height: 1.3; font-weight: 600">A quiet news day. The big one is CPI on 28 October, so if there's deep work you've been putting off, this is the week to do it.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="top3h" style="display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+      <h2 id="top3h" class="disp" style="margin: 0; font-size: 32px; letter-spacing: -0.02em">Three things to know</h2>
+      <a href="News.dc.html" style="font-weight: 700">Full edition</a>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px">
+      <sc-for list="{{top}}" as="s" hint-placeholder-count="3">
+        <article class="clay" style="flex: 1 1 280px; min-width: 0; border-radius: 32px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; align-items: center; justify-content: space-between">
+            <span class="tag pill" style="background: {{s.tagBg}}">{{s.section}}</span>
+            <span class="dent disp" style="width: 46px; height: 46px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: #3E6FA3">{{s.n}}</span>
+          </div>
+          <h3 class="disp" style="margin: 0; font-size: 22px; line-height: 1.2">{{s.title}}</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #44546A"><b style="color: #0E1A2B">Why it matters: </b>{{s.why}}</p>
+          <div class="mono" style="margin-top: auto; font-size: 12px; color: #44546A">{{s.src}}</div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section aria-labelledby="datesh" style="display: flex; flex-direction: column; gap: 16px">
+    <h2 id="datesh" class="disp" style="margin: 0; font-size: 26px; letter-spacing: -0.01em">On the calendar</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 18px">
+      <sc-for list="{{dates}}" as="d" hint-placeholder-count="4">
+        <div class="clay" style="flex: 1 1 200px; min-width: 0; padding: 16px 18px; border-radius: 26px; display: flex; gap: 14px; align-items: center">
+          <div class="dent" style="text-align: center; min-width: 56px; padding: 8px 0; border-radius: 16px">
+            <div class="mono" style="font-size: 11px; color: #44546A">{{d.mon}}</div>
+            <div class="disp" style="font-size: 24px; font-weight: 800; line-height: 1">{{d.day}}</div>
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 15px">{{d.what}}</div>
+            <div class="mono" style="font-size: 12px; color: #44546A; margin-top: 2px">{{d.when}}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section aria-labelledby="secth" style="display: flex; flex-direction: column; gap: 16px">
+    <h2 id="secth" class="disp" style="margin: 0; font-size: 26px; letter-spacing: -0.01em">In this edition</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px">
+      <sc-for list="{{sections}}" as="x" hint-placeholder-count="6">
+        <a class="clay" href="News.dc.html" style="text-decoration: none; color: #0E1A2B; padding: 20px; border-radius: 26px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <span class="tag pill" style="background: {{x.bg}}">{{x.name}}</span>
+            <span class="mono" style="font-size: 13px; color: #44546A">{{x.count}}</span>
+          </div>
+          <div style="font-size: 15px; line-height: 1.45">{{x.lead}}</div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <div class="mono" style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 12px; letter-spacing: 0.06em; color: #44546A">
+    <span>NEXT EDITION 4:00PM</span><span>WEATHER REFRESHED 6:12AM</span><span>EVERY STORY LINKS TO ITS SOURCE</span><span style="opacity: .7">EDITED BY CLAUDE</span>
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { ed: 'am', open: true }; }
+  renderVals() {
+    const am = this.state.ed === 'am';
+    const open = this.state.open;
+    const nav = [
+      { label: 'Today', href: 'Today.dc.html', badge: '', icon: 'M12 9a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 3v2M4.9 6.9l1.4 1.4M19.1 6.9l-1.4 1.4M3 20h18', on: true },
+      { label: 'News', href: 'News.dc.html', badge: '18', icon: 'M3 7a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3zM7 9h10M7 13h10M7 17h6', on: false },
+      { label: 'Archive', href: 'Archive.dc.html', badge: '', icon: 'M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5V9H3zM5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4', on: false }
+    ].map((n) => ({ ...n, cls: n.on ? 'navlink on' : 'navlink' }));
+    return {
+      open, nav,
+      railW: open ? '248px' : '84px',
+      expanded: open ? 'true' : 'false',
+      toggleLabel: open ? 'Collapse menu' : 'Expand menu',
+      toggleAlign: open ? 'flex-end' : 'center',
+      chev: open ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6',
+      toggle: () => this.setState({ open: !open }),
+      amClass: am ? 'seg on' : 'seg', pmClass: am ? 'seg' : 'seg on',
+      amPressed: am ? 'true' : 'false', pmPressed: am ? 'false' : 'true',
+      showPm: !am,
+      pickAm: () => this.setState({ ed: 'am' }),
+      pickPm: () => this.setState({ ed: 'pm' }),
+      hours: [{ t: '6am', v: '8°' }, { t: '9am', v: '10°' }, { t: '12pm', v: '15°' }, { t: '3pm', v: '17°' }, { t: '6pm', v: '13°' }],
+      top: [
+        { n: '1', section: 'AU economy', tagBg: '#FBE3CC', title: 'September-quarter CPI lands 28 October', why: 'It is the last big number before the RBA meets on 3 November. Anything with a variable rate moves on it.', src: 'ABS release calendar · RBA' },
+        { n: '2', section: 'Web dev', tagBg: '#DCE7F2', title: 'Angular v20 leaves long-term support in November', why: 'Apps still on v20 stop getting security patches. Worth raising before the next sprint planning.', src: 'Angular release schedule' },
+        { n: '3', section: 'AI', tagBg: '#F6E7B8', title: 'Google AI Mode passes a billion monthly users', why: 'Fewer clicks reach small-business sites. Pitch clients on being the cited answer, not just a blue link.', src: 'Search Engine Journal' }
+      ],
+      dates: [
+        { mon: 'OCT', day: '15', what: 'Labour Force', when: 'ABS · 11:30am' },
+        { mon: 'OCT', day: '28', what: 'CPI, Sept quarter', when: 'ABS · 11:30am' },
+        { mon: 'NOV', day: '3', what: 'RBA rate decision', when: 'RBA · 2:30pm' },
+        { mon: 'NOV', day: '—', what: 'Angular v20 LTS ends', when: 'angular.dev' }
+      ],
+      sections: [
+        { name: 'AU economy', bg: '#FBE3CC', count: '4', lead: 'CPI countdown, and what the RBA said it is watching' },
+        { name: 'AU politics', bg: '#E4DDF3', count: '3', lead: '[Lead story from ABC Politics]' },
+        { name: 'World', bg: '#D9EEE6', count: '3', lead: '[Lead story from Reuters via Google News]' },
+        { name: 'Web dev', bg: '#DCE7F2', count: '3', lead: 'Angular v20 support ends next month' },
+        { name: 'AI', bg: '#F6E7B8', count: '3', lead: 'AI Mode passes a billion users' },
+        { name: 'AU tech jobs', bg: '#F0DADA', count: '2', lead: 'Developer workforce at a record 216,000' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

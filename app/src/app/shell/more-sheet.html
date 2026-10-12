@@ -1,0 +1,11 @@
+<div class="sheet-backdrop" (click)="closed.emit()" aria-hidden="true"></div>
+<div class="sheet clay" role="dialog" aria-modal="true" aria-labelledby="more-title">
+  <h2 id="more-title" class="visually-hidden">More</h2>
+  <div class="sheet-grip" aria-hidden="true"></div>
+  <label class="sheet-row">
+    <span>Reduce motion</span>
+    <input type="checkbox" [checked]="prefs.reduceMotion()" (change)="toggleMotion($event)" />
+  </label>
+  <a class="sheet-row" routerLink="/" (click)="closed.emit()">About First Light</a>
+  <a class="sheet-row" routerLink="/signin" (click)="closed.emit()">Sign in</a>
+</div>

@@ -1,0 +1,26 @@
+name: Keepalive
+
+# GitHub disables scheduled workflows after 60 days without repository activity.
+# Re-enabling them through the API resets that clock without a commit, so no
+# extra Vercel deploys. (gautamkrishnar/keepalive-workflow, which the plan named,
+# has been disabled by GitHub; this does what its API mode did.)
+on:
+  schedule:
+    - cron: '0 9 1 * *'
+      timezone: Australia/Sydney
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for workflow in watchdog.yml reminder.yml keepalive.yml; do
+            gh workflow enable "$workflow" --repo "$GITHUB_REPOSITORY" > /dev/null
+          done
+          echo ok
+        env:
+          GH_TOKEN: ${{ github.token }}

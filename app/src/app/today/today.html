@@ -1,0 +1,101 @@
+<div class="today">
+  <div class="edition-bar">
+    <p class="label">{{ am().slot === 'am' ? 'Morning' : 'Afternoon' }} edition · {{ amTime() }} · {{ am().stories.length }} stories from {{ am().sourceCount }} sources</p>
+    <div class="seg-group dent" role="group" aria-label="Edition">
+      <button type="button" class="seg" data-slot="am" [class.on]="slot() === 'am'" [attr.aria-pressed]="slot() === 'am'" (click)="slot.set('am')">Morning</button>
+      <button type="button" class="seg" data-slot="pm" [class.on]="slot() === 'pm'" [attr.aria-pressed]="slot() === 'pm'" (click)="slot.set('pm')">Afternoon</button>
+    </div>
+  </div>
+
+  @if (slot() === 'pm') {
+    <div class="pm-note clay" role="status">
+      @if (pm(); as p) {
+        <div>
+          <p class="disp pm-title">{{ p.stories.length }} new since {{ amTime() }}</p>
+          <a routerLink="../news">Read them in News</a>
+        </div>
+      } @else {
+        <div>
+          <p class="disp pm-title">The afternoon edition isn't out yet.</p>
+          <p>It lands at 4:02pm, after the 11:30 ABS releases and the 2:30 RBA slot.</p>
+        </div>
+      }
+    </div>
+  }
+
+  <section class="sky" aria-label="Greeting">
+    <div class="sun" aria-hidden="true"></div>
+    <div class="mist" aria-hidden="true"></div>
+    <div class="hill h1" aria-hidden="true"></div>
+    <div class="hill h2" aria-hidden="true"></div>
+    <div class="hill h3" aria-hidden="true"></div>
+    <div class="greeting">
+      <p class="label">{{ longDate() }}</p>
+      <h1 class="disp">Good morning.</h1>
+      <p class="greeting-line">{{ am().weather.katoomba.summary }} in Katoomba. Sydney {{ am().weather.sydney.summary.toLowerCase() }}.</p>
+    </div>
+    <app-weather-card [place]="am().weather.katoomba" [second]="am().weather.sydney" [liveNow]="liveNow()" />
+  </section>
+
+  @if (am().nudge; as nudge) {
+    <section class="nudge clay" aria-label="Today's nudge">
+      <span class="nudge-icon pill" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0E1A2B" stroke-width="2" stroke-linecap="round"><path d="M12 3v3M5 8l2 2M19 8l-2 2M4 16h16M8 20h8M8 16a4 4 0 0 1 8 0"></path></svg>
+      </span>
+      <div>
+        <p class="label">Today's nudge</p>
+        <p class="disp nudge-text">{{ nudge }}</p>
+      </div>
+    </section>
+  }
+
+  <section class="top3" aria-labelledby="top3h">
+    <div class="section-head">
+      <h2 id="top3h" class="disp">Three things to know</h2>
+      <a routerLink="../news">Full edition</a>
+    </div>
+    <div class="cards">
+      @for (s of top3(); track s.id) {
+        <article class="card clay">
+          <div class="card-top">
+            <span class="tag" [style.background]="s.meta.fill">{{ s.meta.label }}</span>
+            <span class="rank dent disp">{{ s.topRank }}</span>
+          </div>
+          <h3 class="disp">{{ s.title }}</h3>
+          <p><b>Why it matters:</b> {{ s.whyItMatters }}</p>
+          <a class="card-link" [routerLink]="['../news', s.id]">Read more<span class="visually-hidden"> about {{ s.title }}</span></a>
+        </article>
+      }
+    </div>
+  </section>
+
+  @if (dates().length) {
+    <section class="dates" aria-labelledby="datesh">
+      <h2 id="datesh" class="disp">On the calendar</h2>
+      <ul>
+        @for (d of dates(); track d.date + d.label) {
+          <li class="clay-light">
+            <span class="date-chip dent"><span class="mono">{{ d.short.month }}</span><b class="disp">{{ d.short.day }}</b></span>
+            <span><b>{{ d.label }}</b><span class="mono date-src">{{ d.sourceName }}{{ d.clock ? ' · ' + d.clock : '' }}</span></span>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  <section class="overview" aria-labelledby="overviewh">
+    <h2 id="overviewh" class="disp">In this edition</h2>
+    <div class="overview-grid">
+      @for (x of overview(); track x.key) {
+        <a class="overview-tile clay-light" routerLink="../news" [queryParams]="{ section: x.key }">
+          <span class="overview-head"><span class="tag" [style.background]="x.fill">{{ x.label }}</span><span class="mono">{{ x.count }}</span></span>
+          <span>{{ x.lead }}</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <p class="fine label">
+    <span>Next edition 4:02pm</span><span>Every story links to its source</span><span>Weather data by Open-Meteo.com</span><span class="credit">Edited by Claude</span>
+  </p>
+</div>

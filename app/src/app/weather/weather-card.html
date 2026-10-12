@@ -1,0 +1,19 @@
+<section class="weather clay" aria-label="Weather">
+  <div class="weather-top">
+    <span class="weather-icon pill" aria-hidden="true">
+      <svg width="40" height="40" viewBox="0 0 48 48"><circle cx="20" cy="18" r="9" fill="#F6B45E"></circle><rect x="6" y="26" width="34" height="6" rx="3" fill="#9FB5D1"></rect><rect x="12" y="35" width="30" height="6" rx="3" fill="#C3D2E4"></rect></svg>
+    </span>
+    <div>
+      <div class="weather-temp disp">{{ liveNow() ?? place().nowC }}°</div>
+      <div class="weather-place">{{ place().name }} · {{ place().summary }}</div>
+    </div>
+    <div class="weather-meta mono"><span>Rain {{ place().rainChancePct }}%</span><span>Wind {{ place().windKmh }} km/h</span><span>Sunrise {{ clock(place().sunrise) }}</span></div>
+  </div>
+  <app-range-bar [low]="place().lowC" [high]="place().highC" [normalLow]="place().normalLowC" [normalHigh]="place().normalHighC" [now]="liveNow() ?? place().nowC" />
+  <ol class="hours" aria-label="Hourly temperatures">
+    @for (h of place().hourly; track h.time) {
+      <li class="dent"><span class="mono">{{ clock(h.time) }}</span><b>{{ h.tempC }}°</b></li>
+    }
+  </ol>
+  <p class="second pill"><b>{{ second().name }}</b> · {{ second().lowC }}° – {{ second().highC }}°, {{ second().summary.toLowerCase() }}</p>
+</section>

@@ -1,0 +1,26 @@
+{
+  "name": "@first-light/pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cli": "tsx src/cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "watchdog": "tsx src/ops/watchdog.ts",
+    "reminder": "tsx src/ops/reminder.ts"
+  },
+  "dependencies": {
+    "@first-light/contracts": "*",
+    "@neondatabase/serverless": "^1.2.0",
+    "fast-xml-parser": "^5.2.0",
+    "nodemailer": "^10.1.0",
+    "yaml": "^2.8.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/nodemailer": "^8.0.2",
+    "tsx": "^4.20.0"
+  }
+}

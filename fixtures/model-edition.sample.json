@@ -1,0 +1,30 @@
+{
+  "stories": [
+    {
+      "section": "au-economy",
+      "title": "Sample bank holds its rate at 3.60 per cent",
+      "summary": "The sample board left the cash rate unchanged and said inflation is easing.",
+      "whyItMatters": "Borrowers get no relief this month, but the tone points to a cut later.",
+      "pickedBecause": "Primary source: the bank's own release.",
+      "articleIds": ["c001"]
+    },
+    {
+      "section": "au-economy",
+      "title": "Sample wages grow 0.8% in the quarter",
+      "summary": "Wages rose 0.8% over the quarter in the synthetic release.",
+      "whyItMatters": "Wage growth near inflation keeps real incomes flat.",
+      "pickedBecause": "Pairs with the rate decision.",
+      "articleIds": ["c002"]
+    },
+    {
+      "section": "web-dev",
+      "title": "Signals land in Sample framework 9",
+      "summary": "The sample framework makes signals its default way to hold state.",
+      "whyItMatters": "Teams on older versions face a migration this year.",
+      "pickedBecause": "A framework release, not a hot take.",
+      "articleIds": ["c004", "c004"]
+    }
+  ],
+  "top3": [0, 1, 2],
+  "nudge": "Fog in Katoomba this morning: leave a few minutes early."
+}

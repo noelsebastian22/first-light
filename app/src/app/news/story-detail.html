@@ -1,0 +1,22 @@
+<article class="detail-card clay" aria-labelledby="detail-title">
+  <p class="detail-meta"><span class="tag" [style.background]="story().fill">{{ story().label }}</span>
+    <span class="mono">{{ story().links.length }} {{ story().links.length === 1 ? 'source' : 'sources' }}</span></p>
+  <h2 id="detail-title" class="disp">{{ story().title }}</h2>
+  <p class="detail-summary">{{ story().summary }}</p>
+  <div class="why pill"><p class="label">Why it matters to you</p><p>{{ story().whyItMatters }}</p></div>
+  <div class="picked dent"><p class="label">Why Claude picked it</p><p>{{ story().pickedBecause }}</p></div>
+  <div class="coverage">
+    <p class="label">Coverage</p>
+    <ul>
+      @for (l of story().links; track l.url) {
+        <li><a [href]="l.url" target="_blank" rel="noopener noreferrer">{{ l.publisherTitle }}<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      }
+    </ul>
+  </div>
+  <div class="detail-actions">
+    @if (story().links[0]; as first) {
+      <a class="btn btn-pri" [href]="first.url" target="_blank" rel="noopener noreferrer">Read at source</a>
+    }
+    <button type="button" class="btn btn-sec save" [attr.aria-pressed]="saved()" (click)="toggleSave.emit()">{{ saved() ? 'Saved' : 'Save for later' }}</button>
+  </div>
+</article>

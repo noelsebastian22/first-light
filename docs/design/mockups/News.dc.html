@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First Light: News</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@8..144,400..900,0..100&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF2F6}
+a{color:#2F5F8F}a:hover{color:#1F4468}
+.fl{font-family:'Google Sans Flex',system-ui,sans-serif;color:#0E1A2B}
+.disp{font-family:'Google Sans Flex',system-ui,sans-serif;font-variation-settings:'ROND' 100}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.clay{background:#F5F8FC;box-shadow:10px 12px 24px rgba(140,160,190,.45),-8px -8px 20px rgba(255,255,255,.95),inset 3px 3px 6px rgba(255,255,255,.9),inset -4px -6px 12px rgba(140,160,190,.28)}
+.navlink{display:flex;align-items:center;gap:12px;min-height:46px;padding:0 14px;border-radius:14px;text-decoration:none;color:#44546A;font-weight:500;font-size:15px}
+.navlink:hover{background:#E2E8EF;color:#0E1A2B}
+.navlink.on{color:#FFFFFF;background:#3E6FA3;box-shadow:5px 7px 14px rgba(62,111,163,.4),inset 2px 3px 5px rgba(255,255,255,.3),inset -3px -4px 8px rgba(20,40,80,.3)}
+.row{box-shadow:8px 10px 20px rgba(140,160,190,.4),-6px -6px 14px rgba(255,255,255,.9),inset 2px 2px 4px #fff,inset -3px -4px 8px rgba(140,160,190,.22) !important;border-radius:26px !important;background:#F5F8FC !important}
+.chipbtn{box-shadow:4px 5px 10px rgba(140,160,190,.4),inset 1px 2px 3px #fff;border:0 !important;background:#F5F8FC}
+.chipbtn.on{background:#3E6FA3 !important}
+.chipbtn{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #D5DCE5;background:#FFFFFF;font:inherit;font-size:14px;font-weight:600;color:#0E1A2B;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.chipbtn.on{background:#0E1A2B;border-color:#0E1A2B;color:#FFFFFF}
+.row{width:100%;text-align:left;border:0;font:inherit;color:inherit;cursor:pointer;padding:20px 22px;border-radius:20px;display:flex;gap:16px;align-items:flex-start;background:#FFFFFF;border:2px solid transparent}
+.row:hover{border-color:#C9D6E4}
+.row.sel{border-color:#2F5F8F;background:#F7FAFD}
+.tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#0E1A2B}
+.act{min-height:44px;padding:0 18px;border-radius:999px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+</style>
+</helmet>
+<div class="fl" style="min-height: 100vh; background: #EEF2F6; display: flex; flex-wrap: wrap; align-items: flex-start">
+
+<aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; padding: 28px 20px; display: flex; flex-direction: column; gap: 28px">
+  <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0E1A2B; padding: 0 6px">
+    <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="21" r="9" fill="#E8833A"></circle><rect x="3" y="21" width="28" height="3" rx="1.5" fill="#0E1A2B"></rect><path d="M17 4v4M6 9l3 3M28 9l-3 3" stroke="#0E1A2B" stroke-width="2.4" stroke-linecap="round"></path></svg>
+    <span class="disp" style="font-size: 21px; font-weight: 800; letter-spacing: -0.02em">First Light</span>
+  </a>
+  <nav aria-label="Sections" style="display: flex; flex-direction: column; gap: 4px">
+    <a class="navlink" href="Today.dc.html">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="4"></circle><path d="M12 3v2M4.9 6.9l1.4 1.4M19.1 6.9l-1.4 1.4M3 19h18"></path></svg>
+      Today
+    </a>
+    <a class="navlink on" href="News.dc.html" aria-current="page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9h10M7 13h10M7 17h6"></path></svg>
+      News <span class="mono" style="margin-left: auto; font-size: 12px">{{unread}} new</span>
+    </a>
+    <a class="navlink" href="Archive.dc.html">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1.5"></rect><path d="M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4"></path></svg>
+      Archive
+    </a>
+  </nav>
+  <div class="mono" style="font-size: 12px; letter-spacing: 0.08em; color: #44546A; padding: 0 6px">DEMO EDITION · SAMPLE DATA</div>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 24px 28px 48px; display: flex; flex-direction: column; gap: 22px; max-width: 1180px">
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
+    <div>
+      <div class="mono" style="font-size: 13px; letter-spacing: 0.08em; color: #44546A">TUE 13 OCT · MORNING EDITION</div>
+      <h1 class="disp" style="margin: 6px 0 0; font-size: 44px; letter-spacing: -0.03em; line-height: 1">The edition</h1>
+    </div>
+    <div class="mono" style="font-size: 13px; color: #44546A">Ranked for you · {{unread}} unread</div>
+  </div>
+
+  <div role="group" aria-label="Filter by section" style="display: flex; flex-wrap: wrap; gap: 8px">
+    <sc-for list="{{chips}}" as="c" hint-placeholder-count="7">
+      <button type="button" class="{{c.cls}}" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}">{{c.label}} <span class="mono" style="font-size: 12px; opacity: .75">{{c.count}}</span></button>
+    </sc-for>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
+    <div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{list}}" as="s" hint-placeholder-count="6">
+        <button type="button" class="{{s.cls}}" onClick="{{s.pick}}" aria-pressed="{{s.pressed}}">
+          <span style="flex: 0 0 auto; width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; background: {{s.dot}}" aria-hidden="true"></span>
+          <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+            <span style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+              <span class="tag" style="background: {{s.tagBg}}">{{s.section}}</span>
+              <span class="mono" style="font-size: 12px; color: #44546A">{{s.srcCount}}</span>
+              <sc-if value="{{s.saved}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 12px; color: #2F5F8F">SAVED</span></sc-if>
+            </span>
+            <span class="disp" style="font-size: 20px; font-weight: 700; line-height: 1.25">{{s.title}}</span>
+            <span style="font-size: 15px; line-height: 1.5; color: #44546A">{{s.summary}}</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <aside aria-label="Story detail" class="clay" style="flex: 1 1 340px; min-width: 0; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; gap: 10px; align-items: center">
+        <span class="tag" style="background: {{cur.tagBg}}">{{cur.section}}</span>
+        <span class="mono" style="font-size: 12px; color: #44546A">{{cur.srcCount}}</span>
+      </div>
+      <h2 class="disp" style="margin: 0; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em">{{cur.title}}</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.6">{{cur.summary}}</p>
+      <div style="padding: 16px; border-radius: 16px; background: #FBE3CC">
+        <div class="mono" style="font-size: 12px; letter-spacing: 0.08em">WHY IT MATTERS TO YOU</div>
+        <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.55">{{cur.why}}</p>
+      </div>
+      <div style="padding: 16px; border-radius: 16px; background: #EEF2F6">
+        <div class="mono" style="font-size: 12px; letter-spacing: 0.08em; color: #44546A">WHY CLAUDE PICKED IT</div>
+        <p style="margin: 6px 0 0; font-size: 14px; line-height: 1.55; color: #44546A">{{cur.picked}}</p>
+      </div>
+      <div>
+        <div class="mono" style="font-size: 12px; letter-spacing: 0.08em; color: #44546A; margin-bottom: 8px">COVERAGE</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <sc-for list="{{cur.sources}}" as="src" hint-placeholder-count="2">
+            <a href="#source" style="padding: 8px 12px; border-radius: 999px; border: 1px solid #D5DCE5; font-size: 13px; text-decoration: none; color: #0E1A2B; background: #FFFFFF">{{src}}</a>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px">
+        <a class="act" href="#source" style="background: #0E1A2B; color: #FFFFFF">Read at source
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+        </a>
+        <button class="act" type="button" onClick="{{toggleSave}}" style="background: #FFFFFF; border: 1px solid #D5DCE5; color: #0E1A2B">{{saveLabel}}</button>
+      </div>
+    </aside>
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { filter: 'all', sel: 's1', read: { s1: true }, saved: { s6: true } }; }
+  renderVals() {
+    const S = [
+      { id: 's1', k: 'econ', section: 'AU economy', tagBg: '#FBE3CC', title: 'September-quarter CPI lands 28 October', summary: 'The ABS publishes quarterly inflation on Wednesday 28 October at 11:30am. It is the last major reading before the RBA board meets on 2 and 3 November.', why: 'Rates move on this number. If you have a variable loan or a refinance in mind, this is the date to watch.', picked: 'Matches your interest in rates and the RBA. A dated, primary-source release ranks above commentary.', sources: ['ABS release calendar', 'RBA'] },
+      { id: 's2', k: 'econ', section: 'AU economy', tagBg: '#FBE3CC', title: 'Labour Force figures due Thursday', summary: 'September jobs data comes out on 15 October. The unemployment rate is one of the two numbers the RBA leans on most.', why: 'A surprise here shifts expectations for the November decision before CPI does.', picked: 'Scheduled ABS release inside the next 7 days.', sources: ['ABS release calendar'] },
+      { id: 's3', k: 'econ', section: 'AU economy', tagBg: '#FBE3CC', title: 'RBA board meets 2 and 3 November', summary: 'The November meeting comes with the quarterly Statement on Monetary Policy, so it carries new forecasts as well as the decision.', why: 'Forecast changes tell you where rates are heading over the next year, not just next month.', picked: 'Primary source, high relevance to your rates interest.', sources: ['RBA'] },
+      { id: 's4', k: 'pol', section: 'AU politics', tagBg: '#E4DDF3', title: '[Lead politics story]', summary: '[Two sentences in Claude’s own words, from ABC Politics and SBS coverage.]', why: '[How the policy touches the economy or your work.]', picked: '[Ranking reason.]', sources: ['ABC Politics', 'SBS'] },
+      { id: 's5', k: 'world', section: 'World', tagBg: '#D9EEE6', title: '[Lead world story]', summary: '[Two sentences on a global economic or political event, framed for Australia.]', why: '[Why it matters here.]', picked: '[Ranking reason.]', sources: ['Reuters', 'ABC World'] },
+      { id: 's6', k: 'web', section: 'Web dev', tagBg: '#DCE7F2', title: 'Angular v20 leaves long-term support in November', summary: 'Each Angular major gets 18 months of support. v20 reaches the end of that window next month, after which security fixes stop.', why: 'Any app at work or for a client still on v20 should have an upgrade ticket before the end of the year.', picked: 'Angular is your main framework; support dates are high-signal.', sources: ['angular.dev', 'HeroDevs'] },
+      { id: 's7', k: 'web', section: 'Web dev', tagBg: '#DCE7F2', title: 'Signal Forms are stable as of Angular v22', summary: 'Signal Forms, resource and httpResource moved to stable in v22, and new apps now default to OnPush change detection.', why: 'Safe to use in production code now, not just side projects.', picked: 'Direct match on Angular and signals.', sources: ['Angular Blog'] },
+      { id: 's8', k: 'ai', section: 'AI', tagBg: '#F6E7B8', title: 'Google AI Mode passes a billion monthly users', summary: 'Google says AI Mode now has more than a billion monthly users, alongside this year’s core updates.', why: 'Fewer clicks reach small-business sites. It changes what you sell to freelance clients.', picked: 'Touches both AI and your freelance work.', sources: ['Search Engine Journal'] },
+      { id: 's9', k: 'ai', section: 'AI', tagBg: '#F6E7B8', title: 'State of JS: Claude use among respondents doubles to 44%', summary: 'The 2025 survey, published in February, found 29% of code is now AI-generated and Claude use rose from 22% to 44%.', why: 'Useful numbers for job interviews and client conversations about AI-assisted delivery.', picked: 'AI developer tooling, survey data.', sources: ['State of JS 2025'] },
+      { id: 's10', k: 'tech', section: 'AU tech jobs', tagBg: '#F0DADA', title: 'Developer workforce at a record 216,000', summary: 'An analysis of ABS data puts Australia’s software developer workforce at 216,000 in February, up from 189,000.', why: 'More competition for roles, but also more teams hiring seniors to lead them.', picked: 'Matches your job-market interest.', sources: ['Adaca analysis of ABS data'] }
+    ];
+    const st = this.state;
+    const keys = [['all', 'All'], ['econ', 'AU economy'], ['pol', 'AU politics'], ['world', 'World'], ['web', 'Web dev'], ['ai', 'AI'], ['tech', 'AU tech jobs']];
+    const chips = keys.map(([k, label]) => ({
+      label, count: String(k === 'all' ? S.length : S.filter((s) => s.k === k).length),
+      cls: st.filter === k ? 'chipbtn on' : 'chipbtn', pressed: st.filter === k ? 'true' : 'false',
+      pick: () => this.setState({ filter: k })
+    }));
+    const shown = S.filter((s) => st.filter === 'all' || s.k === st.filter);
+    const list = shown.map((s) => ({
+      ...s,
+      srcCount: s.sources.length + (s.sources.length === 1 ? ' source' : ' sources'),
+      saved: !!st.saved[s.id],
+      dot: st.read[s.id] ? 'transparent' : '#E8833A',
+      cls: st.sel === s.id ? 'row sel' : 'row', pressed: st.sel === s.id ? 'true' : 'false',
+      pick: () => this.setState({ sel: s.id, read: { ...st.read, [s.id]: true } })
+    }));
+    const c = S.find((s) => s.id === st.sel) || S[0];
+    const cur = { ...c, srcCount: c.sources.length + (c.sources.length === 1 ? ' source' : ' sources') };
+    return {
+      chips, list, cur,
+      unread: String(S.filter((s) => !st.read[s.id]).length),
+      saveLabel: st.saved[c.id] ? 'Saved' : 'Save for later',
+      toggleSave: () => this.setState({ saved: { ...st.saved, [c.id]: !st.saved[c.id] } })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Sample Dev Blog</title>
+  <id>https://example.org/blog</id>
+  <updated>2026-10-12T05:00:00Z</updated>
+  <entry>
+    <title type="html">Signals land in &lt;em&gt;Sample&lt;/em&gt; framework 9</title>
+    <link rel="alternate" type="text/html" href="https://example.org/blog/signals-9"/>
+    <link rel="replies" href="https://example.org/blog/signals-9#comments"/>
+    <id>tag:example.org,2026:signals-9</id>
+    <published>2026-10-12T04:00:00+10:00</published>
+    <updated>2026-10-12T05:00:00Z</updated>
+    <summary type="html">&lt;p&gt;A synthetic post about signals.&lt;/p&gt;</summary>
+  </entry>
+  <entry>
+    <title>Only updated, no published</title>
+    <link href="https://example.org/blog/updated-only"/>
+    <id>tag:example.org,2026:updated-only</id>
+    <updated>2026-10-11T22:15:00Z</updated>
+    <content type="html">&lt;div&gt;Content used when there is no summary.&lt;/div&gt;</content>
+  </entry>
+</feed>

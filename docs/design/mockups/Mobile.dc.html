@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First Light: mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@8..144,400..900,0..100&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2F5F8F}a:hover{color:#1F4468}
+.fl{font-family:'Google Sans Flex',system-ui,sans-serif;color:#0E1A2B}
+.disp{font-family:'Google Sans Flex',system-ui,sans-serif;font-variation-settings:'ROND' 100}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.clay{background:#F5F8FC;box-shadow:8px 10px 20px rgba(140,160,190,.45),-6px -6px 16px rgba(255,255,255,.95),inset 2px 3px 5px rgba(255,255,255,.9),inset -3px -5px 10px rgba(140,160,190,.28)}
+.dent{background:#E3E9F2;box-shadow:inset 3px 4px 7px rgba(140,160,190,.5),inset -3px -3px 6px rgba(255,255,255,.9)}
+.pill{box-shadow:3px 4px 8px rgba(140,160,190,.4),inset 1px 2px 3px rgba(255,255,255,.8),inset -2px -3px 5px rgba(110,130,165,.22)}
+.tab{flex:1;min-height:58px;border:0;background:transparent;font:inherit;font-size:11px;font-weight:700;color:#44546A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;border-radius:18px;padding:0}
+.tab.on{color:#FFFFFF;background:#3E6FA3;box-shadow:4px 6px 12px rgba(62,111,163,.4),inset 2px 3px 5px rgba(255,255,255,.3),inset -3px -4px 8px rgba(20,40,80,.3)}
+.tag{display:inline-block;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;color:#0E1A2B}
+.snap{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 20px;scrollbar-width:none}
+.snap > *{scroll-snap-align:start}
+.sheetrow{display:flex;align-items:center;gap:14px;min-height:56px;padding:0 16px;border-radius:18px;text-decoration:none;color:#0E1A2B;font-weight:600;font-size:16px}
+.mist{position:absolute;left:-30%;width:160%;height:90px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.6) 0%,rgba(255,255,255,0) 70%);animation:drift 30s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
+.hill{position:absolute;border-radius:50% 50% 0 0/100% 100% 0 0;box-shadow:inset 10px 12px 18px rgba(255,255,255,.4),inset -12px -10px 18px rgba(60,85,125,.3)}
+@media (prefers-reduced-motion: reduce){.mist{animation:none}}
+</style>
+</helmet>
+<div class="fl" style="width: 390px; height: 844px; background: #E9EEF5; display: flex; flex-direction: column; overflow: hidden; position: relative">
+
+  <div style="flex: 1; overflow-y: auto; min-height: 0">
+
+    <sc-if value="{{isToday}}" hint-placeholder-val="{{ true }}">
+      <div style="padding: 14px 14px 0">
+        <div style="position: relative; height: 300px; overflow: hidden; border-radius: 34px; background: linear-gradient(180deg,#BCD2EA 0%,#D9E2F0 50%,#F6DCC4 100%); padding: 44px 20px 0; box-sizing: border-box; box-shadow: 8px 12px 24px rgba(140,160,190,.5), -6px -6px 16px rgba(255,255,255,.95), inset 3px 3px 8px rgba(255,255,255,.7), inset -5px -6px 14px rgba(120,140,175,.3)">
+          <div aria-hidden="true" style="position: absolute; left: 62%; top: 34%; width: 62px; height: 62px; border-radius: 50%; background: radial-gradient(circle at 34% 30%,#FFF1CF 0%,#F7B865 52%,#E7843A 100%); box-shadow: 0 0 36px 8px rgba(255,200,130,.55)"></div>
+          <div class="mist" style="bottom: 60px" aria-hidden="true"></div>
+          <div class="hill" style="left: -10%; bottom: -30px; width: 70%; height: 120px; background: #A9C1DD" aria-hidden="true"></div>
+          <div class="hill" style="left: 40%; bottom: -40px; width: 80%; height: 110px; background: #8FAACB" aria-hidden="true"></div>
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: center">
+            <span class="mono" style="font-size: 12px; letter-spacing: 0.1em; color: #22324B">TUE 13 OCT</span>
+            <span class="mono clay" style="font-size: 10px; padding: 6px 10px; border-radius: 999px">OFFLINE READY</span>
+          </div>
+          <h1 class="disp" style="position: relative; margin: 16px 0 0; font-size: 38px; line-height: 1; letter-spacing: -0.03em; font-weight: 800">Good<br>morning.</h1>
+          <div class="clay" style="position: absolute; left: 16px; right: 16px; bottom: 16px; border-radius: 24px; padding: 12px 16px; display: flex; align-items: center; gap: 12px">
+            <span class="disp" style="font-size: 38px; font-weight: 800; line-height: 1">9°</span>
+            <span style="flex: 1; font-size: 13px; line-height: 1.35">Fog till 10<br><span style="color: #44546A">7–17° · avg 8–18°</span></span>
+            <span class="mono" style="font-size: 11px; color: #44546A; text-align: right">Rain 20%<br>Syd 22°</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 20px 14px 4px">
+        <div class="clay" style="border-radius: 26px; padding: 16px 18px">
+          <div class="mono" style="font-size: 10px; letter-spacing: 0.1em; color: #44546A">TODAY'S NUDGE</div>
+          <p class="disp" style="margin: 6px 0 0; font-size: 18px; line-height: 1.3; font-weight: 600">Quiet news day. CPI lands on the 28th, so this is the week for deep work.</p>
+        </div>
+      </div>
+
+      <h2 class="disp" style="margin: 18px 20px 6px; font-size: 22px">Three things to know</h2>
+      <div class="snap">
+        <sc-for list="{{top}}" as="s" hint-placeholder-count="3">
+          <article class="clay" style="flex: 0 0 276px; border-radius: 28px; padding: 18px; display: flex; flex-direction: column; gap: 10px; box-sizing: border-box">
+            <div style="display: flex; justify-content: space-between; align-items: center">
+              <span class="tag pill" style="background: {{s.bg}}">{{s.section}}</span>
+              <span class="dent disp" style="width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #3E6FA3">{{s.n}}</span>
+            </div>
+            <h3 class="disp" style="margin: 0; font-size: 19px; line-height: 1.2">{{s.title}}</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #44546A">{{s.why}}</p>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isNews}}" hint-placeholder-val="{{ false }}">
+      <div style="padding: 52px 16px 24px; display: flex; flex-direction: column; gap: 14px">
+        <div class="mono" style="font-size: 11px; letter-spacing: 0.08em; color: #44546A">MORNING EDITION · 18 STORIES</div>
+        <h1 class="disp" style="margin: 0 0 4px; font-size: 34px; letter-spacing: -0.03em">The edition</h1>
+        <sc-for list="{{news}}" as="s" hint-placeholder-count="5">
+          <a class="clay" href="News.dc.html" style="text-decoration: none; color: #0E1A2B; border-radius: 24px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+            <span><span class="tag pill" style="background: {{s.bg}}">{{s.section}}</span></span>
+            <span style="font-size: 16px; font-weight: 700; line-height: 1.35">{{s.title}}</span>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isInbox}}" hint-placeholder-val="{{ false }}">
+      <div style="padding: 52px 16px 24px; display: flex; flex-direction: column; gap: 14px">
+        <div class="mono" style="font-size: 11px; letter-spacing: 0.08em; color: #44546A">PHASE 3 · SORTED AT 5:30AM</div>
+        <h1 class="disp" style="margin: 0 0 4px; font-size: 34px; letter-spacing: -0.03em">Inbox catch-up</h1>
+        <div class="clay" style="border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 700">[Freelance client] · 2d</span>
+          <span style="font-size: 14px; color: #44546A">Wants a revised quote with two extra pages before Friday.</span>
+          <span><span class="tag pill" style="background: #FBE3CC">Needs a reply</span></span>
+        </div>
+        <div class="clay" style="border-radius: 24px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-weight: 700">[School] · 1d</span>
+          <span style="font-size: 14px; color: #44546A">Excursion form and payment due Thursday.</span>
+          <span><span class="tag pill" style="background: #FBE3CC">Needs a reply</span></span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isArchive}}" hint-placeholder-val="{{ false }}">
+      <div style="padding: 52px 16px 24px; display: flex; flex-direction: column; gap: 14px">
+        <h1 class="disp" style="margin: 0 0 4px; font-size: 34px; letter-spacing: -0.03em">Archive</h1>
+        <label for="mq" style="font-size: 13px; font-weight: 700; color: #44546A">Search stories</label>
+        <input id="mq" class="dent" type="search" placeholder="RBA, Angular, AI Mode" style="min-height: 52px; box-sizing: border-box; padding: 0 18px; border-radius: 18px; border: 0; font: inherit; font-size: 16px; width: 100%; color: #0E1A2B">
+        <sc-for list="{{news}}" as="s" hint-placeholder-count="4">
+          <div class="clay" style="border-radius: 20px; padding: 12px 14px; display: flex; gap: 12px; align-items: center">
+            <span class="mono" style="font-size: 11px; color: #44546A; min-width: 44px">{{s.date}}</span>
+            <span style="font-size: 15px; font-weight: 600; line-height: 1.3">{{s.title}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{moreOpen}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 0; background: rgba(14,26,43,.28)" aria-hidden="true"></div>
+    <div role="dialog" aria-label="More" class="clay" style="position: absolute; left: 10px; right: 10px; bottom: 96px; border-radius: 30px; padding: 14px; display: flex; flex-direction: column; gap: 6px">
+      <div style="width: 40px; height: 5px; border-radius: 3px; background: #C3D2E4; align-self: center; margin-bottom: 6px" aria-hidden="true"></div>
+      <sc-for list="{{more}}" as="m" hint-placeholder-count="4">
+        <a class="sheetrow" href="{{m.href}}">
+          <span class="pill" style="width: 40px; height: 40px; border-radius: 14px; background: {{m.bg}}; display: flex; align-items: center; justify-content: center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E1A2B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{m.icon}}"></path></svg>
+          </span>
+          {{m.label}}
+          <span class="mono" style="margin-left: auto; font-size: 11px; color: #44546A">{{m.note}}</span>
+        </a>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <nav aria-label="Tabs" class="clay" style="flex: 0 0 auto; display: flex; gap: 4px; margin: 0 10px 14px; padding: 8px; border-radius: 28px">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+      <button type="button" class="{{t.cls}}" onClick="{{t.go}}" aria-pressed="{{t.pressed}}">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.icon}}"></path></svg>
+        {{t.label}}
+      </button>
+    </sc-for>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 'today', more: false }; }
+  renderVals() {
+    const t = this.state.tab;
+    const more = this.state.more;
+    const T = [
+      { k: 'today', label: 'Today', icon: 'M12 9a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 3v2M4.9 6.9l1.4 1.4M19.1 6.9l-1.4 1.4M3 20h18' },
+      { k: 'news', label: 'News', icon: 'M3 7a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3zM7 9h10M7 13h10M7 17h6' },
+      { k: 'inbox', label: 'Inbox', icon: 'M3 13l3-8h12l3 8v6H3zM3 13h5l1 2h6l1-2h5' },
+      { k: 'archive', label: 'Archive', icon: 'M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5V9H3zM5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4' },
+      { k: 'more', label: 'More', icon: 'M5 12h.01M12 12h.01M19 12h.01' }
+    ];
+    const tabs = T.map((x) => {
+      const on = x.k === 'more' ? more : (!more && t === x.k);
+      return { ...x, cls: on ? 'tab on' : 'tab', pressed: String(on),
+        go: () => x.k === 'more' ? this.setState({ more: !more }) : this.setState({ tab: x.k, more: false }) };
+    });
+    return {
+      tabs, moreOpen: more,
+      isToday: t === 'today', isNews: t === 'news', isInbox: t === 'inbox', isArchive: t === 'archive',
+      more: [
+        { label: 'Plan', note: 'FROM DAYBOOK', bg: '#D9EEE6', href: 'Later.dc.html', icon: 'M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9' },
+        { label: 'Saved stories', note: '6', bg: '#DCE7F2', href: 'Archive.dc.html', icon: 'M6 3h12v18l-6-4-6 4z' },
+        { label: 'Settings', note: '', bg: '#E4DDF3', href: '#settings', icon: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z' },
+        { label: 'Sign out', note: '', bg: '#F0DADA', href: 'Main.dc.html', icon: 'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9' }
+      ],
+      top: [
+        { n: '1', section: 'AU economy', bg: '#FBE3CC', title: 'September-quarter CPI lands 28 October', why: 'The last big number before the RBA meets on 3 November.' },
+        { n: '2', section: 'Web dev', bg: '#DCE7F2', title: 'Angular v20 leaves LTS in November', why: 'Apps on v20 stop getting security patches. Raise it at sprint planning.' },
+        { n: '3', section: 'AI', bg: '#F6E7B8', title: 'Google AI Mode passes a billion users', why: 'Fewer clicks reach small-business sites. Rethink the client pitch.' }
+      ],
+      news: [
+        { section: 'AU economy', bg: '#FBE3CC', date: '13 OCT', title: 'September-quarter CPI lands 28 October' },
+        { section: 'AU economy', bg: '#FBE3CC', date: '13 OCT', title: 'Labour Force figures due Thursday' },
+        { section: 'Web dev', bg: '#DCE7F2', date: '13 OCT', title: 'Angular v20 leaves long-term support in November' },
+        { section: 'AI', bg: '#F6E7B8', date: '13 OCT', title: 'Google AI Mode passes a billion monthly users' },
+        { section: 'AU tech jobs', bg: '#F0DADA', date: '09 OCT', title: 'Developer workforce at a record 216,000' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

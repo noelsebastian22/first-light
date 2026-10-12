@@ -10,9 +10,19 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-10-first-light-design.md`
 
+## Status (2026-10-13)
+
+| Tasks | State |
+|---|---|
+| 1–12 | Done on `feat/v1-offline` (contracts, demo fixture, Angular app with Today/News/Archive/landing, Playwright + axe + PWA + secret scan, pipeline fetch, prepare and validate) |
+| 13–16 | Not started (writer + CLI + routine prompt + runbook; db migrations + RLS tests; watchdog/reminder/workflows/vercel.json; README) |
+| Final | Whole-branch review by a fresh reviewer, fix pass, then PR to `main` |
+
+Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, is force-added to git (the rest of `.superpowers/` stays ignored) so any machine resumes at the first unfinished task instead of redoing finished tasks. Keep appending to it and commit it with each task.
+
 ## Global Constraints
 
-- Node 22, TypeScript strict, **no `any`**.
+- Node 24 (≥ 24.15) and npm 11, TypeScript strict, **no `any`**.
 - Angular: standalone, zoneless, every component `ChangeDetectionStrategy.OnPush`, `input()`/`output()`, `inject()`, built-in control flow, templates in sibling `.html` files; a sibling `.css` only where genuinely needed.
 - A "day" is a `YYYY-MM-DD` string in `Australia/Sydney`; never `toISOString()` for a calendar date.
 - Sections, in this order and with these labels: `au-economy` "AU economy", `au-politics` "AU politics", `world` "World", `web-dev` "Web dev", `ai` "AI", `au-tech-market` "AU tech market". Max 4 stories per section.
@@ -252,7 +262,7 @@
 **Interfaces:** Schema per spec §4: `editions`, `stories` (with `top_rank`, generated `search` tsvector, GIN index), `story_links`, `private.members`, `reads`, `saves`, `app_opens`; `public.is_member()` `SECURITY DEFINER` with `set search_path = ''`; roles `pipeline_writer`, `watchdog_reader` created `NOLOGIN` in the migration (Noel sets passwords in Neon, see runbook); grants and policies exactly as spec §4.
 
 - [ ] **Step 1: Write `rls.sql`** as assertions (`DO $$ … RAISE EXCEPTION … $$`): as `authenticated` with sub `stranger` → 0 editions; with sub `noel` (member) → editions visible; `noel` cannot insert into `editions`; `noel` cannot select `private.members`; `noel` sees own reads only, not `other`'s; `anonymous` sees nothing; `pipeline_writer` can insert an edition and cannot select `reads`; `watchdog_reader` can select `app_opens` and cannot insert.
-- [ ] **Step 2: Run** `db/test/run.sh` against a local Postgres 17 (`DATABASE_URL`) — FAIL before migration exists.
+- [ ] **Step 2: Run** `db/test/run.sh` against a local Postgres 18 (`DATABASE_URL`, matching the Neon project) — FAIL before migration exists.
 - [ ] **Step 3: Write `0001_init.sql`** — idempotent role creation (`DO` blocks), schema, policies.
 - [ ] **Step 4: Run** — PASS.
 - [ ] **Step 5: Commit** `feat(db): schema, roles and RLS with tests`
@@ -268,7 +278,7 @@
 - `watchdogDecision(edition: { status: Edition['status']; error: string | null } | null, slot: 'am' | 'pm'): { send: false } | { send: true; subject: string; body: string }`
 - `reminderDecision(am: { status: Edition['status']; nudge: string | null; topTitles: string[] } | null, openedToday: boolean, appUrl: string): { send: false } | { send: true; subject: string; body: string }`
 - `sendMail(cfg: { user: string; pass: string; to: string }, msg: { subject: string; text: string }): Promise<void>` (nodemailer Gmail SMTP).
-- Workflows: `ci.yml` on push/PR — `npm ci`, typecheck, unit tests, build, secret scan, Playwright (with browsers), and a `db` job with `postgres:17` service running `db/test/run.sh`. `watchdog.yml` cron `17 6 * * *` and `47 16 * * *` with `timezone: Australia/Sydney`; `reminder.yml` `57 7 * * *`; `keepalive.yml` monthly using the keepalive action in API mode. All print only `ok`/`sent`/`skipped`.
+- Workflows: `ci.yml` on push/PR — `npm ci`, typecheck, unit tests, build, secret scan, Playwright (with browsers), and a `db` job with `postgres:18` service (Neon project is Postgres 18) running `db/test/run.sh`. `watchdog.yml` cron `17 6 * * *` and `47 16 * * *` with `timezone: Australia/Sydney`; `reminder.yml` `57 7 * * *`; `keepalive.yml` monthly using the keepalive action in API mode. All print only `ok`/`sent`/`skipped`.
 - `vercel.json`: SPA rewrite to `/index.html`; headers: CSP (`default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.open-meteo.com https://*.neon.tech https://*.neonauth.*; img-src 'self' data:; frame-ancestors 'none'`), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`.
 
 - [ ] **Step 1: Failing tests** — watchdog: null edition → send "First Light: morning edition missing"; `failed` with error → send with the error in the body; `ok`/`partial` → no send. Reminder: am ok and not opened → send with subject "Today's edition is ready" and body containing nudge, 3 titles and the URL; opened → no send; am missing or failed → no send.

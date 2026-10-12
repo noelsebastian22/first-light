@@ -1,0 +1,12 @@
+@import './styles/tokens.css';
+@import './styles/clay.css';
+
+html, body { margin: 0; background: var(--fl-ground); color: var(--fl-ink); font-family: var(--fl-font); }
+body { -webkit-font-smoothing: antialiased; }
+a { color: var(--fl-link); }
+a:hover { color: #1f4468; }
+h1, h2, h3 { font-variation-settings: 'ROND' 100; }
+* { box-sizing: border-box; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}

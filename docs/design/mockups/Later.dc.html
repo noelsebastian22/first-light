@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>First Light: Plan and Inbox (later phases)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,ROND@8..144,400..900,0..100&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EEF2F6}
+a{color:#2F5F8F}a:hover{color:#1F4468}
+.fl{font-family:'Google Sans Flex',system-ui,sans-serif;color:#0E1A2B}
+.disp{font-family:'Google Sans Flex',system-ui,sans-serif;font-variation-settings:'ROND' 100}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.clay{background:#F5F8FC;box-shadow:10px 12px 24px rgba(140,160,190,.45),-8px -8px 20px rgba(255,255,255,.95),inset 3px 3px 6px rgba(255,255,255,.9),inset -4px -6px 12px rgba(140,160,190,.28)}
+main li{background:#E3E9F2 !important;border:0 !important;border-radius:20px !important;box-shadow:inset 3px 4px 7px rgba(140,160,190,.45),inset -3px -3px 6px rgba(255,255,255,.9)}
+.navlink{display:flex;align-items:center;gap:12px;min-height:46px;padding:0 14px;border-radius:14px;text-decoration:none;color:#44546A;font-weight:500;font-size:15px}
+.navlink:hover{background:#E2E8EF;color:#0E1A2B}
+.navlink.on{color:#FFFFFF;background:#3E6FA3;box-shadow:5px 7px 14px rgba(62,111,163,.4),inset 2px 3px 5px rgba(255,255,255,.3),inset -3px -4px 8px rgba(20,40,80,.3)}
+.phase{margin-left:auto;font-family:'Geist Mono',monospace;font-size:11px;padding:3px 8px;border-radius:999px;background:#FBE3CC;color:#0E1A2B}
+.seg{min-height:44px;padding:0 16px;border-radius:999px;border:0;font:inherit;font-size:14px;font-weight:600;cursor:pointer;background:transparent;color:#44546A;display:inline-flex;align-items:center;gap:8px}
+.seg.on{background:#FFFFFF;color:#0E1A2B;box-shadow:0 4px 10px -4px rgba(14,26,43,.3)}
+.tag{display:inline-block;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;color:#0E1A2B}
+</style>
+</helmet>
+<div class="fl" style="min-height: 100vh; background: #EEF2F6; display: flex; flex-wrap: wrap; align-items: flex-start">
+
+<aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; padding: 28px 20px; display: flex; flex-direction: column; gap: 28px">
+  <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0E1A2B; padding: 0 6px">
+    <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="21" r="9" fill="#E8833A"></circle><rect x="3" y="21" width="28" height="3" rx="1.5" fill="#0E1A2B"></rect><path d="M17 4v4M6 9l3 3M28 9l-3 3" stroke="#0E1A2B" stroke-width="2.4" stroke-linecap="round"></path></svg>
+    <span class="disp" style="font-size: 21px; font-weight: 800; letter-spacing: -0.02em">First Light</span>
+  </a>
+  <nav aria-label="Sections" style="display: flex; flex-direction: column; gap: 4px">
+    <a class="navlink" href="Today.dc.html">Today</a>
+    <a class="navlink" href="News.dc.html">News</a>
+    <a class="navlink on" href="#plan" aria-current="page">Plan <span class="phase">PHASE 2</span></a>
+    <a class="navlink" href="#inbox">Inbox <span class="phase" style="background: #DCE7F2">PHASE 3</span></a>
+    <a class="navlink" href="Archive.dc.html">Archive</a>
+  </nav>
+  <div style="font-size: 13px; line-height: 1.5; color: #44546A; padding: 0 6px">Plan and Inbox only appear in the menu once they're built. They need sign-in, and the public demo shows sample data.</div>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 24px 28px 48px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; max-width: 1180px">
+
+  <section id="plan" aria-labelledby="planh" class="clay" style="flex: 1 1 380px; min-width: 0; border-radius: 28px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap">
+      <div>
+        <div class="mono" style="font-size: 12px; letter-spacing: 0.08em; color: #44546A">FROM DAYBOOK · READ ONLY</div>
+        <h2 id="planh" class="disp" style="margin: 6px 0 0; font-size: 30px; letter-spacing: -0.02em">Today's page</h2>
+      </div>
+      <a href="#daybook" style="min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 999px; border: 1px solid #D5DCE5; text-decoration: none; color: #0E1A2B; font-weight: 600; font-size: 14px">Open in Daybook</a>
+    </div>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap">
+      <span class="mono" style="font-size: 12px; padding: 6px 10px; border-radius: 999px; background: #EEF2F6">5 TASKS</span>
+      <span class="mono" style="font-size: 12px; padding: 6px 10px; border-radius: 999px; background: #FBE3CC">2 CARRIED</span>
+      <span class="mono" style="font-size: 12px; padding: 6px 10px; border-radius: 999px; background: #EEF2F6">1 PUSHED</span>
+    </div>
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{tasks}}" as="t" hint-placeholder-count="5">
+        <li style="display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #EEF2F6">
+          <span style="width: 20px; height: 20px; border-radius: 7px; border: 2px solid #8592A3; flex: 0 0 auto" aria-hidden="true"></span>
+          <span style="flex: 1; min-width: 0">
+            <span style="display: block; font-size: 15px; font-weight: 600">{{t.title}}</span>
+            <span class="mono" style="display: block; font-size: 12px; color: #44546A; margin-top: 3px">{{t.meta}}</span>
+          </span>
+          <sc-if value="{{t.carried}}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size: 11px; color: #0E1A2B; background: #FBE3CC; padding: 3px 8px; border-radius: 999px">CARRIED</span></sc-if>
+        </li>
+      </sc-for>
+    </ul>
+    <div style="padding: 14px 16px; border-radius: 16px; background: #DCE7F2; font-size: 14px; line-height: 1.5">
+      <b>Nudge link:</b> the Angular upgrade task matches today's top web dev story, so it's pinned first.
+    </div>
+  </section>
+
+  <section id="inbox" aria-labelledby="inboxh" class="clay" style="flex: 1 1 420px; min-width: 0; border-radius: 28px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+    <div>
+      <div class="mono" style="font-size: 12px; letter-spacing: 0.08em; color: #44546A">GMAIL + ZOHO · SORTED AT 5:30AM</div>
+      <h2 id="inboxh" class="disp" style="margin: 6px 0 0; font-size: 30px; letter-spacing: -0.02em">Inbox catch-up</h2>
+    </div>
+    <div role="group" aria-label="Inbox groups" style="display: inline-flex; flex-wrap: wrap; padding: 4px; border-radius: 999px; background: #E2E8EF; align-self: flex-start">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+        <button type="button" class="{{g.cls}}" onClick="{{g.pick}}" aria-pressed="{{g.pressed}}">{{g.label}} <span class="mono" style="font-size: 12px">{{g.count}}</span></button>
+      </sc-for>
+    </div>
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{mails}}" as="m" hint-placeholder-count="3">
+        <li style="padding: 16px; border-radius: 16px; border: 1px solid #D5DCE5; display: flex; flex-direction: column; gap: 6px">
+          <div style="display: flex; justify-content: space-between; gap: 10px">
+            <span style="font-weight: 600; font-size: 15px">{{m.from}}</span>
+            <span class="mono" style="font-size: 12px; color: #44546A">{{m.age}}</span>
+          </div>
+          <div style="font-size: 15px">{{m.subject}}</div>
+          <div style="font-size: 14px; color: #44546A; line-height: 1.5">{{m.ai}}</div>
+          <div><span class="tag" style="background: {{m.boxBg}}">{{m.box}}</span></div>
+        </li>
+      </sc-for>
+    </ul>
+  </section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { g: 'reply' }; }
+  renderVals() {
+    const M = {
+      reply: [
+        { from: '[Freelance client]', age: '2d', subject: 'Quote for the new homepage', ai: 'Asks for a revised quote with two extra pages. Wants it before Friday.', box: 'Zoho · business', boxBg: '#DCE7F2' },
+        { from: '[School]', age: '1d', subject: 'Excursion permission form', ai: 'Form and payment due Thursday. One click to sign.', box: 'Gmail', boxBg: '#FBE3CC' }
+      ],
+      fyi: [
+        { from: '[Property manager]', age: '3h', subject: 'Monthly statement', ai: 'Rent received in full. No action needed.', box: 'Gmail', boxBg: '#FBE3CC' },
+        { from: '[Vercel]', age: '9h', subject: 'Usage summary', ai: 'All projects within the Hobby limits.', box: 'Gmail', boxBg: '#FBE3CC' }
+      ],
+      skip: [
+        { from: '[Newsletters]', age: '—', subject: '11 promotional emails', ai: 'Already covered by the news edition or not relevant.', box: 'Gmail', boxBg: '#FBE3CC' }
+      ]
+    };
+    const labels = [['reply', 'Needs a reply', '2'], ['fyi', 'FYI', '5'], ['skip', 'Skip', '14']];
+    const g = this.state.g;
+    return {
+      groups: labels.map(([k, label, count]) => ({ label, count, cls: g === k ? 'seg on' : 'seg', pressed: String(g === k), pick: () => this.setState({ g: k }) })),
+      mails: M[g],
+      tasks: [
+        { title: 'Open the Angular v20 upgrade ticket', meta: '#work · !deep', carried: false },
+        { title: 'Send revised homepage quote', meta: '#freelance · 4pm', carried: true },
+        { title: 'Sign the excursion form', meta: '#family · !quick', carried: false },
+        { title: 'Review RBA dates for the loan', meta: '#money', carried: true },
+        { title: 'Pi homelab: flash the SD cards', meta: '#learning · !quick', carried: false }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
