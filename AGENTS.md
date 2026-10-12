@@ -15,6 +15,10 @@ The skill's canonical copy is `.agents/skills/session-handoff/SKILL.md`, symlink
 `.claude/skills/session-handoff` so Claude Code discovers it. Claude Code only reads skills
 from `.claude/skills/`, so that symlink is load-bearing. Edit the `.agents/` copy.
 
+The `neon`, `neon-auth` and `neon-postgres` skills in `.claude/skills/` are vendored from
+`neondatabase/agent-skills` and pinned in `skills-lock.json`. Don't edit or move them;
+update with `npx skills update`. `.mcp.json` adds the project-scoped Neon MCP (OAuth).
+
 ## Status
 
 The offline v1 (`docs/superpowers/plans/2026-10-10-first-light-v1-offline.md`) is merged to
