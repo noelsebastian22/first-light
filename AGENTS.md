@@ -31,6 +31,8 @@ npm i -g npm@11                     # npm 10.9 crashes resolving Vitest peers
 npm install
 npx playwright install chromium     # once, for app e2e tests (run from app/)
 npm test                            # contracts, pipeline, app unit tests
+npm run build -w app                # e2e serves app/dist; without a build it times out
+npm run e2e -w app
 ```
 
 No `.env` is needed until the database and email tasks; `.env.example` lists the names.
