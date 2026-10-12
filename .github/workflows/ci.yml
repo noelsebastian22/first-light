@@ -35,7 +35,8 @@ jobs:
       postgres:
         image: postgres:18
         env:
-          POSTGRES_PASSWORD: postgres
+          # Throwaway container that only lives for this job: no password needed.
+          POSTGRES_HOST_AUTH_METHOD: trust
         ports: ['5432:5432']
         options: >-
           --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
@@ -43,4 +44,4 @@ jobs:
       - uses: actions/checkout@v5
       - run: db/test/run.sh
         env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres@localhost:5432/postgres
