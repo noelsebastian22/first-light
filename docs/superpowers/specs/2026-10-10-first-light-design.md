@@ -61,6 +61,8 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 | Edition IDs | `ed-<date>-<slot>`; the routine picks the slot from the Sydney clock (before noon `am`), so **Run now** after noon writes the pm edition |
 | Writing | One transaction: clear old stories for that date and slot, upsert the edition, insert stories and links. An `ok` edition is left alone (`skipped`, exit 0) unless `--force` |
 | Failing | `fail` creates or updates only a `failed` row; it never overwrites an `ok` or `partial` edition. A weather fetch failure fails the run (the edition schema needs weather) |
+| CSP and critical CSS | Angular's critical-CSS inlining is off: its loader is an inline script the CSP blocks, which would leave the page unstyled. CI fails if `index.html` carries inline script (`npm run check:csp`) |
+| Keepalive | A monthly workflow re-enables the scheduled workflows with `gh workflow enable` (no commits). The third-party keepalive action has been disabled by GitHub |
 
 ---
 
@@ -246,7 +248,7 @@ Sun rises over clay hills → six source pods light up → messy story cards tum
 - **Emails** (GitHub Actions, Gmail SMTP with an app password via nodemailer; requires 2-Step Verification on the Google account):
   - *Missing or failed edition* at 6:17am and 4:47pm: which edition, its status and recorded error, and a link to the routines page.
   - *Reminder* at 7:57am daily: sent if today's am edition is `ok` or `partial` and there is no `app_opens` row where `(opened_at at time zone 'Australia/Sydney')::date` is today. Body: the nudge line, the Top 3 titles and a link to `/today`. No story text.
-- **Keepalive:** a monthly workflow keeps scheduled workflows from being disabled after 60 quiet days, using API mode (no commits, so no extra Vercel deploys).
+- **Keepalive:** a monthly workflow keeps scheduled workflows from being disabled after 60 quiet days by re-enabling them through the API (`gh workflow enable`; no commits, so no extra Vercel deploys).
 - **Copyright:** short summaries in Claude's words, always linked to the publisher; no full text stored; paywalls never bypassed. Test fixtures use synthetic feed items. The public demo uses hand-written sample content.
 - **Privacy:** the public repo holds no personal reader profile; the "AU tech market" section name avoids signalling a job search.
 - **Cost guards:** Neon max compute 0.25 CU; candidates capped per section.

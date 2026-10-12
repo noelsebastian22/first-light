@@ -1,0 +1,29 @@
+name: Reminder
+
+# Emails the nudge and Top 3 if the app hasn't been opened by 7:57am. Logs only sent, skipped or error.
+on:
+  schedule:
+    - cron: '57 7 * * *'
+      timezone: Australia/Sydney
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci -w pipeline -w contracts --ignore-scripts --silent
+      - run: npm run reminder -w pipeline --silent
+        env:
+          WATCHDOG_DATABASE_URL: ${{ secrets.WATCHDOG_DATABASE_URL }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          APP_URL: ${{ secrets.APP_URL }}
