@@ -2,6 +2,35 @@
 
 <!-- newest first -->
 
+## 2026-10-13 · claude-code · Git sync and Task 12
+
+**Did**
+- Local clone had never fetched: `main` was 2 behind, `feat/v1-offline` missing locally. Fast-forwarded `main`, created tracking `feat/v1-offline`. Nothing rewritten.
+- Mac setup per `AGENTS.md` (Node 24.19, npm 11.17); `npm install`, Playwright Chromium.
+- Task 12: `pipeline/src/validate.ts` (`LIMITS`, `validateEdition`) passes `validate.spec.ts`; added tests for empty text and repeated article IDs. Plan status and ledger updated.
+- `test:scripts` now `node --test 'scripts/*.test.mjs'`; contracts gets `@types/node` + `"types": ["node"]` (its `demo-fixture.spec.ts` imports `node:fs`).
+- `AGENTS.md` setup: build the app before `npm run e2e -w app`.
+- Numbers: contracts 13/13, pipeline 46/46, app 38/38, e2e 8/8, scripts 3/3, typecheck clean, secret scan clean. Initial bundle 307 kB (84 kB transfer). Pushed `feat/v1-offline` to `f16314b`.
+
+**Decided**
+- Story IDs are `<editionId>-NN` in model order; empty model text is rejected; a repeated article ID in one story gives one link; the built Edition is re-parsed before return. Model-text rules and ID format added to the spec's Decisions log.
+
+**Didn't work**
+- Fresh clone: `npm run e2e -w app` times out on `config.webServer`. It serves `app/dist/app/browser`; run `npm run build -w app` first.
+- `node --test scripts/` on Node 24.19 treats the directory as a module ("Cannot find module …/scripts"). The previous entry's "scripts 3/3" no longer held on this Node; neither did a clean root `typecheck` (contracts lacked Node types).
+- `npm audit` flags `compression@1.8.1` (high, DoS) via `serve@14.2.6`, the dev-only e2e static server, which pins it exactly. Root `"overrides": { "compression": "^1.8.2" }` (and exact `1.8.2`) were ignored by npm 11.17 on install/update; deleting the lockfile entry made npm drop `compression` from the tree entirely. Reverted. `npm audit fix --force` would downgrade `serve` to v10 — don't.
+
+**Open**
+- `compression` audit warning stays until `serve` releases a fix, or swap `serve` for another static server in `app/playwright.config.ts`.
+- npm 11 `allowScripts` skipped install scripts (esbuild, lmdb, @parcel/watcher, fsevents, msgpackr-extract); everything works without them. If a build breaks, try `npm approve-scripts esbuild` first.
+- Tasks 13–16, the whole-branch review, then a PR to `main`. Noel's account setup unchanged (see the 2026-10-10 claude-code entry).
+- Stray `docs/superpowers/specs/*.md.bak` still in Noel's local folder (git-ignored); safe to delete.
+
+**Next**
+- `/session-handoff start`, then `superpowers:executing-plans` at Task 13 (writer, CLI, routine prompt, runbook): `task-start` on the plan with N=13, BASE `f16314b` or the session commit after it.
+
+**Touched** — `pipeline/src/validate.ts`, `pipeline/src/validate.spec.ts`, `package.json`, `package-lock.json`, `contracts/package.json`, `contracts/tsconfig.json`, `AGENTS.md`, `docs/superpowers/plans/2026-10-10-first-light-v1-offline.md`, `docs/superpowers/specs/2026-10-10-first-light-design.md`, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, `docs/SESSIONS.md`
+
 ## 2026-10-13 · claude-code · Handoff readiness check
 
 **Did**

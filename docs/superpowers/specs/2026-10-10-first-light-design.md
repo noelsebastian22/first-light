@@ -55,6 +55,8 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 | Candidates | Feed items older than 72 hours are dropped before Claude sees them |
 | Afternoon edition | Never carries a nudge or Top 3, even when it runs as a full edition because the morning one is missing |
 | Browser bundle | No Zod in the app; the demo area is lazy-loaded; CI fails on secret-like strings in `app/dist` |
+| Model text | Limits: title 120, summary 400, why it matters 220, picked because 160, nudge 200 characters. Rejected if empty, if it contains `<` (treated as HTML) or a URL (`http(s)://` or `www.<host>`) |
+| Story IDs | `<editionId>-NN`, numbered in the order the model returned the stories (e.g. `ed-2026-10-13-am-01`) |
 
 ---
 
