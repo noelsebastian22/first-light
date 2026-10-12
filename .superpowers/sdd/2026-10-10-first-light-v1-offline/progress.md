@@ -71,3 +71,5 @@ Task 15: Ruling: CSP drops `https://*.neonauth.*` (invalid: CSP wildcards only o
 Task 15: Ruling: ops scripts log only sent/skipped, and "error" with exit 1 on any exception (no message) — spec lists ok/sent/skipped; a failure needs a signal without leaking — cost if wrong: none
 Task 15: Ruling: watchdog picks the slot from the Sydney clock (same rule as routine and fail); reminder reads Top 3 titles via stories.top_rank; email link points to https://claude.ai/code plus runbook §4 (exact routines URL unknown) — cost if wrong: one string
 Task 15: Ruling: vercel.json also sets buildCommand and outputDirectory (app/dist/app/browser) so the Vercel project needs no dashboard settings; ci.yml runs on push to main and on pull requests — cost if wrong: none
+Task 15: complete (commits 0b0e371..f225a08, tests: npm test -w pipeline →    Duration  423ms (import 43%, transform 30%, tests 25%, worker 2%))
+Task 16: Ruling: README has no license section — package.json says MIT but the repo has no LICENSE file; left for Noel — cost if wrong: none
