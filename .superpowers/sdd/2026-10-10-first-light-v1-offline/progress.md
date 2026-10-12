@@ -40,3 +40,8 @@ Task 12: Ruling: prepare drops candidates older than 72 hours (spec silent; stop
 Task 12: Ruling: pm edition never carries a nudge or Top 3, even when it runs as a full edition because am is missing — editions table says nudge is null for pm — cost if wrong: a day with a failed am has no Top 3
 Task 12: Ruling: "HTML in text" means any '<' character; URL means http(s):// or www.<host> — cost if wrong: a story about "<3%" is rejected and retried
 Task 12: IN PROGRESS (session paused by Noel 2026-10-10 20:58): url.ts + prepare.ts done and green (commit wip); validate.spec.ts written and RED; next = implement pipeline/src/validate.ts (LIMITS, validateEdition) to pass it, then commit "feat(pipeline): prepare candidates and validate model output" and task-done 12 c23c447
+Task 12: Ruling: empty or whitespace-only model text is rejected as "<path>: empty" — Story schema needs min 1 and a readable line beats a Zod path for the retry — cost if wrong: none
+Task 12: Ruling: a repeated article ID within one story yields one link — cost if wrong: none
+Task 12: Ruling: story ids are "<editionId>-NN" in model order (e.g. ed-2026-10-13-am-01) — spec gives no format; Task 14 can switch to uuid with a one-line change — cost if wrong: one line
+Task 12: Ruling: validateEdition re-parses the built Edition with the contracts schema before returning it — cost if wrong: none
+Task 12: complete (commits c23c447..1580dc7, tests: npm test -w pipeline →    Duration  164ms (transform 41%, import 38%, tests 18%, worker 3%))

@@ -10,16 +10,15 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-10-first-light-design.md`
 
-## Status (2026-10-10, end of first build session)
+## Status (2026-10-13)
 
 | Tasks | State |
 |---|---|
-| 1–11 | Done on `feat/v1-offline` (contracts, demo fixture, Angular app with Today/News/Archive/landing, Playwright + axe + PWA + secret scan, pipeline fetch) |
-| 12 | **In progress.** `url.ts` and `prepare.ts` done and tested. `validate.spec.ts` is written and RED; implement `pipeline/src/validate.ts` next |
+| 1–12 | Done on `feat/v1-offline` (contracts, demo fixture, Angular app with Today/News/Archive/landing, Playwright + axe + PWA + secret scan, pipeline fetch, prepare and validate) |
 | 13–16 | Not started (writer + CLI + routine prompt + runbook; db migrations + RLS tests; watchdog/reminder/workflows/vercel.json; README) |
 | Final | Whole-branch review by a fresh reviewer, fix pass, then PR to `main` |
 
-Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, is force-added to git (the rest of `.superpowers/` stays ignored) so any machine resumes at Task 12 instead of redoing finished tasks. Keep appending to it and commit it with each task.
+Use `superpowers:executing-plans`. Its ledger, `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`, is force-added to git (the rest of `.superpowers/` stays ignored) so any machine resumes at the first unfinished task instead of redoing finished tasks. Keep appending to it and commit it with each task.
 
 ## Global Constraints
 
