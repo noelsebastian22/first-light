@@ -119,3 +119,20 @@ recorded error.
    with `DATABASE_URL` set, finishing with `npm run pipeline -- write --force`.
 4. A failed rerun never overwrites an `ok` or `partial` edition; it only updates the
    error on one that is already `failed`.
+
+## 5. Vercel
+
+Done 2026-10-13. Project `first-light-app` (Hobby), imported from
+`noelsebastian22/first-light`, production branch `main`.
+
+1. Framework preset **Other**, root directory `./`. Build command and output directory
+   come from `vercel.json`; install command overridden to `npm ci`. Node.js **24.x**.
+   No environment variables: the browser holds no secrets.
+2. Settings → Domains: `firstlight.noel-sebastian.com`, production, no redirect.
+3. Cloudflare DNS: CNAME `firstlight` → the target Vercel shows for the project
+   (`373fb90d58d6a443.vercel-dns-017.com`; `cname.vercel-dns.com` also works), proxy
+   **off** (grey cloud), or Vercel can't issue the certificate.
+4. Vercel's default deployment protection puts a Vercel login in front of the
+   `*.vercel.app` URLs; the custom domain stays public. Leave it.
+5. Check: `curl -sI https://firstlight.noel-sebastian.com/` shows `HTTP/2 200` and the
+   CSP, `nosniff` and `referrer-policy` headers from `vercel.json`.

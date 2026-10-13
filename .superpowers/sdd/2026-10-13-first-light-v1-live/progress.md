@@ -21,3 +21,6 @@ Task 3: branch smoke-2026-10-13 = br-flat-river-a7k7avgi, host ep-long-rice-a7gr
 Task 3: Noel ran write twice as pipeline_writer on the branch host (own terminal, read -s). Second run: "skipped: ed-2026-10-13-am is already written with status ok (use --force to replace it)". Branch as owner: 1 edition ed-2026-10-13-am status ok source_count 2; 3 stories; 3 links. Production editions: 0. The non-member Data API check (/editions → []) moves to Task 5, once a token exists.
 Task 3: branch br-flat-river-a7k7avgi deleted (Noel OK'd).
 Task 3: complete (commits 7c08462..ledger commit, tests: none, no code — verification is the branch row counts above)
+Task 4: Vercel project first-light-app (prj_rWa33NFARKSTOgP9oJGr3rZlRu82, team_gaCIp8XcrhuyfjDcGunX8bjp), node 24.x, deployment READY from main@c67103f (origin/main; local main is 4 docs commits ahead, unpushed). Domain firstlight.noel-sebastian.com verified, CNAME 373fb90d58d6a443.vercel-dns-017.com, misconfigured=false.
+Task 4: step 3 (Noel ran curl): HTTP/2 200; CSP, referrer-policy, x-content-type-options match vercel.json; /demo/today <app-root count 1. Matches Expected.
+Task 4: Ruling: plan says CNAME → cname.vercel-dns.com; used Vercel's project-specific recommended target instead — Vercel ranks it first, both work — cost if wrong: none.
