@@ -21,11 +21,10 @@ update with `npx skills update`. `.mcp.json` adds the project-scoped Neon MCP (O
 
 ## Status
 
-The offline v1 (`docs/superpowers/plans/2026-10-10-first-light-v1-offline.md`) is merged to
-`main` (PR #1). Its ledger, with every ruling and the deferred review minors:
-`.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md` (tracked in git, unlike the
-rest of `.superpowers/`). Next is a follow-up plan for the work that needs Noel's accounts
-(Neon, Vercel, routine, GitHub secrets). Account setup steps: `docs/runbook.md`.
+The offline v1 is merged (PR #1; ledger `.superpowers/sdd/2026-10-10-first-light-v1-offline/progress.md`).
+Current work: `docs/superpowers/plans/2026-10-13-first-light-v1-live.md` (status table at the top),
+ledger `.superpowers/sdd/2026-10-13-first-light-v1-live/progress.md` (tracked in git, unlike the
+rest of `.superpowers/`; every ruling is there). Account setup steps: `docs/runbook.md`.
 
 ## Setup on a new machine
 
@@ -34,7 +33,7 @@ nvm install 24 && nvm use 24        # Node >= 24.15 (Angular CLI 22.2 refuses ol
 npm i -g npm@11                     # npm 10.9 crashes resolving Vitest peers
 npm install
 npx playwright install chromium     # once, for app e2e tests (run from app/)
-npm test                            # contracts, pipeline, app unit tests
+npm test                            # contracts, pipeline, app unit tests, api (auth proxy)
 npm run build -w app                # e2e serves app/dist; without a build it times out
 npm run e2e -w app
 npm run pipeline -- demo-run       # pipeline end to end on fixtures, no network or DB
@@ -57,7 +56,8 @@ them). Live canvas: the "First Light mockups" design artifact linked there.
 - Pipeline: Node 24 + TypeScript (tsx), run by a Claude Code routine at 5:32am and 4:02pm Sydney
 - Pipeline writes to Neon over HTTPS (`@neondatabase/serverless`); the routine has no connectors
 - GitHub Actions: CI, watchdog email, 8am reminder email, keepalive
-- Vercel Hobby at `firstlight.noel-sebastian.com` (Cloudflare DNS, grey cloud)
+- Vercel Hobby at `firstlight.noel-sebastian.com` (Cloudflare DNS, grey cloud). One Vercel Function,
+  `api/auth.ts`: the same-origin Neon Auth proxy at `/auth/*`, region `syd1`. Typecheck: root `tsconfig.api.json`
 
 ## Hard rules
 

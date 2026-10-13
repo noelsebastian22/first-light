@@ -10,7 +10,7 @@
 
 **Spec:** [`docs/superpowers/specs/2026-10-10-first-light-design.md`](../specs/2026-10-10-first-light-design.md). This plan covers build-order steps 5–7 (§9). Account steps follow [`docs/runbook.md`](../../runbook.md).
 
-## Status (2026-10-13, end of first session)
+## Status (2026-10-14, end of second session)
 
 | Tasks | State |
 |---|---|
@@ -23,7 +23,7 @@
 | 8 | Done. Deployed `a1d31e8`; Noel is the one member; `/today` → `/waiting` as expected (no edition until Task 12). Sign-out untestable until an edition exists |
 | 9 | Code done (IndexedDB `OfflineStore`, `AppOpens`, guard records opens incl. offline, `DataApi` reports offline as status 0). Step 7 offline check waits for a real edition (Task 12) |
 | 10 | Done (`sydneyMinutes`, pm poll, greeting + next-edition time; demo/pwa e2e now expect "Good afternoon.") |
-| 11 | **Next** |
+| 11 | **Next.** Also push first: `main` is at `a1d31e8`; Tasks 9–10 are unpushed |
 | 12–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in

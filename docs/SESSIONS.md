@@ -2,6 +2,44 @@
 
 <!-- newest first -->
 
+## 2026-10-14 · claude-code · auth proxy, live data, Tasks 5c–10
+
+**Did**
+- Task 5c: `api/auth.ts` Vercel Function proxies `/auth/*` to Neon Auth (rewrite `/auth/:path*` → `/api/auth?path=:path*`); header/cookie rules copied from `handleAuthRequest`/`handleAuthResponse` in `@neondatabase/auth/server`, plus `redirect: 'manual'`, no `content-encoding`, `no-store`. Tests `api/_test/auth.test.ts` (8); root `test`/`typecheck` cover `api/` via `tsconfig.api.json`. SW `navigationUrls` exclude `/auth/**`, `/api/**`.
+- Spike matrix passed: desktop Chrome, macOS Safari, iPhone Safari, iPhone home-screen app. `vercel.json` `regions: ["syd1"]` (verified `…::syd1::` in `x-vercel-id`).
+- Task 6 `core/data-api.ts`; Task 7 `core/rows.ts`, `core/neon-edition-source.ts`, `today()` may be null → `/waiting`; Task 8 `memberGuard`/`Membership`, `member.routes.ts`, `/waiting`, real `/signin`, Sign out in More sheet (`core/sign-out.ts`), `/spike` deleted, manifest `start_url` back to `./`; Task 9 IndexedDB `OfflineStore`, `AppOpens`; Task 10 `sydneyMinutes`, pm `rxResource` poll, greeting/next-edition.
+- Noel added to `private.members` via MCP (1 member, 0 editions). Desktop `/today` → `/waiting` as expected.
+- Deployed to `main` up to `a1d31e8` (Tasks 5c–8, Noel OK'd each push). Tasks 9–10 committed, not pushed.
+- Numbers (this session): contracts 14, pipeline 79, app 82, api 8, scripts 8, e2e 10; initial 310.63 kB (84.41 kB transfer); auth chunk 559.61 kB (108.94 kB), lazy, signin + member routes only.
+
+**Decided** (spec Decisions log: "Function region", "Data API token errors")
+- Auth proxy runs in `syd1`, next to Neon.
+- `DataApi` retries once on `401` or a `400` naming the JWT; offline / unreachable token request = status `0` so the cached edition is used.
+- Own small proxy, not the beta `@neondatabase/auth/server` bundle: testable without Neon internals.
+- Greeting and pm poll go by the slot actually showing (a pm edition can lead when am failed); poll emits null before 4:02pm so Today goes stable.
+- Guard records `app_opens` on the offline path too (spec §6 "offline inserts are queued").
+
+**Didn't work**
+- Expected Neon's Data API to answer an expired token with 401 (plan, Task 2 note). It sends `400 "JWT token has expired"` after ~60 s leeway (real token probed at exp+17 s → 200, +63/+123/+304 s → 400). The 401-only retry could never fire; fixed in `30f408e`.
+- Offline, `DataApi` failed at `auth.token()` and threw 401, so `NeonEditionSource` never saw status 0 and never used the cache. Fixed in Task 9.
+- A pm-poll stream that `filter()`s ticks before 4:02pm never emits: the resource stays loading, `whenStable` never resolves, and the SW (`registerWhenStable:30000`) waits 30 s.
+- Testing a refused save in `news.ts`: the Angular unit-test runner (jsdom) surfaces neither process `unhandledRejection` nor window `unhandledrejection`, so no test can fail first. Left as is (console error only; the source reverts the save).
+- `api/tsconfig.json` would be read by Vercel's own TS compile of the function; typecheck config lives at root `tsconfig.api.json` instead.
+- `private.members.user_id` is `text`, `neon_auth."user".id` is `uuid`: a direct join errors (`text = uuid`); cast `::text`. The insert works by assignment cast.
+
+**Open**
+- macOS Safari showed `token: none` once (session present), then passed 3 min later; cause unknown, not seen again.
+- Not checked by Noel: signed-out `/today` → `/signin`, re-added iPhone icon, demo unchanged. Sign-out untestable until an edition exists.
+- Task 9 Step 7 (airplane-mode reopen shows cached edition) needs a real edition → after Task 12.
+- Google client still has two redirect URIs; which one Neon uses is unchecked (Task 13). Auth chunk 560 kB loads on every member route.
+- Carried: GitGuardian false positive, deferred review minors, `gh workflow enable` 60-day question, `fl-pg18` container, remote `feat/v1-offline`, "Enable Organizations" setting unverified.
+
+**Next**
+- Push `feat/v1-live` to `main` (Tasks 9–10; ask Noel first), then Task 11: Open-Meteo timeout in the pipeline. Task 12 after that needs Noel at GitHub and claude.ai.
+
+**Touched** — `api/auth.ts`, `api/_test/auth.test.ts`, `tsconfig.api.json`, `package.json`, `vercel.json`, `app/ngsw-config.json`, `app/public/manifest.webmanifest`, `app/package.json`, `package-lock.json`, `app/src/app/core/{neon-config,data-api,data-api.spec,rows,rows.spec,neon-edition-source,neon-edition-source.spec,offline-store,offline-store.spec,app-opens,app-opens.spec,member-guard,member-guard.spec,sign-out,edition-source}.ts`, `app/src/app/{app.routes,member.routes}.ts`, `app/src/app/{signin,waiting,shell,today}/*`, `app/src/app/spike/` (deleted), `app/e2e/{member,demo,pwa}.spec.ts`, `contracts/src/dates{,.spec}.ts`, `AGENTS.md`, `docs/superpowers/specs/2026-10-10-first-light-design.md`, `docs/superpowers/plans/2026-10-13-first-light-v1-live.md`, `.superpowers/sdd/2026-10-13-first-light-v1-live/progress.md`, `docs/SESSIONS.md`
+
+
 ## 2026-10-13 · claude-code · v1 live Tasks 1–5b
 
 **Did**
