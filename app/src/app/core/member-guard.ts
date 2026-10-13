@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router, type CanActivateFn } from '@angular/router';
+import { AppOpens } from './app-opens';
 import { Auth } from './auth';
 import { DataApi } from './data-api';
 import { OfflineStore } from './offline-store';
@@ -25,11 +26,17 @@ export const memberGuard: CanActivateFn = async () => {
   const auth = inject(Auth);
   const store = inject(OfflineStore);
   const membership = inject(Membership);
+  const opens = inject(AppOpens);
 
-  if (!navigator.onLine) return (await store.get<string>('member')) ? true : router.parseUrl('/signin');
+  if (!navigator.onLine) {
+    if (!(await store.get<string>('member'))) return router.parseUrl('/signin');
+    void opens.record(); // fails offline; AppOpens retries it on the 'online' event
+    return true;
+  }
   const user = await auth.session();
   if (!user) return router.parseUrl('/signin');
   if (!(await membership.check())) return router.parseUrl('/demo/today?private=1');
   await store.set('member', user.id);
+  void opens.record();
   return true;
 };

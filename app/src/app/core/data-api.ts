@@ -47,7 +47,12 @@ export class DataApi {
   }
 
   private async send<T>(method: Method, path: string, body?: object, retried = false): Promise<T> {
-    const token = await this.auth.token();
+    // Offline, the token step fails before any request; report it as the network (status 0)
+    // so callers fall back to the device's copy instead of treating it as signed out.
+    if (!navigator.onLine) throw new DataApiError(0);
+    const token = await this.auth.token().catch(() => {
+      throw new DataApiError(0);
+    });
     if (!token) throw new DataApiError(401);
     try {
       return await firstValueFrom(

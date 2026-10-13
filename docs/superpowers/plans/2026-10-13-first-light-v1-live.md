@@ -21,8 +21,9 @@
 | 6 | Done (`data-api.ts`, 5 tests). Also `vercel.json` `regions: ["syd1"]` |
 | 7 | Done (`rows.ts`, `neon-edition-source.ts`, `offline-store.ts` stub, `today()` nullable; 14 tests) |
 | 8 | Done. Deployed `a1d31e8`; Noel is the one member; `/today` → `/waiting` as expected (no edition until Task 12). Sign-out untestable until an edition exists |
-| 9 | **Next** |
-| 10–13 | Not started |
+| 9 | Code done (IndexedDB `OfflineStore`, `AppOpens`, guard records opens incl. offline, `DataApi` reports offline as status 0). Step 7 offline check waits for a real edition (Task 12) |
+| 10 | **Next** |
+| 11–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
 `vercel.json` with a function at `/auth/*` that forwards method, path, query, body and
@@ -1587,7 +1588,7 @@ git commit -m "feat(app): member routes, guard, Google sign-in and sign-out"
 **Interfaces:**
 - Produces: the real `OfflineStore` (same signature as the stub) and `class AppOpens { record(): Promise<void> }`.
 
-- [ ] **Step 1: Write the failing tests.** Install the test-only IndexedDB:
+- [x] **Step 1: Write the failing tests.** Install the test-only IndexedDB:
 
 Run: `npm install -D fake-indexeddb@^6 -w app`
 
@@ -1653,12 +1654,12 @@ describe('AppOpens', () => {
 });
 ```
 
-- [ ] **Step 2: Run and watch them fail.**
+- [x] **Step 2: Run and watch them fail.**
 
 Run: `npm test -w app -- --include 'src/app/core/{offline-store,app-opens}.spec.ts'`
 Expected: OfflineStore FAILS (`member` reads back `undefined`); AppOpens FAILS (module missing).
 
-- [ ] **Step 3: Real `offline-store.ts`.**
+- [x] **Step 3: Real `offline-store.ts`.**
 
 ```ts
 import { Injectable } from '@angular/core';
@@ -1719,7 +1720,7 @@ export class OfflineStore {
 }
 ```
 
-- [ ] **Step 4: `app/src/app/core/app-opens.ts`.**
+- [x] **Step 4: `app/src/app/core/app-opens.ts`.**
 
 ```ts
 import { Injectable, inject } from '@angular/core';
@@ -1754,15 +1755,15 @@ export class AppOpens {
 }
 ```
 
-- [ ] **Step 5: Record the open on entry.** In `memberGuard`, add `const opens = inject(AppOpens);` next to the other `inject` calls (they must all run before the first `await`). Then add `void opens.record();` on the line before the final `return true;`. In `member-guard.spec.ts`, add `{ provide: AppOpens, useValue: { record: vi.fn() } }` to the providers.
+- [x] **Step 5: Record the open on entry.** In `memberGuard`, add `const opens = inject(AppOpens);` next to the other `inject` calls (they must all run before the first `await`). Then add `void opens.record();` on the line before the final `return true;`. In `member-guard.spec.ts`, add `{ provide: AppOpens, useValue: { record: vi.fn() } }` to the providers.
 
-- [ ] **Step 6: Run everything.**
+- [x] **Step 6: Run everything.**
 
 Run: `npm test -w app && npm run typecheck -w app`
 Expected: all pass.
 
 - [ ] **Step 7: Offline check on the real build (Noel, after deploy).** Signed in, open `/today` and wait for it to load. Turn on airplane mode, close the app fully and reopen it from the home-screen icon. Today should render the cached edition. Record the result in the ledger.
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add app/package.json package-lock.json app/src/app/core

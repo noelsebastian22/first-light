@@ -87,6 +87,18 @@ describe('DataApi', () => {
     await expect(result).rejects.toMatchObject({ status: 0 });
   });
 
+  it('reports an offline device as status 0 without asking for a token', async () => {
+    const onLine = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false);
+    await expect(api.get('/editions')).rejects.toMatchObject({ status: 0 });
+    expect(auth.token).not.toHaveBeenCalled();
+    onLine.mockRestore();
+  });
+
+  it('reports a token request that could not reach Neon Auth as status 0', async () => {
+    auth.token.mockRejectedValueOnce(new TypeError('Failed to fetch'));
+    await expect(api.get('/editions')).rejects.toMatchObject({ status: 0 });
+  });
+
   it('calls a function with POST and an empty object', async () => {
     const result = api.rpc<boolean>('is_member');
     await flush();
