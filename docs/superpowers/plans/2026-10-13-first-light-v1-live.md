@@ -23,7 +23,7 @@
 | 8 | Done. Deployed `a1d31e8`; Noel is the one member; `/today` → `/waiting` as expected (no edition until Task 12). Sign-out untestable until an edition exists |
 | 9 | Code done (IndexedDB `OfflineStore`, `AppOpens`, guard records opens incl. offline, `DataApi` reports offline as status 0). Step 7 offline check waits for a real edition (Task 12) |
 | 10 | Done (`sydneyMinutes`, pm poll, greeting + next-edition time; demo/pwa e2e now expect "Good afternoon.") |
-| 11 | **Next.** Also push first: `main` is at `a1d31e8`; Tasks 9–10 are unpushed |
+| 11 | **Next.** Tasks 5c–10 are all deployed (`main` = `09180cc`) |
 | 12–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
