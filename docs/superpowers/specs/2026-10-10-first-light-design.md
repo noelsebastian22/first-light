@@ -64,6 +64,7 @@ Plan (Daybook tasks), Inbox (email catch-up), push notifications, dark mode, mul
 | CSP and critical CSS | Angular's critical-CSS inlining is off: its loader is an inline script the CSP blocks, which would leave the page unstyled. CI fails if `index.html` carries inline script (`npm run check:csp`) |
 | Reads and saves on replace | Replacing a `partial` or `failed` edition, or forcing over an `ok` one, deletes its stories, and their reads and saves go with them (cascade). Accepted for v1: reruns happen around 5:30am and 4pm, before Noel is usually reading. If a save is ever actually lost, carry saves across by article URL |
 | Keepalive | A monthly workflow re-enables the scheduled workflows with `gh workflow enable` (no commits). The third-party keepalive action has been disabled by GitHub |
+| Auth transport | Neon Auth goes through a small same-origin Vercel Function at `/auth/*` that forwards to Neon Auth (no secrets, auth traffic only); the browser still reads the Data API directly with the JWT. Direct is out: Safari blocks Neon's cookie as third-party (session lost on reload, `/token` fails). A `vercel.json` rewrite is out: Vercel adds `X-Forwarded-Host` and Neon answers `400 INVALID_HOSTNAME`. Chosen 2026-10-13; not yet built or spiked |
 
 ---
 
@@ -274,7 +275,7 @@ Sun rises over clay hills → six source pods light up → messy story cards tum
 2. **Demo first:** landing with the Morning Machine; Today, News, Archive on the demo edition; PWA basics. Deploy to Vercel. Already a working portfolio piece.
 3. **Pipeline (offline):** fetch, prepare, validate, write, fail, feeds-check; snapshot tests; routine prompt template.
 4. **Database:** migrations, RLS, roles, RLS tests in CI.
-5. **Auth spike (one evening):** Google sign-in and one Data API query from the Angular app, tested in iOS Safari and the installed home-screen app, including after token expiry (≈ 15 min). Neon Auth's session cookie is `SameSite=None` on Neon's domain and `@neondatabase/neon-js` is beta with React-only docs, so this must pass before step 6. Fallback: proxy the auth path through the app's own domain with a Vercel rewrite, or read through Vercel functions with a server-side connection.
+5. **Auth spike (one evening):** Google sign-in and one Data API query from the Angular app, tested in iOS Safari and the installed home-screen app, including after token expiry (≈ 15 min). Neon Auth's session cookie is `SameSite=None` on Neon's domain and `@neondatabase/neon-js` is beta with React-only docs, so this must pass before step 6. Fallback: proxy the auth path through the app's own domain, or read through Vercel functions with a server-side connection. (2026-10-13: a plain Vercel rewrite is rejected by Neon; the proxy must be a Vercel Function. See Decisions log, "Auth transport".)
 6. **Sign-in and live data:** `NeonEditionSource`, reads/saves sync, `app_opens`, offline guard.
 7. **Go live:** create the routine, manual run, then schedule; watchdog, reminder and keepalive workflows.
 8. **Polish:** Lighthouse pass, README and portfolio write-up.

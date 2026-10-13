@@ -2,6 +2,45 @@
 
 <!-- newest first -->
 
+## 2026-10-13 · claude-code · v1 live Tasks 1–5b
+
+**Did**
+- Noted: `0651c4d` (Neon files), `87e29e6` (0.25 CU, replace drops saves) and `2f02898` (v1 live plan) landed with no log entry. The last entry's "Next" (write the plan) was already done.
+- Branch `feat/v1-live`; ledger `.superpowers/sdd/2026-10-13-first-light-v1-live/progress.md` (all rulings there).
+- Task 1: Noel made Google client "First Light" (Testing, one test user), switched Neon Auth to custom Google keys, email/password off, trusted origin `https://firstlight.noel-sebastian.com`. Verified with `get_neon_auth_config`; 0 users at the time.
+- Task 2: `db/migrations/0002_schema_migrations.sql` + ledger checks in `db/test/rls.sql`. Data API provisioned (`neon_auth`, no default grants, CORS prod + `localhost:4200`). 0001 + 0002 applied to `production`; live `private.schema_migrations` = `0001_init`, `0002_schema_migrations`. Noel set `pipeline_writer`/`watchdog_reader` passwords. Handoff skill start step 4 now queries the ledger.
+- Task 3: `pipeline_writer` wrote `ed-2026-10-13-am` to throwaway branch (1 edition, 3 stories, 3 links; rerun `skipped:`). Branch deleted.
+- Task 4: Vercel project `first-light-app`, Node 24.x, domain verified (CNAME `373fb90d58d6a443.vercel-dns-017.com`, grey cloud). Headers and SPA rewrite checked live. Runbook §5.
+- Task 5: `app/src/app/core/{neon-config,auth,auth.spec}.ts`, `app/src/app/spike/*`, `/spike` route. `@neondatabase/auth@0.6.0-beta`.
+- Task 5b: `/auth/:path*` rewrite in `vercel.json`, `NEON.authUrl` = origin + `/auth` on the prod host, `AUTH_CLIENT.jwt` reads `getSession().data.session.token`.
+- `main` fast-forwarded and pushed twice (Noel OK'd): `origin/main` = `9b25144`.
+- Numbers: contracts 13, pipeline 79, app 43; initial bundle 307.87 kB (83.66 kB transfer); RLS pass.
+
+**Decided** (spec Decisions log, "Auth transport")
+- Auth goes through a same-origin **Vercel Function** proxy at `/auth/*`; the Data API stays direct from the browser. Noel chose it over "stay direct" (iPhone would re-sign-in every launch) and "reads through functions" (bigger change). Keep Neon.
+- Every migration ends by inserting its version into `private.schema_migrations` (`AGENTS.md`).
+
+**Didn't work**
+- `prepare_database_migration` (Neon MCP) splits SQL on every `;`, including comments and `do $$` bodies: `syntax error at or near "add"`. Used `run_sql_transaction` with whole statements, dry-run on a branch first.
+- The Neon console no longer has "Auth → Configuration": it's Settings → Better Auth. The shared Google provider has no key fields; remove it and add Google again.
+- Anonymous Data API calls answer **400** "missing authentication credentials", not 401. Task 6's 401-retry must not treat a missing token as expired.
+- Direct Neon Auth on macOS Safari: session arrives (via `?neon_auth_session_verifier=`, held in memory only) but `sdk.token()` → none, since `/token` needs Neon's third-party cookie. Reload would lose the session.
+- `vercel.json` rewrite to Neon Auth: `400 {"code":"INVALID_HOSTNAME"}`. Vercel adds `X-Forwarded-Host`; Noel's curl proved Neon rejects exactly that header. No custom-domain option found for Managed Auth.
+- Agent sandbox can't resolve external hosts; live `curl` checks need Noel's `! …`.
+
+**Open**
+- **Production `/spike` is broken on every browser** until Task 5c (authUrl points at the failing rewrite). Demo is fine.
+- Noel's Google user now exists in `neon_auth.user` (from the Chrome pass).
+- Google client has two redirect URIs (Neon host + `/auth/callback/google`); drop the unused one in Task 13.
+- Unverified: whether Noel turned off "Enable Organizations" in Better Auth settings.
+- Auth SDK makes a 561 kB lazy chunk (109 kB transfer) that every member route will load.
+- Carried from last entry: GitGuardian false positive, deferred review minors, `gh workflow enable` 60-day question, `fl-pg18` container, remote `feat/v1-offline`.
+
+**Next**
+- Task 5c in the plan: write the `/auth/*` Vercel Function proxy (strip `X-Forwarded-Host`, pass `Set-Cookie` and `set-auth-jwt`), exclude `/auth/**` from the service worker, deploy, and rerun the full spike matrix on Chrome, Mac Safari, iPhone Safari and the iPhone home-screen app.
+
+**Touched** — `db/migrations/0002_schema_migrations.sql`, `db/test/rls.sql`, `app/src/app/core/{neon-config,auth,auth.spec}.ts`, `app/src/app/spike/*`, `app/src/app/app.routes.ts`, `app/package.json`, `package-lock.json`, `vercel.json`, `docs/runbook.md`, `AGENTS.md`, `.agents/skills/session-handoff/SKILL.md`, `docs/superpowers/specs/2026-10-10-first-light-design.md`, `docs/superpowers/plans/2026-10-13-first-light-v1-live.md`, `.superpowers/sdd/2026-10-13-first-light-v1-live/progress.md`, `docs/SESSIONS.md`
+
 ## 2026-10-13 · claude-code · Tasks 13–16, review, merge
 
 **Did**

@@ -10,11 +10,25 @@
 
 **Spec:** [`docs/superpowers/specs/2026-10-10-first-light-design.md`](../specs/2026-10-10-first-light-design.md). This plan covers build-order steps 5–7 (§9). Account steps follow [`docs/runbook.md`](../../runbook.md).
 
-## Status (2026-10-13, plan written)
+## Status (2026-10-13, end of first session)
 
 | Tasks | State |
 |---|---|
-| 1–13 | Not started |
+| 1–4 | Done (Neon Auth locked, Data API + 0001/0002 live, write smoke, Vercel + domain) |
+| 5 | Code done (`auth.ts`, `neon-config.ts`, `/spike`); matrix: desktop Chrome passed direct, macOS Safari failed |
+| 5b | Variant B (rewrite) failed: `400 INVALID_HOSTNAME`. Noel chose a Vercel Function proxy → Task 5c |
+| 5c | **Next.** New, see below |
+| 6–13 | Not started |
+
+**Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
+`vercel.json` with a function at `/auth/*` that forwards method, path, query, body and
+cookies to the Neon Auth base URL, without `X-Forwarded-Host`, and passes back the
+status, body, `Set-Cookie` and `set-auth-jwt`. Exclude `/auth/**` from the Angular service
+worker's navigation handling (the Google return is a navigation). Unit-test the
+header handling, then deploy and run the full Task 5 matrix (all four surfaces, reload, 20
+min idle). If iOS still fails, stop and reconsider the provider with Noel.
+Also: production `/spike` is broken on every browser until 5c ships (its `authUrl` points at
+the failing rewrite); the demo is unaffected.
 
 Use the ledger `.superpowers/sdd/2026-10-13-first-light-v1-live/progress.md`. Force-add it to git like the v1-offline one, and commit it with each task.
 
