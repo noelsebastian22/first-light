@@ -4,6 +4,17 @@ import { firstValueFrom } from 'rxjs';
 import { Auth } from './auth';
 import { NEON } from './neon-config';
 
+/**
+ * Neon answers an expired token with 400 "JWT token has expired", not 401, about a minute
+ * after exp (checked 2026-10-14). A malformed token is also a 400; neither should happen
+ * given Auth's early refresh, so both get the one retry a 401 gets.
+ */
+function rejectedToken(e: HttpErrorResponse): boolean {
+  if (e.status === 401) return true;
+  const message: unknown = (e.error as { message?: unknown } | null)?.message;
+  return e.status === 400 && typeof message === 'string' && /\bJWT\b|authentication token/i.test(message);
+}
+
 /** A failed Data API call. Status 0 means the network, not the server. */
 export class DataApiError extends Error {
   constructor(readonly status: number) {
@@ -44,7 +55,7 @@ export class DataApi {
       );
     } catch (e) {
       if (!(e instanceof HttpErrorResponse)) throw e;
-      if (e.status === 401 && !retried) {
+      if (rejectedToken(e) && !retried) {
         this.auth.dropToken();
         return this.send<T>(method, path, body, true);
       }

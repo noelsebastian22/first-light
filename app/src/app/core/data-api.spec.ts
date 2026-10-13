@@ -44,6 +44,31 @@ describe('DataApi', () => {
     expect(auth.dropToken).toHaveBeenCalledTimes(1);
   });
 
+  it('retries once when Neon rejects an expired token (a 400, not a 401)', async () => {
+    auth.token.mockResolvedValueOnce('old').mockResolvedValueOnce('new');
+    const result = api.get<unknown[]>('/editions');
+    await flush();
+    http
+      .expectOne(`${NEON.dataApiUrl}/editions`)
+      .flush({ message: 'JWT token has expired (exp=1791928371)', code: null }, { status: 400, statusText: 'Bad Request' });
+    await flush();
+    const retry = http.expectOne(`${NEON.dataApiUrl}/editions`);
+    expect(retry.request.headers.get('Authorization')).toBe('Bearer new');
+    retry.flush([]);
+    expect(await result).toEqual([]);
+    expect(auth.dropToken).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not retry an ordinary bad request', async () => {
+    const result = api.get<unknown[]>('/editions?bad=1');
+    await flush();
+    http
+      .expectOne(`${NEON.dataApiUrl}/editions?bad=1`)
+      .flush({ message: 'failed to parse filter (bad)', code: 'PGRST100' }, { status: 400, statusText: 'Bad Request' });
+    await expect(result).rejects.toMatchObject({ status: 400 });
+    expect(auth.dropToken).not.toHaveBeenCalled();
+  });
+
   it('gives up after a second 401', async () => {
     const result = api.get<unknown[]>('/editions');
     await flush();
