@@ -17,8 +17,9 @@
 | 1–4 | Done (Neon Auth locked, Data API + 0001/0002 live, write smoke, Vercel + domain) |
 | 5 | Code done (`auth.ts`, `neon-config.ts`, `/spike`); matrix: desktop Chrome passed direct, macOS Safari failed |
 | 5b | Variant B (rewrite) failed: `400 INVALID_HOSTNAME`. Noel chose a Vercel Function proxy → Task 5c |
-| 5c | Deployed `bfaadf3`. Matrix: desktop Chrome, iPhone Safari pass; macOS Safari showed `token: none` once, then passed; home-screen app pending. **Temporary:** manifest `start_url` is `./spike` so the home-screen app can reach the spike. Task 8 must set it back to `./` |
-| 6–13 | Not started |
+| 5c | Done. Deployed `bfaadf3` + `9a17d9d`. Matrix passes on desktop Chrome, macOS Safari (one unexplained `token: none` first, then passed), iPhone Safari and the iPhone home-screen app. **Temporary:** manifest `start_url` is `./spike`; Task 8 must set it back to `./` |
+| 6 | **Next** |
+| 7–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
 `vercel.json` with a function at `/auth/*` that forwards method, path, query, body and
