@@ -21,7 +21,8 @@ export interface ArchiveHit {
 export interface EditionSource {
   /** True when weather may be refreshed live from Open-Meteo. False for the demo. */
   readonly live: boolean;
-  today(): Promise<TodayEditions>;
+  /** Null only when no edition exists yet (the first morning). */
+  today(): Promise<TodayEditions | null>;
   story(id: string): Promise<{ story: Story; edition: Edition } | null>;
   search(q: ArchiveQuery): Promise<ArchiveHit[]>;
   editionDays(): Promise<{ date: string; am: boolean; pm: boolean }[]>;

@@ -19,8 +19,9 @@
 | 5b | Variant B (rewrite) failed: `400 INVALID_HOSTNAME`. Noel chose a Vercel Function proxy → Task 5c |
 | 5c | Done. Deployed `bfaadf3` + `9a17d9d`. Matrix passes on desktop Chrome, macOS Safari (one unexplained `token: none` first, then passed), iPhone Safari and the iPhone home-screen app. **Temporary:** manifest `start_url` is `./spike`; Task 8 must set it back to `./` |
 | 6 | Done (`data-api.ts`, 5 tests). Also `vercel.json` `regions: ["syd1"]` |
-| 7 | **Next** |
-| 8–13 | Not started |
+| 7 | Done (`rows.ts`, `neon-edition-source.ts`, `offline-store.ts` stub, `today()` nullable; 14 tests) |
+| 8 | **Next** |
+| 9–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
 `vercel.json` with a function at `/auth/*` that forwards method, path, query, body and
@@ -820,7 +821,7 @@ git commit -m "feat(app): Data API client with token refresh on 401"
   - `class NeonEditionSource implements EditionSource` (`live = true`);
   - `editionIdOf(storyId: string): string`.
 
-- [ ] **Step 1: Write the failing row tests** `app/src/app/core/rows.spec.ts`:
+- [x] **Step 1: Write the failing row tests** `app/src/app/core/rows.spec.ts`:
 
 ```ts
 import type { Edition } from '@first-light/contracts';
@@ -875,12 +876,12 @@ describe('rows', () => {
 });
 ```
 
-- [ ] **Step 2: Run and watch them fail.**
+- [x] **Step 2: Run and watch them fail.**
 
 Run: `npm test -w app -- --include src/app/core/rows.spec.ts`
 Expected: FAIL, `Cannot find module './rows'`.
 
-- [ ] **Step 3: Write `app/src/app/core/rows.ts`.**
+- [x] **Step 3: Write `app/src/app/core/rows.ts`.**
 
 ```ts
 import type { Edition, KeyDate, SectionKey, Story, Weather } from '@first-light/contracts';
@@ -938,12 +939,12 @@ export function editionIdOf(storyId: string): string {
 }
 ```
 
-- [ ] **Step 4: Run the row tests.**
+- [x] **Step 4: Run the row tests.**
 
 Run: `npm test -w app -- --include src/app/core/rows.spec.ts`
 Expected: 7 passed. If the round-trip fails only on story order, the demo fixture isn't in section/rank order. The `sortStories` expectation already handles that, so look for a field-name typo instead.
 
-- [ ] **Step 5: Allow `today()` to return null.** In `edition-source.ts`, change `today(): Promise<TodayEditions>;` to:
+- [x] **Step 5: Allow `today()` to return null.** In `edition-source.ts`, change `today(): Promise<TodayEditions>;` to:
 
 ```ts
   /** Null only when no edition exists yet (the first morning). */
@@ -967,7 +968,7 @@ export const todayResolver: ResolveFn<TodayEditions> = async () => {
 
 Run `npm test -w app`: the demo specs still pass, because the demo never returns null.
 
-- [ ] **Step 6: Write the failing source tests** `app/src/app/core/neon-edition-source.spec.ts`:
+- [x] **Step 6: Write the failing source tests** `app/src/app/core/neon-edition-source.spec.ts`:
 
 ```ts
 import { TestBed } from '@angular/core/testing';
@@ -1063,12 +1064,12 @@ describe('NeonEditionSource', () => {
 
 Task 9 builds `OfflineStore`. For this task, create its minimal interface file now (Step 7) so the source compiles. Task 9 adds the IndexedDB body.
 
-- [ ] **Step 7: Run and watch them fail.**
+- [x] **Step 7: Run and watch them fail.**
 
 Run: `npm test -w app -- --include src/app/core/neon-edition-source.spec.ts`
 Expected: FAIL, `Cannot find module './neon-edition-source'`.
 
-- [ ] **Step 8: Write a stub `app/src/app/core/offline-store.ts`** (Task 9 replaces the body):
+- [x] **Step 8: Write a stub `app/src/app/core/offline-store.ts`** (Task 9 replaces the body):
 
 ```ts
 import { Injectable } from '@angular/core';
@@ -1086,7 +1087,7 @@ export class OfflineStore {
 }
 ```
 
-- [ ] **Step 9: Write `app/src/app/core/neon-edition-source.ts`.**
+- [x] **Step 9: Write `app/src/app/core/neon-edition-source.ts`.**
 
 ```ts
 import { Injectable, inject, signal } from '@angular/core';
@@ -1213,12 +1214,12 @@ function without(set: ReadonlySet<string>, id: string): ReadonlySet<string> {
 
 `markRead` swallows a failure after reverting, because a missed read mark is harmless. `toggleSave` rethrows so the caller can tell the user. Check that News's save button already handles a rejected `toggleSave`. If it doesn't, wrap the call in `try/catch` in `news.ts` and show nothing more than the reverted button.
 
-- [ ] **Step 10: Run all app tests and typecheck.**
+- [x] **Step 10: Run all app tests and typecheck.**
 
 Run: `npm test -w app && npm run typecheck -w app`
 Expected: all pass (38 before this plan, plus the new ones). Typecheck is clean.
 
-- [ ] **Step 11: Commit**
+- [x] **Step 11: Commit**
 
 ```bash
 git add app/src/app/core app/src/app/today/today.resolver.ts
