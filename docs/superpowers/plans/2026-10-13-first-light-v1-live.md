@@ -20,8 +20,9 @@
 | 5c | Done. Deployed `bfaadf3` + `9a17d9d`. Matrix passes on desktop Chrome, macOS Safari (one unexplained `token: none` first, then passed), iPhone Safari and the iPhone home-screen app. Manifest `start_url` was `./spike` during the spike; Task 8 set it back to `./` |
 | 6 | Done (`data-api.ts`, 5 tests). Also `vercel.json` `regions: ["syd1"]` |
 | 7 | Done (`rows.ts`, `neon-edition-source.ts`, `offline-store.ts` stub, `today()` nullable; 14 tests) |
-| 8 | Code done (guard, member routes, sign-in, sign-out, `/waiting`, spike deleted); **next: deploy, Noel signs in, bootstrap member (Step 11)** |
-| 9–13 | Not started |
+| 8 | Done. Deployed `a1d31e8`; Noel is the one member; `/today` → `/waiting` as expected (no edition until Task 12). Sign-out untestable until an edition exists |
+| 9 | **Next** |
+| 10–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
 `vercel.json` with a function at `/auth/*` that forwards method, path, query, body and
@@ -1558,7 +1559,7 @@ test('the demo never calls Neon', async ({ page }) => {
 Run: `npm test -w app && npm run typecheck -w app && npm run build -w app && npm run check:secrets && npm run check:csp && npm run e2e -w app`
 Expected: all green. Record the initial bundle size in the ledger.
 
-- [ ] **Step 11: Make Noel a member.** After deploy: Noel signs in at `/signin`; that lands on `/demo/today?private=1`, which is correct. Then, from the Neon SQL editor or via MCP after Noel confirms his address, run runbook §1 "Bootstrap the member":
+- [x] **Step 11: Make Noel a member.** After deploy: Noel signs in at `/signin`; that lands on `/demo/today?private=1`, which is correct. Then, from the Neon SQL editor or via MCP after Noel confirms his address, run runbook §1 "Bootstrap the member":
 
 ```sql
 insert into private.members (user_id, email)
@@ -1567,7 +1568,7 @@ select id, email from neon_auth."user" where email = '<Noel's Google address>';
 
 Reload `/today`: it shows `/waiting` (no edition yet). That's correct until Task 12.
 
-- [ ] **Step 12: Commit**
+- [x] **Step 12: Commit**
 
 ```bash
 git add -A app/src app/e2e
