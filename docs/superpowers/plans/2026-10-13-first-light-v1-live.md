@@ -18,8 +18,9 @@
 | 5 | Code done (`auth.ts`, `neon-config.ts`, `/spike`); matrix: desktop Chrome passed direct, macOS Safari failed |
 | 5b | Variant B (rewrite) failed: `400 INVALID_HOSTNAME`. Noel chose a Vercel Function proxy → Task 5c |
 | 5c | Done. Deployed `bfaadf3` + `9a17d9d`. Matrix passes on desktop Chrome, macOS Safari (one unexplained `token: none` first, then passed), iPhone Safari and the iPhone home-screen app. **Temporary:** manifest `start_url` is `./spike`; Task 8 must set it back to `./` |
-| 6 | **Next** |
-| 7–13 | Not started |
+| 6 | Done (`data-api.ts`, 5 tests). Also `vercel.json` `regions: ["syd1"]` |
+| 7 | **Next** |
+| 8–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
 `vercel.json` with a function at `/auth/*` that forwards method, path, query, body and
@@ -642,7 +643,7 @@ git commit -m "feat(app): auth through a same-origin proxy (spike ruling)"
 - Consumes: `Auth.token()`, `Auth.dropToken()`, `NEON.dataApiUrl`.
 - Produces: `class DataApi { get<T>(path: string): Promise<T>; post(path: string, body: object): Promise<void>; delete(path: string): Promise<void>; rpc<T>(fn: string): Promise<T> }` and `class DataApiError extends Error { readonly status: number }`. Status `0` means offline or network failure.
 
-- [ ] **Step 1: Write the failing tests** `app/src/app/core/data-api.spec.ts`:
+- [x] **Step 1: Write the failing tests** `app/src/app/core/data-api.spec.ts`:
 
 ```ts
 import { TestBed } from '@angular/core/testing';
@@ -723,12 +724,12 @@ describe('DataApi', () => {
 });
 ```
 
-- [ ] **Step 2: Run them and watch them fail.**
+- [x] **Step 2: Run them and watch them fail.**
 
 Run: `npm test -w app -- --include src/app/core/data-api.spec.ts`
 Expected: FAIL, `Cannot find module './data-api'`.
 
-- [ ] **Step 3: Write `app/src/app/core/data-api.ts`.**
+- [x] **Step 3: Write `app/src/app/core/data-api.ts`.**
 
 ```ts
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -787,12 +788,12 @@ export class DataApi {
 }
 ```
 
-- [ ] **Step 4: Run the tests.**
+- [x] **Step 4: Run the tests.**
 
 Run: `npm test -w app -- --include src/app/core/data-api.spec.ts && npm run typecheck -w app`
 Expected: 5 passed, and typecheck is clean.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add app/src/app/core/data-api.ts app/src/app/core/data-api.spec.ts
