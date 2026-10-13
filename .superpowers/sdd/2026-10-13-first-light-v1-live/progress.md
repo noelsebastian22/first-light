@@ -51,3 +51,4 @@ Task 6: data-api.spec.ts verbatim from the plan RED (TS2307 Cannot find module '
 Task 6: note: a request without a bearer gets 400 from Neon (Task 2), but DataApi never sends one (no token → DataApiError(401) locally). The 401 retry is a backstop for a token rejected despite Auth's 60 s early refresh; Neon's status for an expired/invalid JWT is still unverified.
 Task 6: complete (commit below, tests: contracts 13, pipeline 79, app 48, api 8, scripts 8, e2e 8; initial 307.87 kB / 83.66 kB transfer; check:secrets, check:csp green)
 Task 5c follow-up: verified after 25ed3de deployed: /auth/get-session → 200 null, x-vercel-id "iad1:iad1::syd1::…" (edge = the US-based checker, function = syd1).
+Task 6: Noel curl, bearer "eyJhbGciOiJFZERTQSJ9.eyJleHAiOjF9.x" → 400 {"message":"Provided authentication token is not a valid JWT encoding"}. Malformed token = 400 (like no token). Status for a well-formed but expired token still unknown.
