@@ -21,8 +21,9 @@ Run when opening a session.
    section of the current plan in `docs/superpowers/plans/` (if one exists).
 3. Run `git log --oneline -10` and `git status --short` to see what actually landed
    versus what the last entry claimed.
-4. If the Neon MCP is connected, list the applied migrations and compare against
-   `db/migrations/`. The live project is the truth; the folder can lag.
+4. If the Neon MCP is connected, run `select version from private.schema_migrations order by 1`
+   on project `bold-heart-62307789` and compare with `db/migrations/`. The live project is
+   the truth; the folder can lag.
 5. Report back in three lines: where things stand, what the last session left open, and
    what you propose doing now. Then stop and wait — do not start work off the log alone.
 

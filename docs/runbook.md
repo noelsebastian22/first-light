@@ -18,10 +18,17 @@ this file says how. Nothing here costs money: every service stays on its free ti
 3. **Data API:** enable it. It serves `public` only; `private.members` stays unreachable.
    It also creates the `authenticated` and `anonymous` roles and `auth.user_id()`, which
    the migration needs, so do this before step 4.
+   Done 2026-10-13 (agent, MCP `provision_neon_data_api`: `neon_auth`, no default grants,
+   CORS `https://firstlight.noel-sebastian.com,http://localhost:4200`). URL (public):
+   `https://ep-round-morning-a71pawwz.apirest.ap-southeast-2.aws.neon.tech/neondb/rest/v1`
 4. Apply `db/migrations/*.sql` in number order, as the project owner (`neondb_owner`), from
    the Neon SQL editor. Each file is one transaction. An applied migration is never
    edited; fixes go in a new file. CI runs the same files plus `db/test/rls.sql` against
    `postgres:18` (`db/test/run.sh`).
+   Done 2026-10-13: 0001 and 0002 (agent, MCP `run_sql_transaction`, one transaction).
+   The MCP's `prepare_database_migration` splits on every `;`, comments and `do $$` bodies
+   included, so it can't take these files; pass whole statements to `run_sql_transaction`
+   instead, or paste the file into the SQL editor.
 5. The migration creates the roles `pipeline_writer` and `watchdog_reader` without login.
    Give each a long generated password (keep them in your password manager):
 
@@ -29,6 +36,9 @@ this file says how. Nothing here costs money: every service stays on its free ti
    alter role pipeline_writer with login password '<generated>';
    alter role watchdog_reader with login password '<generated>';
    ```
+
+   Done 2026-10-13: both roles can log in. Generate each password with
+   `openssl rand -base64 33 | tr -d '/+=' | pbcopy` so it never prints.
 
    Their connection strings are the owner's string from the Neon console with the role
    and password swapped:

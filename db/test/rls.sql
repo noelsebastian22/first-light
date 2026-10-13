@@ -146,3 +146,19 @@ do $$ begin
 exception when insufficient_privilege then null;
 end $$;
 reset role;
+
+-- The migrations ledger lists every applied file and is unreachable from the API roles.
+reset role;
+do $$ begin
+  if (select array_agg(version order by version) from private.schema_migrations)
+     <> array['0001_init', '0002_schema_migrations'] then
+    raise exception 'FAIL: migrations ledger does not list 0001 and 0002';
+  end if;
+end $$;
+set role authenticated;
+do $$ begin
+  perform 1 from private.schema_migrations;
+  raise exception 'FAIL: authenticated can read the migrations ledger';
+exception when insufficient_privilege then null;
+end $$;
+reset role;

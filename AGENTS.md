@@ -84,6 +84,7 @@ them). Live canvas: the "First Light mockups" design artifact linked there.
 ## Database
 
 - Migrations live in `db/migrations/`, numbered, never edited once applied.
+- Every migration ends by inserting its version into private.schema_migrations.
 - **RLS on every table, always.** Content readable only when `public.is_member()`;
   personal tables owner-only. `private.members` is never exposed to the Data API.
 - **Model output is plain text.** Never render it with `innerHTML`.
