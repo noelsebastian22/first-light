@@ -17,7 +17,7 @@
 | 1–4 | Done (Neon Auth locked, Data API + 0001/0002 live, write smoke, Vercel + domain) |
 | 5 | Code done (`auth.ts`, `neon-config.ts`, `/spike`); matrix: desktop Chrome passed direct, macOS Safari failed |
 | 5b | Variant B (rewrite) failed: `400 INVALID_HOSTNAME`. Noel chose a Vercel Function proxy → Task 5c |
-| 5c | **Next.** New, see below |
+| 5c | Code done (`api/auth.ts` proxy, rewrite to it, SW excludes `/auth/**`); **next: deploy and run the matrix** |
 | 6–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in

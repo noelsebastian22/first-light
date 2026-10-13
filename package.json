@@ -15,8 +15,9 @@
   },
   "packageManager": "npm@11.21.0",
   "scripts": {
-    "test": "npm run test --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present && npm run test:api",
+    "test:api": "vitest run --dir api",
+    "typecheck": "npm run typecheck --workspaces --if-present && tsc -p tsconfig.api.json",
     "build": "npm run build --workspaces --if-present",
     "check:secrets": "node scripts/check-dist-secrets.mjs app/dist",
     "test:scripts": "node --test 'scripts/*.test.mjs'",

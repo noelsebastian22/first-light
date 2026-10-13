@@ -4,8 +4,8 @@
  */
 export const NEON = {
   /**
-   * In production, Neon Auth goes through a same-origin rewrite (vercel.json) so its
-   * session cookie is first-party: Safari blocks it as a third-party cookie (spike, Task 5b).
+   * In production, Neon Auth goes through a same-origin proxy (`api/auth.ts`) so its
+   * session cookie is first-party: Safari blocks it as a third-party cookie (spike, Task 5c).
    */
   authUrl:
     typeof location !== 'undefined' && location.hostname === 'firstlight.noel-sebastian.com'
