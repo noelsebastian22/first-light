@@ -3,15 +3,19 @@ import { provideRouter, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { Shell } from './shell';
 import { Nav } from './nav';
+import { EDITION_SOURCE } from '../core/edition-source';
 
 @Component({ template: '<p>page</p>' })
 class Page {}
 
-async function setup(url = '/demo/today') {
+async function setup(url = '/demo/today', live = false) {
   localStorage.clear();
   TestBed.configureTestingModule({
     imports: [Shell],
-    providers: [provideRouter([{ path: 'demo', children: [{ path: '**', component: Page }] }])],
+    providers: [
+      provideRouter([{ path: 'demo', children: [{ path: '**', component: Page }] }]),
+      { provide: EDITION_SOURCE, useValue: { live } },
+    ],
   });
   const router = TestBed.inject(Router);
   const fixture = TestBed.createComponent(Shell);
@@ -48,6 +52,16 @@ describe('Shell', () => {
     expect(sheet!.textContent).toContain('Reduce motion');
     expect(sheet!.textContent).toContain('About First Light');
     expect(sheet!.textContent).toContain('Sign in');
+    expect(sheet!.textContent).not.toContain('Sign out');
+  });
+
+  it('offers Sign out instead of Sign in on the live edition', async () => {
+    const { fixture, el } = await setup('/demo/today', true);
+    el.querySelector<HTMLButtonElement>('.bottombar button')!.click();
+    await fixture.whenStable();
+    const sheet = el.querySelector('[role="dialog"]')!;
+    expect(sheet.textContent).toContain('Sign out');
+    expect(sheet.textContent).not.toContain('Sign in');
   });
 
   it('explains the private edition when redirected with ?private=1', async () => {

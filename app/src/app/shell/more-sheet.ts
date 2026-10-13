@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Injector, inject, output } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { EDITION_SOURCE } from '../core/edition-source';
 import { Prefs } from '../core/prefs';
 
 @Component({
@@ -11,9 +12,19 @@ import { Prefs } from '../core/prefs';
 })
 export class MoreSheet {
   protected readonly prefs = inject(Prefs);
+  protected readonly live = inject(EDITION_SOURCE).live;
+  private readonly injector = inject(Injector);
+  private readonly router = inject(Router);
   readonly closed = output<void>();
 
   protected toggleMotion(event: Event) {
     this.prefs.reduceMotion.set((event.target as HTMLInputElement).checked);
+  }
+
+  protected async signOut() {
+    const { signOutEverywhere } = await import('../core/sign-out');
+    await signOutEverywhere(this.injector);
+    this.closed.emit();
+    await this.router.navigateByUrl('/');
   }
 }

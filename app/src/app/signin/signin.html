@@ -1,7 +1,13 @@
 <main class="signin">
   <div class="clay signin-card">
     <h1 class="disp">Sign in</h1>
-    <p>First Light is a private edition for one reader. Google sign-in arrives with the database step.</p>
-    <a class="btn btn-pri" routerLink="/demo/today">Explore the demo edition</a>
+    <p>First Light is a private edition for one reader.</p>
+    <button class="btn btn-pri" type="button" (click)="google()" [disabled]="busy()">
+      {{ busy() ? 'Opening Google…' : 'Continue with Google' }}
+    </button>
+    @if (failed()) {
+      <p role="alert">Sign-in didn't start. Check your connection and try again.</p>
+    }
+    <a class="btn" routerLink="/demo/today">Explore the demo edition</a>
   </div>
 </main>

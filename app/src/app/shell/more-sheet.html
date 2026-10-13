@@ -7,5 +7,9 @@
     <input type="checkbox" [checked]="prefs.reduceMotion()" (change)="toggleMotion($event)" />
   </label>
   <a class="sheet-row" routerLink="/" (click)="closed.emit()">About First Light</a>
-  <a class="sheet-row" routerLink="/signin" (click)="closed.emit()">Sign in</a>
+  @if (live) {
+    <button class="sheet-row" type="button" (click)="signOut()">Sign out</button>
+  } @else {
+    <a class="sheet-row" routerLink="/signin" (click)="closed.emit()">Sign in</a>
+  }
 </div>

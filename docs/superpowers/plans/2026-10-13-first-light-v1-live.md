@@ -17,10 +17,10 @@
 | 1–4 | Done (Neon Auth locked, Data API + 0001/0002 live, write smoke, Vercel + domain) |
 | 5 | Code done (`auth.ts`, `neon-config.ts`, `/spike`); matrix: desktop Chrome passed direct, macOS Safari failed |
 | 5b | Variant B (rewrite) failed: `400 INVALID_HOSTNAME`. Noel chose a Vercel Function proxy → Task 5c |
-| 5c | Done. Deployed `bfaadf3` + `9a17d9d`. Matrix passes on desktop Chrome, macOS Safari (one unexplained `token: none` first, then passed), iPhone Safari and the iPhone home-screen app. **Temporary:** manifest `start_url` is `./spike`; Task 8 must set it back to `./` |
+| 5c | Done. Deployed `bfaadf3` + `9a17d9d`. Matrix passes on desktop Chrome, macOS Safari (one unexplained `token: none` first, then passed), iPhone Safari and the iPhone home-screen app. Manifest `start_url` was `./spike` during the spike; Task 8 set it back to `./` |
 | 6 | Done (`data-api.ts`, 5 tests). Also `vercel.json` `regions: ["syd1"]` |
 | 7 | Done (`rows.ts`, `neon-edition-source.ts`, `offline-store.ts` stub, `today()` nullable; 14 tests) |
-| 8 | **Next** |
+| 8 | Code done (guard, member routes, sign-in, sign-out, `/waiting`, spike deleted); **next: deploy, Noel signs in, bootstrap member (Step 11)** |
 | 9–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
@@ -1242,7 +1242,7 @@ git commit -m "feat(app): NeonEditionSource over the Data API"
 - Consumes: `Auth`, `DataApi.rpc`, `OfflineStore`, `NeonEditionSource`, `todayResolver`, `Shell`.
 - Produces: `memberGuard: CanActivateFn`, `class Membership { check(): Promise<boolean> }`, routes `/today`, `/news`, `/news/:storyId`, `/archive`, `/waiting`.
 
-- [ ] **Step 1: Write the failing guard tests** `app/src/app/core/member-guard.spec.ts`:
+- [x] **Step 1: Write the failing guard tests** `app/src/app/core/member-guard.spec.ts`:
 
 ```ts
 import { TestBed } from '@angular/core/testing';
@@ -1300,12 +1300,12 @@ describe('memberGuard', () => {
 });
 ```
 
-- [ ] **Step 2: Run and watch them fail.**
+- [x] **Step 2: Run and watch them fail.**
 
 Run: `npm test -w app -- --include src/app/core/member-guard.spec.ts`
 Expected: FAIL, `Cannot find module './member-guard'`.
 
-- [ ] **Step 3: Write `app/src/app/core/member-guard.ts`.**
+- [x] **Step 3: Write `app/src/app/core/member-guard.ts`.**
 
 ```ts
 import { Injectable, inject } from '@angular/core';
@@ -1347,12 +1347,12 @@ export const memberGuard: CanActivateFn = async () => {
 
 The guard tests stub `DataApi.rpc`, which `Membership` calls, so `Membership` itself needs no stub.
 
-- [ ] **Step 4: Run the guard tests.**
+- [x] **Step 4: Run the guard tests.**
 
 Run: `npm test -w app -- --include src/app/core/member-guard.spec.ts`
 Expected: 5 passed.
 
-- [ ] **Step 5: Waiting page.** `app/src/app/waiting/waiting.ts`:
+- [x] **Step 5: Waiting page.** `app/src/app/waiting/waiting.ts`:
 
 ```ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -1376,7 +1376,7 @@ export class Waiting {}
 </main>
 ```
 
-- [ ] **Step 6: `app/src/app/member.routes.ts`.**
+- [x] **Step 6: `app/src/app/member.routes.ts`.**
 
 ```ts
 import { Routes } from '@angular/router';
@@ -1411,7 +1411,7 @@ In `app.routes.ts`, delete the `spike` route and add this before `'**'`:
 ```
 
 Delete `app/src/app/spike/`.
-- [ ] **Step 7: Sign-in page.** `signin.ts`:
+- [x] **Step 7: Sign-in page.** `signin.ts`:
 
 ```ts
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
@@ -1467,7 +1467,7 @@ export class Signin {
 </main>
 ```
 
-- [ ] **Step 8: Sign out in the More sheet.** `MoreSheet` also renders in the demo, so it must not inject `Auth`. Injecting it would build the Neon client, and the demo would call Neon. Sign-out lives in its own file, loaded only when pressed. Create `app/src/app/core/sign-out.ts`:
+- [x] **Step 8: Sign out in the More sheet.** `MoreSheet` also renders in the demo, so it must not inject `Auth`. Injecting it would build the Neon client, and the demo would call Neon. Sign-out lives in its own file, loaded only when pressed. Create `app/src/app/core/sign-out.ts`:
 
 ```ts
 import type { Injector } from '@angular/core';
@@ -1530,7 +1530,7 @@ export class MoreSheet {
   }
 ```
 
-- [ ] **Step 9: e2e for the signed-out path** `app/e2e/member.spec.ts`. CI has no Google account, so it tests the redirect only:
+- [x] **Step 9: e2e for the signed-out path** `app/e2e/member.spec.ts`. CI has no Google account, so it tests the redirect only:
 
 ```ts
 import { expect, test } from '@playwright/test';
@@ -1553,7 +1553,7 @@ test('the demo never calls Neon', async ({ page }) => {
 });
 ```
 
-- [ ] **Step 10: Run everything.**
+- [x] **Step 10: Run everything.**
 
 Run: `npm test -w app && npm run typecheck -w app && npm run build -w app && npm run check:secrets && npm run check:csp && npm run e2e -w app`
 Expected: all green. Record the initial bundle size in the ledger.
