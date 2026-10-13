@@ -3,7 +3,7 @@
   "short_name": "First Light",
   "display": "standalone",
   "scope": "./",
-  "start_url": "./",
+  "start_url": "./spike",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
