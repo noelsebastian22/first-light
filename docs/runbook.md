@@ -12,6 +12,9 @@ this file says how. Nothing here costs money: every service stays on its free ti
    anyone signs in. Use your own Google OAuth client, left in *Testing* status with
    yourself as the only test user. Trusted domains: `firstlight.noel-sebastian.com` and
    localhost; turn "Allow localhost" off once development is done.
+   Done 2026-10-13: Google client "First Light" (Testing, one test user). Email/password off.
+   The console calls this **Better Auth** (Settings → Better Auth). The shared Google
+   provider has no key fields; remove it and add Google again to enter your own client.
 3. **Data API:** enable it. It serves `public` only; `private.members` stays unreachable.
    It also creates the `authenticated` and `anonymous` roles and `auth.user_id()`, which
    the migration needs, so do this before step 4.
