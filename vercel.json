@@ -2,7 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build -w app",
   "outputDirectory": "app/dist/app/browser",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    {
+      "source": "/auth/:path*",
+      "destination": "https://ep-round-morning-a71pawwz.neonauth.ap-southeast-2.aws.neon.tech/neondb/auth/:path*"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

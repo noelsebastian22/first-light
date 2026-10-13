@@ -25,7 +25,9 @@ export const AUTH_CLIENT = new InjectionToken<AuthClientLike>('AUTH_CLIENT', {
       getSession: () => sdk.getSession() as ReturnType<AuthClientLike['getSession']>,
       signIn: { social: (o) => sdk.signIn.social(o) },
       signOut: () => sdk.signOut(),
-      jwt: async () => (await sdk.token()).data?.token ?? null,
+      // The SDK puts the Data API JWT on the session (its own getJWTToken() reads it the
+      // same way). sdk.token() would need Neon's cookie, which Safari blocks cross-site.
+      jwt: async () => (await sdk.getSession()).data?.session.token ?? null,
     };
   },
 });
