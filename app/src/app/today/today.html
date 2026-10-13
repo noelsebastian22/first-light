@@ -31,7 +31,7 @@
     <div class="hill h3" aria-hidden="true"></div>
     <div class="greeting">
       <p class="label">{{ longDate() }}</p>
-      <h1 class="disp">Good morning.</h1>
+      <h1 class="disp">{{ greeting() }}</h1>
       <p class="greeting-line">{{ am().weather.katoomba.summary }} in Katoomba. Sydney {{ am().weather.sydney.summary.toLowerCase() }}.</p>
     </div>
     <app-weather-card [place]="am().weather.katoomba" [second]="am().weather.sydney" [liveNow]="liveNow()" />
@@ -96,6 +96,6 @@
   </section>
 
   <p class="fine label">
-    <span>Next edition 4:02pm</span><span>Every story links to its source</span><span>Weather data by Open-Meteo.com</span><span class="credit">Edited by Claude</span>
+    <span>Next edition {{ nextEdition() }}</span><span>Every story links to its source</span><span>Weather data by Open-Meteo.com</span><span class="credit">Edited by Claude</span>
   </p>
 </div>

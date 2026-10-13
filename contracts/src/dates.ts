@@ -7,6 +7,13 @@ export function sydneyDate(at: Date): string {
   return `${get('year')}-${get('month')}-${get('day')}`;
 }
 
+/** Minutes since midnight in Sydney, for comparing against edition times. */
+export function sydneyMinutes(at: Date): number {
+  const parts = new Intl.DateTimeFormat('en-AU', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(at);
+  const get = (t: string) => Number(parts.find((p) => p.type === t)?.value ?? '0');
+  return get('hour') * 60 + get('minute');
+}
+
 /** Sydney wall-clock time as h:mma, e.g. 5:31am. */
 export function sydneyTime(at: Date): string {
   const parts = new Intl.DateTimeFormat('en-AU', { timeZone: TZ, hour: 'numeric', minute: '2-digit', hour12: true }).formatToParts(at);

@@ -22,8 +22,9 @@
 | 7 | Done (`rows.ts`, `neon-edition-source.ts`, `offline-store.ts` stub, `today()` nullable; 14 tests) |
 | 8 | Done. Deployed `a1d31e8`; Noel is the one member; `/today` → `/waiting` as expected (no edition until Task 12). Sign-out untestable until an edition exists |
 | 9 | Code done (IndexedDB `OfflineStore`, `AppOpens`, guard records opens incl. offline, `DataApi` reports offline as status 0). Step 7 offline check waits for a real edition (Task 12) |
-| 10 | **Next** |
-| 11–13 | Not started |
+| 10 | Done (`sydneyMinutes`, pm poll, greeting + next-edition time; demo/pwa e2e now expect "Good afternoon.") |
+| 11 | **Next** |
+| 12–13 | Not started |
 
 **Task 5c (new): auth proxy as a Vercel Function.** Replace the `/auth/:path*` rewrite in
 `vercel.json` with a function at `/auth/*` that forwards method, path, query, body and
@@ -1782,7 +1783,7 @@ Spec §6: `rxResource` polls for the pm edition every 10 minutes after 4:02pm. T
 **Interfaces:**
 - Produces: `sydneyMinutes(at: Date): number`, minutes since Sydney midnight.
 
-- [ ] **Step 1: Failing contract test.** Append to `contracts/src/dates.spec.ts`:
+- [x] **Step 1: Failing contract test.** Append to `contracts/src/dates.spec.ts`:
 
 ```ts
 describe('sydneyMinutes', () => {
@@ -1798,7 +1799,7 @@ Add `sydneyMinutes` to that file's import from `./dates`.
 Run: `npm test -w contracts`
 Expected: FAIL, `sydneyMinutes is not a function`.
 
-- [ ] **Step 2: Implement** in `contracts/src/dates.ts`:
+- [x] **Step 2: Implement** in `contracts/src/dates.ts`:
 
 ```ts
 /** Minutes since midnight in Sydney, for comparing against edition times. */
@@ -1812,7 +1813,7 @@ export function sydneyMinutes(at: Date): number {
 Run: `npm test -w contracts`
 Expected: PASS.
 
-- [ ] **Step 3: Failing Today tests.** In `app/src/app/today/today.spec.ts`, the first test renders `{ am, pm }` and expects `'Good morning'`. Change that expectation to `'Good afternoon'`: the pm edition is showing. Then add, using the file's `render` helper:
+- [x] **Step 3: Failing Today tests.** In `app/src/app/today/today.spec.ts`, the first test renders `{ am, pm }` and expects `'Good morning'`. Change that expectation to `'Good afternoon'`: the pm edition is showing. Then add, using the file's `render` helper:
 
 ```ts
   it('greets the afternoon once the pm edition is showing', async () => {
@@ -1830,7 +1831,7 @@ Expected: PASS.
 
 Run `npm test -w app -- --include src/app/today/today.spec.ts`. Expected: the two afternoon expectations FAIL.
 
-- [ ] **Step 4: Implement in `today.ts`.** Add imports `rxResource` (from `@angular/core/rxjs-interop`), `timer`, `filter`, `switchMap`, `from`, `map`, `takeWhile` (from `rxjs`) and `sydneyMinutes`. Then:
+- [x] **Step 4: Implement in `today.ts`.** Add imports `rxResource` (from `@angular/core/rxjs-interop`), `timer`, `filter`, `switchMap`, `from`, `map`, `takeWhile` (from `rxjs`) and `sydneyMinutes`. Then:
 
 Add this module constant above the class: `const PM_AT = 16 * 60 + 2; // 4:02pm`. Then in the class:
 
@@ -1860,12 +1861,12 @@ In `today.html` line 34, use `<h1 class="disp">{{ greeting() }}</h1>`. On line 9
 
 The demo has `live = false`, so `params` is `undefined` and it never polls. The existing demo e2e still expects "Good morning.", but the demo shows a pm edition. **Update `app/e2e/demo.spec.ts` line 9 and `app/e2e/pwa.spec.ts` line 16 to expect `Good afternoon.`.** That is the deferred minor being fixed, not a regression.
 
-- [ ] **Step 5: Run everything.**
+- [x] **Step 5: Run everything.**
 
 Run: `npm test --workspaces --if-present && npm run typecheck && npm run build -w app && npm run e2e -w app`
 Expected: all green.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add contracts/src/dates.ts contracts/src/dates.spec.ts app/src/app/today app/e2e/demo.spec.ts app/e2e/pwa.spec.ts

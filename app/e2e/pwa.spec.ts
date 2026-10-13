@@ -13,6 +13,6 @@ test('is installable and works offline after the first visit', async ({ page, co
 
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Good morning.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Good afternoon.' })).toBeVisible();
   await context.setOffline(false);
 });

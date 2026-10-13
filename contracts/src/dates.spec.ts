@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { sydneyDate, sydneyTime } from './dates';
+import { sydneyDate, sydneyMinutes, sydneyTime } from './dates';
 
 describe('sydneyDate', () => {
   it('returns the Sydney date just after midnight AEDT, not the UTC date', () => {
@@ -18,5 +18,12 @@ describe('sydneyTime', () => {
 
   it('formats afternoon times with pm', () => {
     expect(sydneyTime(new Date('2026-10-13T05:03:00Z'))).toBe('4:03pm');
+  });
+});
+
+describe('sydneyMinutes', () => {
+  it('counts minutes since midnight in Sydney, across the UTC date line', () => {
+    expect(sydneyMinutes(new Date('2026-10-13T05:02:00Z'))).toBe(16 * 60 + 2); // 4:02pm AEDT
+    expect(sydneyMinutes(new Date('2026-10-13T13:30:00Z'))).toBe(30); // 00:30 next day
   });
 });

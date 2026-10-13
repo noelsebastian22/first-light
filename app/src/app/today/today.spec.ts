@@ -10,10 +10,14 @@ import { DemoEditionSource } from '../core/demo-edition-source';
 const am = demo.am as unknown as Edition;
 const pm = demo.pm as unknown as Edition;
 
-async function render(editions: { am: Edition; pm: Edition | null }) {
+async function render(editions: { am: Edition; pm: Edition | null }, source?: object) {
   TestBed.configureTestingModule({
     imports: [Today],
-    providers: [provideRouter([]), provideHttpClient(), { provide: EDITION_SOURCE, useExisting: DemoEditionSource }],
+    providers: [
+      provideRouter([]),
+      provideHttpClient(),
+      source ? { provide: EDITION_SOURCE, useValue: source } : { provide: EDITION_SOURCE, useExisting: DemoEditionSource },
+    ],
   });
   const f = TestBed.createComponent(Today);
   f.componentRef.setInput('editions', editions);
@@ -22,9 +26,51 @@ async function render(editions: { am: Edition; pm: Edition | null }) {
 }
 
 describe('Today', () => {
+  describe('afternoon poll (live)', () => {
+    afterEach(() => vi.useRealTimers());
+    const live = (today: () => Promise<unknown>) => ({ live: true, today: vi.fn(today), readIds: () => new Set(), savedIds: () => new Set() });
+
+    it('after 4:02pm, picks up the pm edition and greets the afternoon', async () => {
+      vi.useFakeTimers({ now: new Date('2026-10-13T05:10:00Z'), toFake: ['Date'] }); // 4:10pm AEDT
+      const source = live(async () => ({ am, pm }));
+      const { f, el } = await render({ am, pm: null }, source);
+      await vi.waitFor(() => expect(source.today).toHaveBeenCalled());
+      await f.whenStable();
+      expect(el.querySelector('h1')!.textContent).toContain('Good afternoon.');
+    });
+
+    it('does not ask before 4:02pm', async () => {
+      vi.useFakeTimers({ now: new Date('2026-10-13T04:00:00Z'), toFake: ['Date'] }); // 3:00pm AEDT
+      const source = live(async () => ({ am, pm }));
+      const { f, el } = await render({ am, pm: null }, source);
+      await new Promise((r) => setTimeout(r, 20));
+      await f.whenStable();
+      expect(source.today).not.toHaveBeenCalled();
+      expect(el.querySelector('h1')!.textContent).toContain('Good morning.');
+    });
+  });
+
+  it('greets the afternoon once the pm edition is showing', async () => {
+    const { el } = await render({ am, pm });
+    expect(el.querySelector('h1')!.textContent).toContain('Good afternoon.');
+    expect(el.textContent).toContain('Next edition 5:32am');
+  });
+
+  it('greets the morning before the pm edition lands', async () => {
+    const { el } = await render({ am, pm: null });
+    expect(el.querySelector('h1')!.textContent).toContain('Good morning.');
+    expect(el.textContent).toContain('Next edition 4:02pm');
+  });
+
+  it('greets the afternoon when the pm edition leads because the am one failed', async () => {
+    const { el } = await render({ am: pm, pm: null });
+    expect(el.querySelector('h1')!.textContent).toContain('Good afternoon.');
+    expect(el.textContent).toContain('Next edition 5:32am');
+  });
+
   it('shows the date, nudge and the three things to know in rank order', async () => {
     const { el } = await render({ am, pm });
-    expect(el.querySelector('h1')!.textContent).toContain('Good morning');
+    expect(el.querySelector('h1')!.textContent).toContain('Good afternoon');
     expect(el.textContent).toContain('Tuesday 13 October');
     expect(el.textContent).toContain(am.nudge!);
     const titles = [...el.querySelectorAll('.top3 h3')].map((h) => h.textContent!.trim());

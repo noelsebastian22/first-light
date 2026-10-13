@@ -6,7 +6,7 @@ test('a visitor explores the demo from the landing page', async ({ page }) => {
   await page.getByRole('link', { name: 'Explore the demo edition' }).click();
 
   await expect(page).toHaveURL(/\/demo\/today$/);
-  await expect(page.getByRole('heading', { name: 'Good morning.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Good afternoon.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Three things to know' })).toBeVisible();
 
   await page.getByRole('link', { name: 'News', exact: true }).first().click();

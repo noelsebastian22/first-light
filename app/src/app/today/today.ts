@@ -1,14 +1,18 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { SECTIONS, SECTION_META } from '@first-light/contracts/sections-meta';
-import { sydneyTime } from '@first-light/contracts/dates';
+import { sydneyMinutes, sydneyTime } from '@first-light/contracts/dates';
+import { from, map, of, switchMap, takeWhile, timer } from 'rxjs';
 import type { TodayEditions } from '../core/edition-source';
 import { EDITION_SOURCE } from '../core/edition-source';
 import { formatClock, formatLongDate, formatShortDate } from '../core/format';
 import { WeatherCard } from '../weather/weather-card';
 
 interface OpenMeteoNow { current?: { temperature_2m?: number } }
+
+const PM_AT = 16 * 60 + 2; // 4:02pm
 
 @Component({
   selector: 'app-today',
@@ -23,7 +27,28 @@ export class Today {
   protected readonly slot = signal<'am' | 'pm'>('am');
 
   protected readonly am = computed(() => this.editions().am);
-  protected readonly pm = computed(() => this.editions().pm);
+
+  /**
+   * Spec §6: while open after 4:02pm with no pm edition, look for it every 10 minutes.
+   * Not when the pm edition already leads the day (the am one failed).
+   */
+  private readonly pmPoll = rxResource({
+    params: () =>
+      this.source.live && this.editions().pm === null && this.am().slot === 'am' ? this.am().editionDate : undefined,
+    stream: ({ params: date }) =>
+      timer(0, 10 * 60_000).pipe(
+        // Emit null before 4:02pm rather than nothing, so the page doesn't sit "loading" (unstable).
+        switchMap(() => (sydneyMinutes(new Date()) >= PM_AT ? from(this.source.today()) : of(null))),
+        map((t) => (t && t.am.editionDate === date ? t.pm : null)),
+        takeWhile((pm) => pm === null, true),
+      ),
+  });
+
+  protected readonly pm = computed(() => this.editions().pm ?? (this.pmPoll.hasValue() ? this.pmPoll.value() : null));
+  /** The afternoon once a pm edition is showing, whether it follows the am one or leads. */
+  private readonly afternoon = computed(() => this.pm() !== null || this.am().slot === 'pm');
+  protected readonly greeting = computed(() => (this.afternoon() ? 'Good afternoon.' : 'Good morning.'));
+  protected readonly nextEdition = computed(() => (this.afternoon() ? '5:32am' : '4:02pm'));
   protected readonly longDate = computed(() => formatLongDate(this.am().editionDate));
   protected readonly amTime = computed(() => sydneyTime(new Date(this.am().createdAt)));
   protected readonly top3 = computed(() =>
